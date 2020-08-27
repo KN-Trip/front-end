@@ -1,3 +1,4 @@
 import axios from "axios";
+import baseURL from "../config/setting.js";
 
-let baseURL = "http://kntrip.me:8000/";
+console.log(baseURL);
