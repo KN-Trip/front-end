@@ -8,6 +8,28 @@ import dummy_img from "../../assets/dummy_img.jpg";
 import "../../css/carousel.css";
 import { Link } from "react-router-dom";
 
+const Mobile = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+const PC = styled.div`
+  @media (min-width: 1025px) {
+    display: flex;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
 const WidthSlider = styled(Slider)`
   width: 100%;
   outline: none;
@@ -26,6 +48,10 @@ const CardWrapper = styled.div`
   & :focus {
     outline: none;
   }
+`;
+
+const VerticalMargin = styled.div`
+  margin-top: ${(props) => props.margin};
 `;
 
 const fakeJson = [
@@ -185,22 +211,37 @@ function MultipleItems() {
   };
 
   return (
-    <div>
-      <WidthSlider {...settings}>
+    <>
+      <PC>
+        <WidthSlider {...settings}>
+          {fakeJson.map((item, idx) => (
+            <div className="center">
+              <CardWrapper>
+                <PlaceItem
+                  id={idx}
+                  img={item.img}
+                  name={item.name}
+                  address={item.address}
+                />
+              </CardWrapper>
+            </div>
+          ))}
+        </WidthSlider>
+      </PC>
+      <Mobile>
         {fakeJson.map((item, idx) => (
-          <div className="center">
-            <CardWrapper>
-              <PlaceItem
-                id={idx}
-                img={item.img}
-                name={item.name}
-                address={item.address}
-              />
-            </CardWrapper>
-          </div>
+          <>
+            <PlaceItem
+              id={idx}
+              img={item.img}
+              name={item.name}
+              address={item.address}
+            />
+            <VerticalMargin margin="30px" />
+          </>
         ))}
-      </WidthSlider>
-    </div>
+      </Mobile>
+    </>
   );
 }
 
