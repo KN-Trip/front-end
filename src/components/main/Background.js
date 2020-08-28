@@ -3,14 +3,17 @@ import styled from "styled-components";
 import background from "../../assets/background.png";
 
 const BackgroundWrapper = styled.div`
-  width: 100vw;
-
-  background-image: url(${(props) => props.src});
   background-color: #fff;
-
-  background-repeat: repeat-y;
-
   font-family: "NanumSquare", sans-serif !important;
+
+  @media (min-width: 1025px) {
+    width: 100vw;
+    background-image: url(${(props) => props.src});
+    background-repeat: repeat-y;
+  }
+
+  @media (max-width: 1024px) {
+  }
 `;
 
 function Background({ children }) {

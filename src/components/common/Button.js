@@ -6,7 +6,7 @@ export const ButtonTemplate = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 170px;
+  width: 200px;
   height: 48px;
   border-radius: 24px;
 

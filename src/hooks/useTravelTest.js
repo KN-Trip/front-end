@@ -5,8 +5,8 @@ import { resetFilterOne } from "../modules/testOneFilter";
 import { resetFilterTwo } from "../modules/testTwoFilter";
 
 export default function useTravelTest(index = 1) {
-  const filterOne = useSelector((state) => state.testOneFilter);
-  const filterTwo = useSelector((state) => state.testTwoFilter);
+  const checked1 = useSelector((state) => state.testOneFilter).checked;
+  const checked2 = useSelector((state) => state.testTwoFilter).checked;
 
   const dispatch = useDispatch();
 
@@ -30,5 +30,10 @@ export default function useTravelTest(index = 1) {
 
   const onReset = index === 1 ? onResetOne : onResetTwo;
 
-  return [index, title, desc, onReset];
+  const checkedLength =
+    index === 1
+      ? checked1.filter((v) => v === true).length
+      : checked2.filter((v) => v === true).length;
+
+  return [index, title, desc, onReset, checkedLength];
 }

@@ -6,7 +6,14 @@ import { getExistItem } from "../../lib/getExistItem";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
   overflow-x: auto;
+
+  @media (max-width: 1024px) {
+    padding: 0 18px;
+  }
 `;
 
 const HashTag = styled.div`
@@ -14,10 +21,11 @@ const HashTag = styled.div`
   justify-content: center;
   align-items: center;
 
-  height: 27px;
-
+  margin-bottom: 10px;
   margin-right: 8px;
   padding: 4px 13px 5px 12px;
+
+  height: 27px;
 
   box-sizing: border-box;
 

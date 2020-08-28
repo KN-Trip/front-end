@@ -7,8 +7,34 @@ import TestFilter from "./TestFilter";
 import HashTagList from "./HashTagList";
 import useTravelTest from "../../hooks/useTravelTest";
 
+import * as IconLib from "../../lib/icon";
+import dropdownIco from "../../assets/dropdown-ico.png";
+
 import { Link as ScrollLink } from "react-scroll";
 import { Element } from "react-scroll";
+
+const PC = styled.div`
+  @media (min-width: 1025px) {
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Mobile = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+    padding: 0 30px;
+
+    box-sizing: border-box;
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,6 +61,17 @@ const Title = styled.h2`
   line-height: 1.81;
   letter-spacing: -1.68px;
   color: #173147;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+
+    font-stretch: normal;
+    font-style: normal;
+
+    letter-spacing: -1.2px;
+    text-align: center;
+    color: #173147;
+  }
 `;
 
 const TemplateBox = styled.div`
@@ -45,7 +82,6 @@ const TemplateBox = styled.div`
   box-sizing: border-box;
 
   width: 100%;
-  height: 650px;
 
   margin-top: 70px;
   padding: 51px 67px;
@@ -54,6 +90,10 @@ const TemplateBox = styled.div`
   box-shadow: 0 2px 50px 0 rgba(22, 27, 96, 0.1);
 
   background-color: #ffffff;
+
+  @media (max-width: 1024px) {
+    padding: 35px 40px;
+  }
 `;
 
 const StepButton = styled.div`
@@ -91,11 +131,13 @@ const QuestionH3 = styled.h3`
   letter-spacing: -1px;
   text-align: left;
   color: #173147;
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
 `;
 
 const Description = styled.h5`
-  padding-bottom: 52px;
-
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -104,6 +146,11 @@ const Description = styled.h5`
   letter-spacing: -0.64px;
   text-align: left;
   color: #757575;
+
+  @media (max-width: 1024px) {
+    line-height: 1.86;
+    margin-bottom: 30px;
+  }
 `;
 
 const HashTagAndInfoWrapper = styled.div`
@@ -118,6 +165,10 @@ const HashTagAndInfoWrapper = styled.div`
 
 const Info = styled.h5`
   display: block;
+
+  margin-top: 30px;
+  margin-bottom: 30px;
+
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -169,72 +220,188 @@ const ColorStyledButton = styled(StyledButton)`
   border: 0px;
 `;
 
+const SelectStatus = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 14px 30px;
+
+  width: 100%;
+  height: 46px;
+  border-radius: 10px;
+  border: solid 1px #f85c5c;
+  background-color: #ffffff;
+
+  box-sizing: border-box;
+
+  font-size: 16px;
+  font-weight: 900;
+  font-stretch: normal;
+  font-style: normal;
+
+  letter-spacing: -0.64px;
+  text-align: left;
+  color: #f85c5c;
+`;
+
+const VerticalMargin = styled.div`
+  margin-top: ${(props) => props.margin};
+`;
+
 function TravelTendancyTest() {
-  const [indexOne, titleOne, descOne, onResetOne] = useTravelTest(1);
-  const [indexTwo, titleTwo, descTwo, onResetTwo] = useTravelTest(2);
+  const [indexOne, titleOne, descOne, onResetOne, checkedOne] = useTravelTest(
+    1
+  );
+  const [indexTwo, titleTwo, descTwo, onResetTwo, checkedTwo] = useTravelTest(
+    2
+  );
+
+  const showHashTagListIfExist = (checked, testNum) => {
+    if (checked > 0) {
+      return (
+        <div style={{ width: "100%" }}>
+          <Divider />
+          <VerticalMargin margin="30px" />
+          <HashTagList index={testNum} />
+          <VerticalMargin margin="30px" />
+          <Divider />
+        </div>
+      );
+    } else return null;
+  };
 
   return (
-    <Responsive>
-      <Wrapper>
-        <Element name="first-test">
-          <Title>서로의 여행 성향을 테스트 해보세요!</Title>
-        </Element>
-        <TestIndex index={indexOne} />
+    <>
+      <PC>
+        <Responsive>
+          <Wrapper>
+            <Element name="first-test">
+              <Title>서로의 여행 성향을 테스트 해보세요!</Title>
+            </Element>
+            <TestIndex index={indexOne} />
 
+            <TemplateBox>
+              <StepButton>{`STEP 01`}</StepButton>
+              <QuestionH3>{titleOne}</QuestionH3>
+              <Description>{descOne}</Description>
+              <Divider />
+              <TestFilter index={indexOne} />
+              <Divider />
+              <HashTagAndInfoWrapper>
+                <HashTagList index={indexOne} />
+                <Info>* 최대 3개까지 선택 가능합니다.</Info>
+              </HashTagAndInfoWrapper>
+              <ButtonWrapper>
+                <StyledButton onClick={onResetOne}>Reset</StyledButton>
+                <ScrollLink
+                  activeClass="active"
+                  to="second-test"
+                  spy={true}
+                  smooth={true}
+                  duration={700}
+                >
+                  <ColorStyledButton>Next</ColorStyledButton>
+                </ScrollLink>
+              </ButtonWrapper>
+            </TemplateBox>
+          </Wrapper>
+
+          <WrapperTwo>
+            <Element name="second-test">
+              <TestIndex index={indexTwo} />
+            </Element>
+            <TemplateBox>
+              <StepButton>{`STEP 02`}</StepButton>
+              <QuestionH3>{titleTwo}</QuestionH3>
+              <Description>{descTwo}</Description>
+              <Divider />
+              <TestFilter index={indexTwo} />
+              <Divider />
+              <HashTagAndInfoWrapper>
+                <HashTagList index={indexTwo} />
+                <Info>* 최대 5개까지 선택 가능합니다.</Info>
+              </HashTagAndInfoWrapper>
+              <ButtonWrapper>
+                <StyledButton onClick={onResetTwo}>Reset</StyledButton>
+                <ColorStyledButton
+                  onClick={() => {
+                    alert("아래로 이동");
+                  }}
+                >
+                  Next
+                </ColorStyledButton>
+              </ButtonWrapper>
+            </TemplateBox>
+          </WrapperTwo>
+        </Responsive>
+      </PC>
+
+      <Mobile>
+        <Element name="mobile-first-test">
+          <VerticalMargin margin="127px" />
+        </Element>
+        <Title>서로의 여행 성향을 테스트 해보세요!</Title>
+        <TestIndex index={indexOne} />
         <TemplateBox>
           <StepButton>{`STEP 01`}</StepButton>
           <QuestionH3>{titleOne}</QuestionH3>
           <Description>{descOne}</Description>
-          <Divider />
-          <TestFilter index={indexOne} />
-          <Divider />
-          <HashTagAndInfoWrapper>
-            <HashTagList index={indexOne} />
-            <Info>* 최대 3개까지 선택 가능합니다.</Info>
-          </HashTagAndInfoWrapper>
-          <ButtonWrapper>
-            <StyledButton onClick={onResetOne}>Reset</StyledButton>
-            <ScrollLink
-              activeClass="active"
-              to="second-test"
-              spy={true}
-              smooth={true}
-              duration={700}
-            >
-              <ColorStyledButton>Next</ColorStyledButton>
-            </ScrollLink>
-          </ButtonWrapper>
-        </TemplateBox>
-      </Wrapper>
 
-      <WrapperTwo>
-        <Element name="second-test">
-          <TestIndex index={indexTwo} />
+          <Divider />
+
+          <SelectStatus>
+            <div>{`${checkedOne}개 선택됨`}</div>
+            <div>{IconLib.getImgIcon(dropdownIco, 24, 24)}</div>
+          </SelectStatus>
+          <TestFilter index={indexOne} />
+          <Info>* 최대 3개까지 선택 가능합니다.</Info>
+          <div style={{ width: "100%" }}>
+            {showHashTagListIfExist(checkedOne, indexOne)}
+          </div>
+          <VerticalMargin margin="30px" />
+          <ScrollLink
+            activeClass="active"
+            to="mobile-second-test"
+            spy={true}
+            smooth={true}
+            duration={700}
+          >
+            <ColorStyledButton>Next</ColorStyledButton>
+          </ScrollLink>
+          <VerticalMargin margin="20px" />
+          <StyledButton onClick={onResetOne}>Reset</StyledButton>
+        </TemplateBox>
+        <Element name="mobile-second-test">
+          <VerticalMargin margin="90px" />
         </Element>
+        <TestIndex index={indexTwo} />
         <TemplateBox>
           <StepButton>{`STEP 02`}</StepButton>
           <QuestionH3>{titleTwo}</QuestionH3>
           <Description>{descTwo}</Description>
+
           <Divider />
+
+          <SelectStatus>
+            <div>{`${checkedTwo}개 선택됨`}</div>
+            <div>{IconLib.getImgIcon(dropdownIco, 24, 24)}</div>
+          </SelectStatus>
           <TestFilter index={indexTwo} />
-          <Divider />
-          <HashTagAndInfoWrapper>
-            <HashTagList index={indexTwo} />
-            <Info>* 최대 5개까지 선택 가능합니다.</Info>
-          </HashTagAndInfoWrapper>
-          <ButtonWrapper>
-            <StyledButton onClick={onResetTwo}>Reset</StyledButton>
-            <ColorStyledButton
-              onClick={() => {
-                alert("아래로 이동");
-              }}
-            >
-              Next
-            </ColorStyledButton>
-          </ButtonWrapper>
+          <Info>* 최대 5개까지 선택 가능합니다.</Info>
+          <div style={{ width: "100%" }}>
+            {showHashTagListIfExist(checkedTwo, indexTwo)}
+          </div>
+          <VerticalMargin margin="30px" />
+          <ColorStyledButton>Next</ColorStyledButton>
+          <VerticalMargin margin="20px" />
+          <StyledButton onClick={onResetTwo}>Reset</StyledButton>
         </TemplateBox>
-      </WrapperTwo>
-    </Responsive>
+        <VerticalMargin margin="174px" />
+      </Mobile>
+    </>
   );
 }
 

@@ -14,6 +14,10 @@ const StyledTable = styled.table`
   height: 144px;
 
   margin: 52px 0;
+
+  @media (max-width: 1024px) {
+    margin: 0;
+  }
 `;
 
 const StyledCheckBox = styled.div`
@@ -32,6 +36,10 @@ const TableCell = styled.div`
   align-items: center;
 
   user-select: none;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const Label = styled.div`
@@ -62,6 +70,37 @@ const findIndex = (i, j, A) => {
 };
 
 function ARowTable({ A, data, filterStatus, onToggle }) {
+  if (A === 1) {
+    const flatData = data.flat();
+    const flatFilterStatus = filterStatus.flat();
+    const iterator = Array(flatData.length);
+    iterator.fill(null);
+
+    console.log(flatData, flatFilterStatus);
+    console.log(iterator);
+
+    return (
+      <TableWrapper>
+        <StyledTable>
+          {iterator.map((v, i) => (
+            <TableCell
+              onClick={() => {
+                onToggle(i);
+              }}
+            >
+              <StyledCheckBox type="checkbox" checked={flatFilterStatus[i]} />
+              <Label>
+                <LabelText checked={flatFilterStatus[i]}>
+                  {flatData[i]}
+                </LabelText>
+              </Label>
+            </TableCell>
+          ))}
+        </StyledTable>
+      </TableWrapper>
+    );
+  }
+
   return (
     <>
       <TableWrapper>

@@ -41,6 +41,10 @@ const Line = styled.div`
   height: 6px;
 
   background-color: #fea2a2;
+
+  @media (max-width: 1024px) {
+    width: 90px;
+  }
 `;
 
 const LineTwo = styled(Line)`
