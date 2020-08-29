@@ -34,7 +34,6 @@ const StyledCheckBox = styled.div`
 const TableCell = styled.div`
   display: flex;
   align-items: center;
-
   user-select: none;
 
   @media (max-width: 1024px) {

@@ -19,6 +19,28 @@ import marker from "../../../assets/marker.png";
 import Divider from "../../common/Divider";
 import KakaoMap from "./KakaoMap";
 
+const Mobile = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+    padding: 0 30px;
+
+    box-sizing: block;
+  }
+`;
+
+const PC = styled.div`
+  @media (min-width: 1025px) {
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
 const Wrapper = styled.div`
   padding: 50px 70px;
 
@@ -30,6 +52,12 @@ const Wrapper = styled.div`
   background-color: #ffffff;
 
   box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 30px 27px;
+    margin: 100px auto;
+  }
 `;
 
 const MainPicture = styled.img`
@@ -41,6 +69,12 @@ const MainPicture = styled.img`
   height: 500px;
 
   border-radius: 30px;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 30px;
+    width: 100%;
+    height: 160px;
+  }
 `;
 
 const EnglishName = styled.h3`
@@ -56,6 +90,19 @@ const EnglishName = styled.h3`
   letter-spacing: normal;
   text-align: left;
   color: #757575;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 12px;
+
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+
+    letter-spacing: normal;
+    text-align: left;
+    color: #757575;
+  }
 `;
 
 const KoreanName = styled.h2`
@@ -70,6 +117,17 @@ const KoreanName = styled.h2`
   letter-spacing: -2.52px;
   text-align: left;
   color: #173147;
+
+  @media (max-width: 1024px) {
+    font-size: 24px;
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.67;
+    letter-spacing: -1.44px;
+    text-align: left;
+    color: #173147;
+  }
 `;
 
 const SpaceBetweenBlock = styled.div`
@@ -82,6 +140,11 @@ const ImgWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 50px;
+
+  @media (max-width: 1024px) {
+    margin-top: 12px;
+    margin-bottom: 34px;
+  }
 `;
 
 const ImageIcon = styled.img`
@@ -102,6 +165,10 @@ const Address = styled.h3`
   letter-spacing: -0.64px;
   text-align: left;
   color: #757575;
+
+  @media (max-width: 1024px) {
+    line-height: 0;
+  }
 `;
 
 const Desc = styled.p`
@@ -118,6 +185,11 @@ const Desc = styled.p`
   letter-spacing: -0.64px;
   text-align: left;
   color: #424242;
+
+  @media (max-width: 1024px) {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 `;
 
 const SubTitle = styled.h2`
@@ -133,6 +205,10 @@ const SubTitle = styled.h2`
   letter-spacing: -0.84px;
   text-align: left;
   color: #173147;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const MarginBlank = styled.div`
@@ -153,17 +229,29 @@ const ColorBox = styled.div`
   background-color: #f5f5f5;
 
   box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: auto;
+    padding: 30px 19px;
+  }
 `;
 
 const StyledH3 = styled.h3`
   display: block;
   font-size: 16px;
-  font-weight: normal;
+
   font-stretch: normal;
   font-style: normal;
   letter-spacing: -0.64px;
   text-align: left;
   color: #757575;
+
+  line-height: 1.3;
+`;
+
+const BoldStyledH3 = styled(StyledH3)`
+  font-weight: 900;
 `;
 
 const MarginLeft20Div = styled.div`
@@ -202,6 +290,10 @@ const UnorderedFlexDiv = styled.div`
 const MapWrapper = styled.div`
   height: 420px;
   border-radius: 30px;
+
+  @media (max-width: 1024px) {
+    height: 160px;
+  }
 `;
 
 export default function Tripinfodetailcard() {
@@ -226,41 +318,173 @@ export default function Tripinfodetailcard() {
 
   const facilitiesIcons = [parkIco, petIco, childCarIco];
   return (
-    <Wrapper>
-      <MainPicture src={dummy} />
-      <EnglishName>{obj.engName}</EnglishName>
+    <>
+      <PC>
+        <Wrapper>
+          <MainPicture src={dummy} />
+          <EnglishName>{obj.engName}</EnglishName>
 
-      <SpaceBetweenBlock>
-        <KoreanName>{obj.korName}</KoreanName>
-        <FlexDiv>
-          <div>{IconLib.getImgIcon(loveIco, 24, 24)}</div>
-          <MarginLeftDiv margin="30px" />
-          <div>{IconLib.getImgIcon(shareIco, 24, 24)}</div>
-        </FlexDiv>
-      </SpaceBetweenBlock>
+          <SpaceBetweenBlock>
+            <KoreanName>{obj.korName}</KoreanName>
+            <FlexDiv>
+              <div>{IconLib.getImgIcon(loveIco, 24, 24)}</div>
+              <MarginLeftDiv margin="30px" />
+              <div>{IconLib.getImgIcon(shareIco, 24, 24)}</div>
+            </FlexDiv>
+          </SpaceBetweenBlock>
 
-      <ImgWrapper>
-        <ImageIcon src={marker} />
-        <Address>{obj.address}</Address>
-      </ImgWrapper>
+          <ImgWrapper>
+            <ImageIcon src={marker} />
+            <Address>{obj.address}</Address>
+          </ImgWrapper>
 
-      <Divider />
+          <Divider />
 
-      <Desc>{obj.description}</Desc>
-      <Divider />
+          <Desc>{obj.description}</Desc>
+          <Divider />
 
-      <MarginBlank margin={"50px"} />
+          <MarginBlank margin={"50px"} />
 
-      <InfoSection>
-        <LeftBox>
+          <InfoSection>
+            <LeftBox>
+              <div>
+                <SubTitle>기본 정보</SubTitle>
+                <strong>
+                  <MarginBottom13StyledH3>주소</MarginBottom13StyledH3>
+                </strong>
+                <MarginStyledH3>{obj.descAddress}</MarginStyledH3>
+              </div>
+
+              <div>
+                <SubTitle>편의 시설</SubTitle>
+                {obj.facilities.map((v, idx) => (
+                  <>
+                    <UnorderedFlexDiv>
+                      <div>
+                        {IconLib.getImgIcon(facilitiesIcons[idx], 24, 24)}
+                      </div>
+                      <MarginLeftDiv margin="12px" />
+                      <StyledH3>{v}</StyledH3>
+                    </UnorderedFlexDiv>
+                    <MarginBlank margin="23px" />
+                  </>
+                ))}
+              </div>
+            </LeftBox>
+
+            <RightBox>
+              <SubTitle>
+                <MarginLeftDiv margin={"38px"}>이용 안내</MarginLeftDiv>
+              </SubTitle>
+              <ColorBox>
+                <div>
+                  <FlexDiv>
+                    <div>{IconLib.getImgIcon(infoIco, 24, 24)}</div>
+                    <MarginLeftDiv margin="10px" />
+                    <BoxLabelStyledH3>문의 및 안내</BoxLabelStyledH3>
+                    <MarginRight40Div />
+                    <StyledH3>{obj.contact}</StyledH3>
+                  </FlexDiv>
+                  <MarginBlank margin={"20px"} />
+                </div>
+                <Divider />
+
+                <div>
+                  <MarginBlank margin={"20px"} />
+                  <UnorderedFlexDiv>
+                    <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
+                    <MarginLeftDiv margin="10px" />
+                    <BoxLabelStyledH3>이용시간</BoxLabelStyledH3>
+                    <MarginLeftDiv margin="57px" />
+
+                    <div>
+                      <BoldStyledH3>평일</BoldStyledH3>
+                      <MarginBlank margin={"20px"} />
+                      <BoldStyledH3>주말, 공휴일</BoldStyledH3>
+                    </div>
+
+                    <MarginLeftDiv margin={"30px"} />
+                    <div>
+                      <StyledH3>{obj.weeksday}</StyledH3>
+                      <MarginBlank margin={"20px"} />
+                      <StyledH3>{`하절기(3 ~ 10월) : ${obj.summerWeekendAndHoliday}`}</StyledH3>
+                      <MarginBlank margin={"20px"} />
+                      <StyledH3>{`동절기(11 ~ 2월) : ${obj.winterWeekendAndHoliday}`}</StyledH3>
+                    </div>
+                  </UnorderedFlexDiv>
+                </div>
+
+                <MarginBlank margin={"20px"} />
+                <Divider />
+                <MarginBlank margin={"20px"} />
+                <div>
+                  <FlexDiv>
+                    <div>{IconLib.getImgIcon(calendarIco, 24, 24)}</div>
+                    <MarginLeftDiv margin="10px" />
+                    <BoxLabelStyledH3>쉬는 날</BoxLabelStyledH3>
+                    <MarginLeftDiv margin="71px" />
+                    <StyledH3>{obj.breakDay}</StyledH3>
+                  </FlexDiv>
+                </div>
+
+                <MarginBlank margin={"20px"} />
+                <Divider />
+                <MarginBlank margin={"20px"} />
+                <div>
+                  <FlexDiv>
+                    <div>{IconLib.getImgIcon(moneyIco, 24, 24)}</div>
+                    <MarginLeftDiv margin="10px" />
+                    <BoxLabelStyledH3>이용 요금</BoxLabelStyledH3>
+                    <MarginLeftDiv margin="57px" />
+                    <StyledH3>{obj.fee}</StyledH3>
+                  </FlexDiv>
+                </div>
+
+                <MarginBlank margin={"20px"} />
+                <Divider />
+                <MarginBlank margin={"20px"} />
+                <div>
+                  <FlexDiv>
+                    <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
+                    <MarginLeftDiv margin="10px" />
+                    <BoxLabelStyledH3>관람 소요 시간</BoxLabelStyledH3>
+                    <MarginLeftDiv margin="26px" />
+                    <StyledH3>{obj.playTime}</StyledH3>
+                  </FlexDiv>
+                </div>
+              </ColorBox>
+            </RightBox>
+          </InfoSection>
+          <MarginBlank margin="50px" />
+          <SubTitle>위치</SubTitle>
+          <MapWrapper>
+            <KakaoMap />
+          </MapWrapper>
+        </Wrapper>
+      </PC>
+
+      <Mobile>
+        <Wrapper>
+          <MainPicture src={dummy} />
+          <EnglishName>{obj.engName}</EnglishName>
+          <KoreanName>{obj.korName}</KoreanName>
+          <ImgWrapper>
+            <ImageIcon src={marker} />
+            <Address>{obj.address}</Address>
+          </ImgWrapper>
+          <Divider />
+          <MarginBlank margin="30px" />
+          <Desc>{obj.description}</Desc>
+          <Divider />
+          <MarginBlank margin="30px" />
           <div>
             <SubTitle>기본 정보</SubTitle>
             <strong>
               <MarginBottom13StyledH3>주소</MarginBottom13StyledH3>
             </strong>
-            <MarginStyledH3>{obj.descAddress}</MarginStyledH3>
+            <StyledH3>{obj.descAddress}</StyledH3>
           </div>
-
+          <MarginBlank margin="50px" />
           <div>
             <SubTitle>편의 시설</SubTitle>
             {obj.facilities.map((v, idx) => (
@@ -274,96 +498,104 @@ export default function Tripinfodetailcard() {
               </>
             ))}
           </div>
-        </LeftBox>
-
-        <RightBox>
-          <SubTitle>
-            <MarginLeftDiv margin={"38px"}>이용 안내</MarginLeftDiv>
-          </SubTitle>
+          <MarginBlank margin="50px" />
+          <SubTitle>이용 안내</SubTitle>
           <ColorBox>
+            <FlexDiv>
+              <div>{IconLib.getImgIcon(infoIco, 24, 24)}</div>
+              <MarginLeftDiv margin="10px" />
+              <BoxLabelStyledH3>문의 및 안내</BoxLabelStyledH3>
+            </FlexDiv>
+            <MarginBlank margin="8px" />
+            <FlexDiv>
+              <MarginLeftDiv margin="35px" />
+              <StyledH3>{obj.contact}</StyledH3>
+            </FlexDiv>
+
+            <MarginBlank margin="20px" />
+            <Divider />
+            <MarginBlank margin="20px" />
+
             <div>
               <FlexDiv>
-                <div>{IconLib.getImgIcon(infoIco, 24, 24)}</div>
-                <MarginLeftDiv margin="10px" />
-                <BoxLabelStyledH3>문의 및 안내</BoxLabelStyledH3>
-                <MarginRight40Div />
-                <StyledH3>{obj.contact}</StyledH3>
-              </FlexDiv>
-              <MarginBlank margin={"20px"} />
-            </div>
-            <Divider />
-
-            <div>
-              <MarginBlank margin={"20px"} />
-              <UnorderedFlexDiv>
                 <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
                 <MarginLeftDiv margin="10px" />
                 <BoxLabelStyledH3>이용시간</BoxLabelStyledH3>
-                <MarginLeftDiv margin="57px" />
+              </FlexDiv>
+              <MarginBlank margin="16px" />
+              <MarginLeftDiv margin="36px">
+                <StyledH3>평일</StyledH3>
 
-                <div>
-                  <StyledH3>평일</StyledH3>
-                  <MarginBlank margin={"20px"} />
-                  <StyledH3>주말, 공휴일</StyledH3>
-                </div>
+                <MarginBlank margin={"20px"} />
+                <StyledH3>{obj.weeksday}</StyledH3>
+                <MarginBlank margin="30px" />
 
-                <MarginLeftDiv margin={"30px"} />
+                <StyledH3>주말, 공휴일</StyledH3>
+
+                <MarginBlank margin="16px" />
                 <div>
-                  <StyledH3>{obj.weeksday}</StyledH3>
-                  <MarginBlank margin={"20px"} />
                   <StyledH3>{`하절기(3 ~ 10월) : ${obj.summerWeekendAndHoliday}`}</StyledH3>
-                  <MarginBlank margin={"20px"} />
+                  <MarginBlank margin={"16px"} />
                   <StyledH3>{`동절기(11 ~ 2월) : ${obj.winterWeekendAndHoliday}`}</StyledH3>
                 </div>
-              </UnorderedFlexDiv>
+              </MarginLeftDiv>
             </div>
 
-            <MarginBlank margin={"20px"} />
+            <MarginBlank margin="20px" />
             <Divider />
-            <MarginBlank margin={"20px"} />
-            <div>
-              <FlexDiv>
-                <div>{IconLib.getImgIcon(calendarIco, 24, 24)}</div>
-                <MarginLeftDiv margin="10px" />
-                <BoxLabelStyledH3>쉬는 날</BoxLabelStyledH3>
-                <MarginLeftDiv margin="71px" />
-                <StyledH3>{obj.breakDay}</StyledH3>
-              </FlexDiv>
-            </div>
+            <MarginBlank margin="20px" />
 
-            <MarginBlank margin={"20px"} />
-            <Divider />
-            <MarginBlank margin={"20px"} />
-            <div>
-              <FlexDiv>
-                <div>{IconLib.getImgIcon(moneyIco, 24, 24)}</div>
-                <MarginLeftDiv margin="10px" />
-                <BoxLabelStyledH3>이용 요금</BoxLabelStyledH3>
-                <MarginLeftDiv margin="57px" />
-                <StyledH3>{obj.fee}</StyledH3>
-              </FlexDiv>
-            </div>
+            <FlexDiv>
+              <div>{IconLib.getImgIcon(calendarIco, 24, 24)}</div>
+              <MarginLeftDiv margin="10px" />
+              <BoxLabelStyledH3>쉬는 날</BoxLabelStyledH3>
+            </FlexDiv>
+            <MarginBlank margin="8px" />
+            <FlexDiv>
+              <MarginLeftDiv margin="35px" />
+              <StyledH3>{obj.breakDay}</StyledH3>
+            </FlexDiv>
 
-            <MarginBlank margin={"20px"} />
+            <MarginBlank margin="20px" />
             <Divider />
-            <MarginBlank margin={"20px"} />
-            <div>
-              <FlexDiv>
-                <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
-                <MarginLeftDiv margin="10px" />
-                <BoxLabelStyledH3>관람 소요 시간</BoxLabelStyledH3>
-                <MarginLeftDiv margin="26px" />
-                <StyledH3>{obj.playTime}</StyledH3>
-              </FlexDiv>
-            </div>
+            <MarginBlank margin="20px" />
+
+            <FlexDiv>
+              <div>{IconLib.getImgIcon(moneyIco, 24, 24)}</div>
+              <MarginLeftDiv margin="10px" />
+              <BoxLabelStyledH3>이용 요금</BoxLabelStyledH3>
+            </FlexDiv>
+            <MarginBlank margin="8px" />
+            <FlexDiv>
+              <MarginLeftDiv margin="35px" />
+              <StyledH3>{obj.fee}</StyledH3>
+            </FlexDiv>
+
+            <MarginBlank margin="20px" />
+            <Divider />
+            <MarginBlank margin="20px" />
+
+            <FlexDiv>
+              <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
+              <MarginLeftDiv margin="10px" />
+              <BoxLabelStyledH3>관람 소요 시간</BoxLabelStyledH3>
+            </FlexDiv>
+            <MarginBlank margin="8px" />
+            <FlexDiv>
+              <MarginLeftDiv margin="35px" />
+              <StyledH3>{obj.playTime}</StyledH3>
+            </FlexDiv>
           </ColorBox>
-        </RightBox>
-      </InfoSection>
-      <MarginBlank margin="50px" />
-      <SubTitle>위치</SubTitle>
-      <MapWrapper>
-        <KakaoMap />
-      </MapWrapper>
-    </Wrapper>
+
+          <MarginBlank margin="50px" />
+          <SubTitle>위치</SubTitle>
+          <MarginBlank margin="20px" />
+
+          <MapWrapper>
+            <KakaoMap />
+          </MapWrapper>
+        </Wrapper>
+      </Mobile>
+    </>
   );
 }

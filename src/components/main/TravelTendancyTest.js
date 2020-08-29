@@ -16,6 +16,7 @@ import { Element } from "react-scroll";
 const PC = styled.div`
   @media (min-width: 1025px) {
     display: block;
+    width: 100%;
   }
 
   @media (max-width: 1024px) {
@@ -274,7 +275,7 @@ function TravelTendancyTest() {
   };
 
   return (
-    <>
+    <div>
       <PC>
         <Responsive>
           <Wrapper>
@@ -287,9 +288,12 @@ function TravelTendancyTest() {
               <StepButton>{`STEP 01`}</StepButton>
               <QuestionH3>{titleOne}</QuestionH3>
               <Description>{descOne}</Description>
+              <VerticalMargin margin="52px" />
               <Divider />
               <TestFilter index={indexOne} />
+
               <Divider />
+
               <HashTagAndInfoWrapper>
                 <HashTagList index={indexOne} />
                 <Info>* 최대 3개까지 선택 가능합니다.</Info>
@@ -317,6 +321,7 @@ function TravelTendancyTest() {
               <StepButton>{`STEP 02`}</StepButton>
               <QuestionH3>{titleTwo}</QuestionH3>
               <Description>{descTwo}</Description>
+              <VerticalMargin margin="52px" />
               <Divider />
               <TestFilter index={indexTwo} />
               <Divider />
@@ -401,7 +406,7 @@ function TravelTendancyTest() {
         </TemplateBox>
         <VerticalMargin margin="174px" />
       </Mobile>
-    </>
+    </div>
   );
 }
 

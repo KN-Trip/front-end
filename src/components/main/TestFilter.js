@@ -10,6 +10,7 @@ import { divideArray } from "../../lib/divdeArray";
 const PC = styled.div`
   @media (max-width: 1024px) {
     display: none;
+    width: 100%;
   }
 
   @media (min-width: 1025px) {
@@ -20,6 +21,7 @@ const PC = styled.div`
 const Mobile = styled.div`
   @media (max-width: 1024px) {
     display: block;
+    width: 100%;
   }
 
   @media (min-width: 1025px) {
@@ -31,7 +33,6 @@ const MobileWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 0 36px;
   padding: 19px 12px 19px 30px;
 
   width: 226px;
@@ -77,7 +78,7 @@ function TestFilter({ index }) {
   const onToggle = index === 1 ? onToggleOne : onToggleTwo;
 
   return (
-    <>
+    <div style={{ width: "100%" }}>
       <PC>
         <ARowTable
           A={6}
@@ -99,7 +100,7 @@ function TestFilter({ index }) {
           </ScrollWrapper>
         </MobileWrapper>
       </Mobile>
-    </>
+    </div>
   );
 }
 
