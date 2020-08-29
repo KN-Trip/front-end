@@ -174,10 +174,14 @@ const Info = styled.h5`
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
-  line-height: 1.88;
+
   letter-spacing: -0.64px;
   text-align: left;
   color: #424242;
+
+  @media (min-width: 1025px) {
+    white-space: nowrap;
+  }
 `;
 
 const ButtonWrapper = styled.div`

@@ -6,11 +6,10 @@ import { getExistItem } from "../../lib/getExistItem";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
 
   width: 100%;
   overflow-x: auto;
-
+  flex-wrap: wrap;
   @media (max-width: 1024px) {
     padding: 0 18px;
   }
