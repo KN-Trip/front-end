@@ -7,6 +7,10 @@ const SIGNUP = "signup/LOGIN";
 const SIGNUP_SUCCESS = "signup/LOGIN_SUCCESS";
 const SIGNUP_FAILURE = "signup/LOGIN_FAILURE";
 
+const CHECKID = "signup/CHECKID";
+const CHECKID_SUCCESS = "signup/CHECKID_SUCCESS";
+const CHECKID_FAILURE = "signup/CHECKID_FAILURE";
+
 const CHANGE_INPUT = "signup/CHANGE_INPUT";
 
 export const setStep = (step) => ({
@@ -36,6 +40,25 @@ export const postSignUpRequest = (nickname, id, password) => async (
   }
 };
 
+export const checkIDRequest = (id) => async (dispatch) => {
+  dispatch({ type: CHECKID }); // 요청이 시작됨
+  try {
+    const res = await api.checkExistID(id); // API 호출
+    if (res.data.message !== true && res.data.message !== false) {
+      dispatch({ type: CHECKID_FAILURE, res_error: "error" });
+    } else {
+      dispatch({ type: CHECKID_SUCCESS, isExist: res.data.message }); // 성공
+      if (res.data.message) {
+        alert("존재하는 아이디 입니다.");
+      } else {
+        dispatch(setStep(2));
+      }
+    }
+  } catch (e) {
+    dispatch({ type: CHECKID_FAILURE, res_error: e }); // 실패
+  }
+};
+
 const initialState = {
   step: 1,
 
@@ -45,8 +68,13 @@ const initialState = {
   checkPassword: "",
 
   signup: false,
-  signup_loading: "",
-  signup_error: "",
+  signup_loading: false,
+  signup_error: null,
+
+  checkID: false,
+  checkID_loading: false,
+  checkID_error: null,
+  isIDExist: false,
 };
 
 export default function signup(state = initialState, action) {
@@ -81,6 +109,27 @@ export default function signup(state = initialState, action) {
         ...state,
         [action.name]: action.value,
       };
+
+    case CHECKID:
+      return {
+        ...state,
+        checkID_loading: true,
+      };
+
+    case CHECKID_SUCCESS:
+      return {
+        ...state,
+        checkID_loading: false,
+        isIDExist: action.isExist,
+      };
+
+    case CHECKID_FAILURE:
+      return {
+        ...state,
+        checkID_loading: false,
+        checkID_error: action.res_error,
+      };
+
     default:
       return state;
   }

@@ -5,6 +5,7 @@ import CR from "../../assets/radiobutton-checked.png";
 import DR from "../../assets/radiobutton-default.png";
 
 import useSignUp from "../../hooks/useSignUp";
+import signup from "../../modules/signup";
 
 const Wrapper = styled.div`
   width: 300px;
@@ -131,6 +132,14 @@ const SignUpButton = styled.div`
 function SignUpOne({ setStep }) {
   const signUpData = useSignUp();
   const [radio, setRadio] = useState(false);
+
+  if (signUpData.checkID_loading) {
+    return <div>asdf</div>;
+  }
+
+  if (signUpData.checkID_error) {
+    return <div>에러남</div>;
+  }
   return (
     <Wrapper>
       <CautionWrapper>
@@ -194,7 +203,7 @@ function SignUpOne({ setStep }) {
 
       <ButtonWrapper>
         <SignUpButton
-          onClick={() => {
+          onClick={async () => {
             const regPwd = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; // 6 ~ 20 글자수의 영문, 숫자 판별 정규식
 
             if (!radio) {
@@ -209,10 +218,10 @@ function SignUpOne({ setStep }) {
               alert("아이디를 입력해주세요.");
             } else if (signUpData.nickname.length === 0) {
               alert("닉네임을 입력해주세요.");
-            } else if (regPwd.test(signUpData.password)) {
+            } else if (!regPwd.test(signUpData.password)) {
               alert("비밀번호는 6~20자의 영문과 숫자로 입력해주세요.");
             } else {
-              setStep(2);
+              await signUpData.checkExistID();
             }
           }}
         >
