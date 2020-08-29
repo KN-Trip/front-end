@@ -2,10 +2,11 @@ import produce from "immer";
 import * as api from "../lib/api";
 
 const SET_STEP = "signup/SET_STEP";
+const CLEAR_SIGNUP_PROCESS = "signup/CLEAR_SIGNUP_PROCESS";
 
-const SIGNUP = "signup/LOGIN";
-const SIGNUP_SUCCESS = "signup/LOGIN_SUCCESS";
-const SIGNUP_FAILURE = "signup/LOGIN_FAILURE";
+const SIGNUP = "signup/SIGNUP";
+const SIGNUP_SUCCESS = "signup/SIGNUP_SUCCESS";
+const SIGNUP_FAILURE = "signup/SIGNUP_FAILURE";
 
 const CHECKID = "signup/CHECKID";
 const CHECKID_SUCCESS = "signup/CHECKID_SUCCESS";
@@ -18,6 +19,9 @@ export const setStep = (step) => ({
   step,
 });
 
+export const clearSignUpProcess = () => ({
+  type: CLEAR_SIGNUP_PROCESS,
+});
 export const changeInput = (e) => {
   const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
   return { type: CHANGE_INPUT, value, name };
@@ -32,8 +36,8 @@ export const postSignUpRequest = (nickname, id, password) => async (
     if (res.data.message === "fail") {
       dispatch({ type: SIGNUP_FAILURE, res_error: "error" });
     } else {
-      alert("회원가입이 완료 되었습니다!");
       dispatch({ type: SIGNUP_SUCCESS }); // 성공
+      dispatch(setStep(3));
     }
   } catch (e) {
     dispatch({ type: SIGNUP_FAILURE, res_error: e }); // 실패
@@ -128,6 +132,25 @@ export default function signup(state = initialState, action) {
         ...state,
         checkID_loading: false,
         checkID_error: action.res_error,
+      };
+
+    case CLEAR_SIGNUP_PROCESS:
+      return {
+        step: 1,
+
+        nickname: "",
+        id: "",
+        password: "",
+        checkPassword: "",
+
+        signup: false,
+        signup_loading: false,
+        signup_error: null,
+
+        checkID: false,
+        checkID_loading: false,
+        checkID_error: null,
+        isIDExist: false,
       };
 
     default:

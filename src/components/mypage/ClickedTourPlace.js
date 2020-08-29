@@ -8,6 +8,25 @@ import RightArrowIco from "../../assets/right-arrow-ico.png";
 
 import PlaceItem from "../common/PlaceItem";
 
+const PC = styled.div`
+  @media (min-width: 1025px) {
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Mobile = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+  }
+`;
 const HorizontalMargin = styled.div`
   margin-left: ${(props) => props.margin};
 `;
@@ -218,68 +237,108 @@ export default function ClickedTourPlace() {
     arrows: false,
   };
 
+  const mobileSettings = {
+    accessibility: false,
+    focusOnSelect: false,
+    centerPadding: "50px",
+
+    dots: false,
+
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    beforeChange: (prev, next) => {
+      setCurrentSlide(next);
+    },
+
+    arrows: false,
+  };
+
   return (
-    <Wrapper>
-      <SpaceBetweenFlexDiv>
-        <FlexDiv>
-          <HorizontalMargin margin="75px" />
-          <Title>최근 조회한 여행지</Title>
-        </FlexDiv>
+    <>
+      <PC>
+        <Wrapper>
+          <SpaceBetweenFlexDiv>
+            <FlexDiv>
+              <HorizontalMargin margin="75px" />
+              <Title>최근 조회한 여행지</Title>
+            </FlexDiv>
 
-        <FlexDiv>
-          <Arrow
-            onClick={() => {
-              if (currentSlide === 0) {
-                return;
-              }
+            <FlexDiv>
+              <Arrow
+                onClick={() => {
+                  if (currentSlide === 0) {
+                    return;
+                  }
 
-              slider.current.slickGoTo(currentSlide - 3);
-              setCurrentSlide(currentSlide - 3);
-            }}
-            num={currentSlide}
-            direction={"left"}
-          >
-            <ArrowImg src={LeftArrowIco} />
-          </Arrow>
+                  slider.current.slickGoTo(currentSlide - 3);
+                  setCurrentSlide(currentSlide - 3);
+                }}
+                num={currentSlide}
+                direction={"left"}
+              >
+                <ArrowImg src={LeftArrowIco} />
+              </Arrow>
 
-          <HorizontalMargin margin="20px" />
+              <HorizontalMargin margin="20px" />
 
-          <Arrow
-            onClick={() => {
-              if (currentSlide === 6) {
-                return;
-              }
+              <Arrow
+                onClick={() => {
+                  if (currentSlide === 6) {
+                    return;
+                  }
 
-              slider.current.slickGoTo(currentSlide + 3);
-              setCurrentSlide(currentSlide + 3);
-            }}
-            num={currentSlide}
-            direction={"right"}
-          >
-            <ArrowImg src={RightArrowIco} />
-          </Arrow>
-        </FlexDiv>
-      </SpaceBetweenFlexDiv>
-      <div>
-        <WidthSlider ref={slider} {...settings}>
-          {fakeJson.map((item, idx) => (
-            <div className="center">
-              <CardWrapper>
-                <PlaceItem
-                  id={idx}
-                  img={item.img}
-                  name={item.name}
-                  address={item.address}
-                />
-              </CardWrapper>
-            </div>
-          ))}
-        </WidthSlider>
-      </div>
+                  slider.current.slickGoTo(currentSlide + 3);
+                  setCurrentSlide(currentSlide + 3);
+                }}
+                num={currentSlide}
+                direction={"right"}
+              >
+                <ArrowImg src={RightArrowIco} />
+              </Arrow>
+            </FlexDiv>
+          </SpaceBetweenFlexDiv>
+          <div>
+            <WidthSlider ref={slider} {...settings}>
+              {fakeJson.map((item, idx) => (
+                <div className="center">
+                  <CardWrapper>
+                    <PlaceItem
+                      id={idx}
+                      img={item.img}
+                      name={item.name}
+                      address={item.address}
+                    />
+                  </CardWrapper>
+                </div>
+              ))}
+            </WidthSlider>
+          </div>
 
-      <div>
-        <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-      </div>
-    </Wrapper>
+          <div>
+            <Dots slide={currentSlide} setSlide={setCurrentSlide} />
+          </div>
+        </Wrapper>
+      </PC>
+
+      <Mobile>
+        <Title>내가 찜한 여행지</Title>
+        <div>
+          <WidthSlider ref={slider} {...mobileSettings}>
+            {fakeJson.map((item, idx) => (
+              <div className="center">
+                <CardWrapper>
+                  <PlaceItem
+                    id={idx}
+                    img={item.img}
+                    name={item.name}
+                    address={item.address}
+                  />
+                </CardWrapper>
+              </div>
+            ))}
+          </WidthSlider>
+        </div>
+      </Mobile>
+    </>
   );
 }

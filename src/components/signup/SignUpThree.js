@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Description, Button, ColorButton, ButtonWrapper } from "./SignUpTwo";
 import { setStep } from "../../modules/signup";
 import { useHistory } from "react-router-dom";
+import useSignUp from "../../hooks/useSignUp";
 
 const DecorateID = styled.strong`
   color: #000000;
@@ -10,17 +11,19 @@ const DecorateID = styled.strong`
 `;
 function SignUpThree() {
   let history = useHistory();
+  const signUpInfo = useSignUp();
   return (
     <div>
       <Description>
-        꽁냥트립 가입하신 아이디는 <DecorateID>dmsgp0829</DecorateID> 입니다.
+        꽁냥트립 가입하신 아이디는 <DecorateID>{signUpInfo.id}</DecorateID>
+        입니다.
         <br /> 가입하신 아이디와 비밀번호로 로그인이 가능합니다.
       </Description>
 
       <ButtonWrapper>
         <Button
           onClick={() => {
-            setStep(1);
+            signUpInfo.clearSignUp();
             history.push("/");
           }}
         >
@@ -28,7 +31,7 @@ function SignUpThree() {
         </Button>
         <ColorButton
           onClick={async () => {
-            setStep(1);
+            signUpInfo.clearSignUp();
             history.push("/login");
           }}
         >

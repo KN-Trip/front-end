@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import useSignUp from "../../hooks/useSignUp";
 
 const Wrapper = styled.div``;
 
@@ -99,6 +100,8 @@ export const ColorButton = styled(Button)`
 `;
 
 function SignUpTwo({ setStep }) {
+  const singUpdata = useSignUp();
+
   return (
     <Wrapper>
       <CoupleIDWrapper>
@@ -113,8 +116,8 @@ function SignUpTwo({ setStep }) {
 
       <ButtonWrapper>
         <Button
-          onClick={() => {
-            setStep(3);
+          onClick={async () => {
+            await singUpdata.postSignUp();
           }}
         >
           건너뛰기

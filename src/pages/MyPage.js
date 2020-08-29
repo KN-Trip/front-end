@@ -5,22 +5,59 @@ import Footer from "../components/common/Footer";
 import MyPageNav from "../components/mypage/MyPageNav";
 import MyPageContent from "../components/mypage/MyPageContent";
 
+const PC = styled.div`
+  @media (min-width: 1025px) {
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Mobile = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+`;
+
 const MyPageH1 = styled.h1`
-  display: block;
+  @media (min-width: 1025px) {
+    display: block;
 
-  margin-top: 90px;
-  margin-bottom: 77px;
+    margin-top: 90px;
+    margin-bottom: 77px;
 
-  text-align: center;
-  font-family: "Godo", sans-serif;
-  font-size: 42px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
+    text-align: center;
+    font-family: "Godo", sans-serif;
+    font-size: 42px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
 
-  line-height: 1.57;
-  letter-spacing: -2.52px;
-  color: #173147;
+    letter-spacing: -2.52px;
+    color: #173147;
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-family: "Godo", sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+
+    letter-spacing: -1.56px;
+    text-align: left;
+    color: #173147;
+  }
 `;
 
 const SmallMenu = styled.div`
@@ -33,6 +70,18 @@ const SmallMenu = styled.div`
   letter-spacing: -0.8px;
   text-align: left;
   color: #000000;
+
+  @media (max-width: 1024px) {
+    margin-left: 0px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+
+    letter-spacing: -0.64px;
+    text-align: left;
+    color: #000000;
+  }
 `;
 
 const FlexBox = styled.div`
@@ -47,17 +96,28 @@ const ResponsiveBlock = styled.div`
 function MyPage() {
   return (
     <>
+      <PC>
+        <div>
+          <Header />
+          <MyPageH1>마이페이지</MyPageH1>
+          <ResponsiveBlock>
+            <SmallMenu>회원 정보 수정</SmallMenu>
+          </ResponsiveBlock>
+
+          <FlexBox>
+            <MyPageContent />
+          </FlexBox>
+          <Footer />
+        </div>
+      </PC>
+
       <div>
         <Header />
-        <MyPageH1>마이페이지</MyPageH1>
-        <ResponsiveBlock>
+        <Mobile>
+          <MyPageH1>마이페이지</MyPageH1>
           <SmallMenu>회원 정보 수정</SmallMenu>
-        </ResponsiveBlock>
-
-        <FlexBox>
-          <MyPageNav />
           <MyPageContent />
-        </FlexBox>
+        </Mobile>
         <Footer />
       </div>
     </>

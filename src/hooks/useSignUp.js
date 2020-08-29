@@ -3,6 +3,7 @@ import {
   postSignUpRequest,
   changeInput,
   checkIDRequest,
+  clearSignUpProcess,
 } from "../modules/signup";
 
 function useSignUp() {
@@ -30,6 +31,10 @@ function useSignUp() {
     dispatch(checkIDRequest(id));
   };
 
+  const clearSignUp = () => {
+    dispatch(clearSignUpProcess());
+  };
+
   const onChangeInput = (e) => dispatch(changeInput(e));
 
   return {
@@ -47,6 +52,7 @@ function useSignUp() {
     checkID_loading,
     checkID_error,
     isIDExist,
+    clearSignUp,
   };
 }
 
