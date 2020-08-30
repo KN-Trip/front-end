@@ -10,6 +10,27 @@ import kakaoIco from "../../assets/kakao.png";
 import naverIco from "../../assets/naver.png";
 import { useHistory } from "react-router-dom";
 
+const PC = styled.div`
+  @media (min-width: 1025px) {
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const Mobile = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+    padding: 0 30px;
+  }
+`;
+
 const Wrapper = styled.div`
   margin-top: 183px;
 `;
@@ -19,6 +40,19 @@ const LoginTextWrapper = styled.div`
   justify-content: center;
 
   margin-bottom: 70px;
+
+  @media (max-width: 1024px) {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-size: 26px;
+    font-weight: normal;
+    font-stretch: normal;
+
+    line-height: 1.54;
+    letter-spacing: -1.56px;
+    text-align: left;
+    color: #173147;
+  }
 `;
 
 const LoginText = styled.h2`
@@ -58,6 +92,10 @@ const LoginInput = styled.input`
 
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
   }
 `;
 
@@ -131,6 +169,9 @@ const LoginButton = styled.div`
     background-color: #fd8989;
     cursor: pointer;
   }
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const MarginDivider = styled(Divider)`
@@ -149,13 +190,31 @@ const SNSLoginWrapper = styled.div`
   letter-spacing: -0.56px;
   text-align: left;
   color: #757575;
+
+  @media (max-width: 1024px) {
+    line-height: 1;
+  }
 `;
 const SocialLoginList = styled.ul`
   display: flex;
 `;
 const SocialLabel = styled.div`
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+
+  letter-spacing: -0.56px;
+  text-align: left;
+  color: #757575;
+
   margin-right: 32px;
   white-space: nowrap;
+
+  @media (max-width: 1024px) {
+    margin-top: 30px;
+    margin-right: 14px;
+  }
 `;
 const SocialItem = styled.li`
   display: flex;
@@ -164,6 +223,10 @@ const SocialItem = styled.li`
   margin-right: 32px;
 
   white-space: nowrap;
+
+  @media (max-width: 1024px) {
+    margin-right: 20px;
+  }
 `;
 const ColorCircle = styled.div`
   width: 48px;
@@ -189,16 +252,90 @@ const CursorDiv = styled.div`
   }
 `;
 
+const FlexDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const VerticalMargin = styled.div`
+  margin-top: ${(props) => props.margin};
+`;
+
 function LoginForm() {
   const [id, password, onChange] = useLoginInput();
   let history = useHistory();
   return (
-    <Wrapper>
-      <LoginResponsive>
+    <>
+      <PC>
+        <Wrapper>
+          <LoginResponsive>
+            <LoginTextWrapper>
+              <LoginText>로그인</LoginText>
+            </LoginTextWrapper>
+
+            <LoginInputWrapper>
+              <LoginInput
+                placeholder="아이디 입력"
+                type="text"
+                name="id"
+                value={id}
+                onChange={(e) => {
+                  onChange(e);
+                }}
+              />
+              <LoginInput
+                placeholder="비밀번호 입력"
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => {
+                  onChange(e);
+                }}
+              />
+            </LoginInputWrapper>
+            <SaveIDAndSignUpWrapper>
+              <SaveIdCheckBoxWrapper>
+                <SaveIdCheckBox type="checkbox" />
+                <SaveIdLabel>아이디 저장</SaveIdLabel>
+              </SaveIdCheckBoxWrapper>
+
+              <SignUpText
+                onClick={() => {
+                  history.push("./signup");
+                }}
+              >
+                회원가입
+              </SignUpText>
+            </SaveIDAndSignUpWrapper>
+
+            <LoginButton>로그인</LoginButton>
+
+            <MarginDivider />
+
+            <SNSLoginWrapper>
+              <SocialLabel>간편 SNS 로그인</SocialLabel>
+              <SocialLoginList>
+                <SocialItem>
+                  <CursorDiv>{IconLib.getImgIcon(kakaoIco, 40, 40)}</CursorDiv>
+                  <HorizontalMargin margin="16px" />
+                  <div>카카오</div>
+                </SocialItem>
+
+                <SocialItem>
+                  <CursorDiv>{IconLib.getImgIcon(naverIco, 40, 40)}</CursorDiv>
+                  <HorizontalMargin margin="16px" />
+                  <div>네이버</div>
+                </SocialItem>
+              </SocialLoginList>
+            </SNSLoginWrapper>
+          </LoginResponsive>
+        </Wrapper>
+      </PC>
+
+      <Mobile>
         <LoginTextWrapper>
           <LoginText>로그인</LoginText>
         </LoginTextWrapper>
-
         <LoginInputWrapper>
           <LoginInput
             placeholder="아이디 입력"
@@ -219,6 +356,7 @@ function LoginForm() {
             }}
           />
         </LoginInputWrapper>
+
         <SaveIDAndSignUpWrapper>
           <SaveIdCheckBoxWrapper>
             <SaveIdCheckBox type="checkbox" />
@@ -238,24 +376,29 @@ function LoginForm() {
 
         <MarginDivider />
 
-        <SNSLoginWrapper>
+        <FlexDiv>
           <SocialLabel>간편 SNS 로그인</SocialLabel>
-          <SocialLoginList>
-            <SocialItem>
-              <CursorDiv>{IconLib.getImgIcon(kakaoIco, 40, 40)}</CursorDiv>
-              <HorizontalMargin margin="16px" />
-              <div>카카오</div>
-            </SocialItem>
+        </FlexDiv>
+        <FlexDiv>
+          <SNSLoginWrapper>
+            <SocialLoginList>
+              <SocialItem>
+                <CursorDiv>{IconLib.getImgIcon(kakaoIco, 40, 40)}</CursorDiv>
+                <HorizontalMargin margin="10px" />
+                <div>카카오</div>
+              </SocialItem>
 
-            <SocialItem>
-              <CursorDiv>{IconLib.getImgIcon(naverIco, 40, 40)}</CursorDiv>
-              <HorizontalMargin margin="16px" />
-              <div>네이버</div>
-            </SocialItem>
-          </SocialLoginList>
-        </SNSLoginWrapper>
-      </LoginResponsive>
-    </Wrapper>
+              <SocialItem>
+                <CursorDiv>{IconLib.getImgIcon(naverIco, 40, 40)}</CursorDiv>
+                <HorizontalMargin margin="10px" />
+                <div>네이버</div>
+              </SocialItem>
+            </SocialLoginList>
+          </SNSLoginWrapper>
+        </FlexDiv>
+        <VerticalMargin margin="30px" />
+      </Mobile>
+    </>
   );
 }
 
