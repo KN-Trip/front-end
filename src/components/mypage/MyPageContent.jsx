@@ -10,6 +10,7 @@ import Divider from "../common/Divider";
 const PC = styled.div`
   @media (min-width: 1025px) {
     display: block;
+    margin: 0 auto;
   }
 
   @media (max-width: 1024px) {
@@ -235,7 +236,7 @@ const Center = styled.div`
 
 export default function Mypagecontent() {
   return (
-    <>
+    <div style={{ width: "100%" }}>
       <PC>
         <ResponsiveBlock>
           <Box>
@@ -302,7 +303,7 @@ export default function Mypagecontent() {
               <VerticalFlex>
                 <SmallName>상대방 아이디</SmallName>
                 <HorizontalMargin margin="55px" />
-                <Input placeholder="닉네임을 입력해주세요." />
+                <Input placeholder="아이디를 입력해주세요." />
               </VerticalFlex>
 
               <VerticalMargin margin="38px" />
@@ -371,7 +372,7 @@ export default function Mypagecontent() {
           <VerticalMargin margin="50px" />
 
           <SmallName>상대방 아이디</SmallName>
-          <Input placeholder="닉네임을 입력해주세요." />
+          <Input placeholder="아이디를 입력해주세요." />
 
           <ExplainCouple>
             서로의 해시태그를 분석하여 최적화된 여행지를 알려드리기 위해
@@ -393,6 +394,6 @@ export default function Mypagecontent() {
         <ClickedTourPlace />
         <VerticalMargin margin="200px" />
       </Mobile>
-    </>
+    </div>
   );
 }

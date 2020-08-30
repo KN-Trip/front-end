@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import Footer from "../components/common/Footer";
 import MyPageNav from "../components/mypage/MyPageNav";
 import MyPageContent from "../components/mypage/MyPageContent";
+import ShowRedundantID from "../components/common/ShowRedundantID";
+import { useState } from "react";
 
 const PC = styled.div`
   @media (min-width: 1025px) {
@@ -24,6 +26,16 @@ const Mobile = styled.div`
     display: block;
     padding: 0 30px;
     box-sizing: border-box;
+  }
+`;
+
+const MobileWrapper = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
   }
 `;
 
@@ -94,6 +106,7 @@ const ResponsiveBlock = styled.div`
 `;
 
 function MyPage() {
+  const [modal, toggleModal] = useState(true);
   return (
     <>
       <PC>
@@ -112,6 +125,16 @@ function MyPage() {
       </PC>
 
       <div>
+        {modal && (
+          <ShowRedundantID
+            close={() => {
+              toggleModal(!modal);
+            }}
+          />
+        )}
+      </div>
+
+      <MobileWrapper>
         <Header />
         <Mobile>
           <MyPageH1>마이페이지</MyPageH1>
@@ -119,7 +142,7 @@ function MyPage() {
           <MyPageContent />
         </Mobile>
         <Footer />
-      </div>
+      </MobileWrapper>
     </>
   );
 }
