@@ -9,6 +9,10 @@ import signup from "../../modules/signup";
 
 const Wrapper = styled.div`
   width: 300px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 const CautionWrapper = styled.div`
   display: flex;
@@ -68,6 +72,10 @@ const Input = styled.input`
   border-bottom: 1px solid #e0e0e0;
 
   outline: none;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const RadioWrapper = styled.div`

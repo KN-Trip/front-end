@@ -6,6 +6,11 @@ const Wrapper = styled.div`
   justify-content: center;
 
   margin-top: 95px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    margin-top: 42px;
+  }
 `;
 
 const Circle = styled.div`
@@ -15,7 +20,7 @@ const Circle = styled.div`
 
   width: 28px;
   height: 28px;
-  background-color: #fea2a2;
+  background-color: #f85c5c;
 
   border-radius: 100%;
 
@@ -50,10 +55,10 @@ const CircleThree = styled(Circle)`
 `;
 
 const Line = styled.div`
-  width: 87px;
+  width: 43px;
   height: 6px;
 
-  background-color: #fea2a2;
+  background-color: #f85c5c;
 `;
 
 const LineTwo = styled(Line)`

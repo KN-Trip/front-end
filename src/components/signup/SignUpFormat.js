@@ -12,6 +12,10 @@ const Wrapper = styled.div`
   align-items: center;
 
   width: 465px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h2`
@@ -30,6 +34,11 @@ const Title = styled.h2`
   color: #173147;
 
   white-space: nowrap;
+
+  @media (max-width: 1024px) {
+    margin-top: 50px;
+    font-size: 26px;
+  }
 `;
 
 const setTitleByStep = (step) => {

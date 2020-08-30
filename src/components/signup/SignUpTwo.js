@@ -31,6 +31,11 @@ const CoupleIDInput = styled.input`
   border-bottom: 1px solid #e0e0e0;
 
   outline: none;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 0 16px;
+  }
 `;
 
 export const Description = styled.h3`
