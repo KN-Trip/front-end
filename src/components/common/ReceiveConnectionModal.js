@@ -62,14 +62,14 @@ const Modal = styled.div`
   @media (max-width: 1024px) {
     display: block;
     width: 100%;
-    height: 274px;
+    height: 349px;
 
     border-radius: 30px;
     box-shadow: 1px 2px 30px 0 rgba(22, 27, 96, 0.1);
     background-color: #ffffff;
     box-sizing: border-box;
 
-    padding: 30px 30px;
+    padding: 30px 15px;
 
     overflow-y: auto;
   }
@@ -97,10 +97,10 @@ const Text = styled.div`
   color: #757575;
 
   @media (max-width: 1024px) {
-    margin-left: 0px;
+    margin-left: 0;
     margin-top: 38px;
     font-size: 14px;
-    font-weight: normal;
+    font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.86;
@@ -116,7 +116,6 @@ const Strong = styled.strong`
 `;
 
 const StyledButton = styled(ButtonTemplate)`
-  margin-left: auto;
   background-color: #f85c5c !important;
 
   font-weight: bold;
@@ -125,13 +124,40 @@ const StyledButton = styled(ButtonTemplate)`
   cursor: pointer;
   user-select: none;
 
+  @media (min-width: 1025px) {
+    margin-left: 20px;
+  }
+
   @media (max-width: 1024px) {
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 18px;
   }
 `;
 
-export default function MakeConnectionModal({ close }) {
+const PlainButton = styled(ButtonTemplate)`
+  background-color: #ffffff !important;
+
+  font-weight: bold;
+  color: #757575;
+
+  border: solid 1px #bdbdbd;
+  cursor: pointer;
+  user-select: none;
+
+  @media (min-width: 1024px) {
+    margin-left: auto;
+  }
+`;
+
+const FlexBox = styled.div`
+  display: flex;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export default function ReceiveConnectionModal({ close }) {
   return (
     <>
       <PC>
@@ -140,11 +166,16 @@ export default function MakeConnectionModal({ close }) {
             <ClearIconWrapper onClick={close}>
               <div>{IconLib.getImgIcon(clearIco, 24, 24)}</div>
             </ClearIconWrapper>
+
             <Text>
-              <Strong>dmsgp0829</Strong> 님에게 연결을 요청했습니다.
-              <br /> 본인의 아이디를 상대방에게 알려주세요!
+              <Strong>dmsgp0829</Strong> 님이 연결을 요청했습니다.
+              <br /> 수락 하시겠습니까?
             </Text>
-            <StyledButton onClick={close}>확인</StyledButton>
+
+            <FlexBox>
+              <PlainButton onClick={close}>거절하기</PlainButton>
+              <StyledButton onClick={close}>수락하기</StyledButton>
+            </FlexBox>
           </Modal>
         </Background>
       </PC>
@@ -155,10 +186,14 @@ export default function MakeConnectionModal({ close }) {
               <div>{IconLib.getImgIcon(clearIco, 24, 24)}</div>
             </ClearIconWrapper>
             <Text>
-              <Strong>dmsgp0829</Strong> 님에게 연결을 요청했습니다.
-              <br /> 본인의 아이디를 상대방에게 알려주세요!
+              <Strong>dmsgp0829</Strong> 님이 연결을 요청했습니다.
+              <br /> 수락 하시겠습니까?
             </Text>
-            <StyledButton onClick={close}>확인</StyledButton>
+
+            <FlexBox>
+              <StyledButton onClick={close}>수락하기</StyledButton>
+              <PlainButton onClick={close}>거절하기</PlainButton>
+            </FlexBox>
           </Modal>
         </Background>
       </Mobile>

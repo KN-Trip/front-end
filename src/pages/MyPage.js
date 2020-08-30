@@ -5,7 +5,9 @@ import Footer from "../components/common/Footer";
 import MyPageNav from "../components/mypage/MyPageNav";
 import MyPageContent from "../components/mypage/MyPageContent";
 import ShowRedundantID from "../components/common/ShowRedundantID";
+import ReceiveConnectionModal from "../components/common/ReceiveConnectionModal";
 import { useState } from "react";
+import MakeConnectionModal from "../components/common/MakeConnectionModal";
 
 const PC = styled.div`
   @media (min-width: 1025px) {
@@ -107,6 +109,10 @@ const ResponsiveBlock = styled.div`
 
 function MyPage() {
   const [modal, toggleModal] = useState(true);
+  const [connectionModal, toggleConnectionModal] = useState(false);
+  const [receivedConnectionModal, toggleReceivedConnectionModal] = useState(
+    false
+  );
   return (
     <>
       <PC>
@@ -129,6 +135,26 @@ function MyPage() {
           <ShowRedundantID
             close={() => {
               toggleModal(!modal);
+            }}
+          />
+        )}
+      </div>
+
+      <div>
+        {connectionModal && (
+          <MakeConnectionModal
+            close={() => {
+              toggleConnectionModal(!connectionModal);
+            }}
+          />
+        )}
+      </div>
+
+      <div>
+        {receivedConnectionModal && (
+          <ReceiveConnectionModal
+            close={() => {
+              toggleReceivedConnectionModal(!receivedConnectionModal);
             }}
           />
         )}
