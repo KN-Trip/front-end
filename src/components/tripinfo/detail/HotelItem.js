@@ -80,6 +80,10 @@ const StyledSpan = styled.span`
   text-align: left;
   color: #757575;
 `;
+
+const NotBoldStyledSpan = styled.strong`
+  font-weight: 300;
+`;
 const FlexDiv = styled.div`
   display: flex;
 `;
@@ -162,7 +166,9 @@ export default function Hotelitem() {
           <VerticalCenterDiv>
             <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
             <HorizontalMargin margin="12px" />
-            <StyledSpan>체크인</StyledSpan>
+            <StyledSpan>
+              체크인 <NotBoldStyledSpan>10:00</NotBoldStyledSpan>
+            </StyledSpan>
           </VerticalCenterDiv>
 
           <HorizontalMargin margin="12px" />
@@ -172,7 +178,9 @@ export default function Hotelitem() {
           <VerticalCenterDiv>
             <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
             <HorizontalMargin margin="12px" />
-            <StyledSpan>체크아웃</StyledSpan>
+            <StyledSpan>
+              체크아웃 <NotBoldStyledSpan>10:00</NotBoldStyledSpan>
+            </StyledSpan>
           </VerticalCenterDiv>
         </VerticalCenterDiv>
       </div>

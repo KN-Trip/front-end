@@ -65,6 +65,10 @@ const LoginText = styled.h2`
   letter-spacing: -1.68px;
   text-align: left;
   color: #173147;
+
+  @media (max-width: 1024px) {
+    font-size: 26px;
+  }
 `;
 
 const LoginInputWrapper = styled.div`
