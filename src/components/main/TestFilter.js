@@ -60,7 +60,7 @@ const ScrollWrapper = styled.div`
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: red;
+    background: #f85c5c;
     border-radius: 10px;
   }
 

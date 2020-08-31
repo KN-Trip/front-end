@@ -6,6 +6,24 @@ import SignUpThree from "./SignUpThree";
 import useSignUpIndex from "../../hooks/useSignUpIndex";
 import SignUpStep from "./SignUpStep";
 
+const PC = styled.div`
+  @media (max-width: 1024px) {
+    display: none;
+  }
+  @media (min-width: 1025px) {
+    display: block;
+  }
+`;
+
+const Mobile = styled.div`
+  @media (max-width: 1024px) {
+    display: block;
+  }
+  @media (min-width: 1025px) {
+    display: none;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,10 +59,25 @@ const Title = styled.h2`
   }
 `;
 
+const SplitedTitle = styled(Title)`
+  margin-bottom: 0px;
+  margin-top: 0px;
+
+  @media (max-width: 1024px) {
+    margin-top: 0px;
+    line-height: 1.6;
+    font-size: 26px;
+  }
+`;
+
+const VerticalMargin = styled.div`
+  margin-top: ${(props) => props.margin};
+`;
+
 const setTitleByStep = (step) => {
   if (step === 1) return "회원가입";
   if (step === 2) return "상대방의 아이디를 입력해주세요";
-  if (step === 3) return "환영합니다!\n가입이 완료되었습니다.";
+  if (step === 3) return "환영합니다! 가입이 완료되었습니다";
 };
 
 const getSignUpStep = (step, setStep) => {
@@ -59,10 +92,31 @@ function SignUpFormat() {
   return (
     <>
       <SignUpStep index={step} />
-      <Wrapper>
-        <Title>{setTitleByStep(step)}</Title>
-        {getSignUpStep(step, setStep)}
-      </Wrapper>
+
+      <PC>
+        <Wrapper>
+          <Title>{setTitleByStep(step)}</Title>
+        </Wrapper>
+      </PC>
+
+      <Mobile>
+        {step !== 3 && (
+          <Wrapper>
+            <Title>{setTitleByStep(step)}</Title>
+          </Wrapper>
+        )}
+
+        <div>
+          {step === 3 && (
+            <VerticalMargin margin="50px">
+              <SplitedTitle>환영합니다! </SplitedTitle>
+              <SplitedTitle> 가입이 완료되었습니다.</SplitedTitle>
+            </VerticalMargin>
+          )}
+        </div>
+      </Mobile>
+
+      <Wrapper>{getSignUpStep(step, setStep)}</Wrapper>
     </>
   );
 }

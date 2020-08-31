@@ -55,7 +55,12 @@ const CircleThree = styled(Circle)`
 `;
 
 const Line = styled.div`
-  width: 43px;
+  @media (min-width: 1025px) {
+    width: 87px;
+  }
+  @media (max-width: 1024px) {
+    width: 42px;
+  }
   height: 6px;
 
   background-color: #f85c5c;

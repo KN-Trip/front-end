@@ -64,7 +64,7 @@ export const checkIDRequest = (id) => async (dispatch) => {
 };
 
 const initialState = {
-  step: 2,
+  step: 1,
 
   nickname: "",
   id: "",
