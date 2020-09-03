@@ -18,6 +18,7 @@ import dummy from "../../../assets/dummy_img_2.jpg";
 import marker from "../../../assets/marker.png";
 import Divider from "../../common/Divider";
 import KakaoMap from "./KakaoMap";
+import { English } from "../../common/Font";
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
@@ -322,7 +323,9 @@ export default function Tripinfodetailcard() {
       <PC>
         <Wrapper>
           <MainPicture src={dummy} />
-          <EnglishName>{obj.engName}</EnglishName>
+          <English>
+            <EnglishName>{obj.engName}</EnglishName>
+          </English>
 
           <SpaceBetweenBlock>
             <KoreanName>{obj.korName}</KoreanName>
@@ -466,7 +469,9 @@ export default function Tripinfodetailcard() {
       <Mobile>
         <Wrapper>
           <MainPicture src={dummy} />
-          <EnglishName>{obj.engName}</EnglishName>
+          <English>
+            <EnglishName>{obj.engName}</EnglishName>
+          </English>
           <KoreanName>{obj.korName}</KoreanName>
           <ImgWrapper>
             <ImageIcon src={marker} />

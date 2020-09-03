@@ -62,6 +62,10 @@ const FooterParagraph = styled.p`
   }
 `;
 
+const English = styled.strong`
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+`;
 const FooterImg = styled.img`
   width: 100vw;
   height: 110px;
@@ -73,7 +77,8 @@ export default function Footer() {
       <PC>
         <FooterImgWrapper src={footer}>
           <FooterParagraph>
-            COPYRIGHT 2020 꽁냥트립 ALL RIGHTS RESERVED.
+            <English>COPYRIGHT 2020</English> 꽁냥트립
+            <English> ALL RIGHTS RESERVED.</English>
             <br /> 본 사이트는 상업적 목적이 아닌 포트폴리오 사이트로
             제작되었습니다.
           </FooterParagraph>
@@ -82,7 +87,8 @@ export default function Footer() {
 
       <Mobile>
         <FooterParagraph>
-          COPYRIGHT 2020 꽁냥트립 ALL RIGHTS RESERVED.
+          <English>COPYRIGHT 2020</English> 꽁냥트립
+          <English>ALL RIGHTS RESERVED.</English>
           <br /> 본 사이트는 상업적 목적이 아닌 포트폴리오 사이트로
           제작되었습니다.
         </FooterParagraph>

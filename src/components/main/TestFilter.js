@@ -35,8 +35,6 @@ const MobileWrapper = styled.div`
 
   padding: 19px 12px 19px 30px;
 
-  width: 226px;
-
   border-radius: 10px;
   box-shadow: 1px 2px 30px 0 rgba(22, 27, 96, 0.1);
   background-color: #ffffff;

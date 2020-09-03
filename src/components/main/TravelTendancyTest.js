@@ -12,6 +12,7 @@ import dropdownIco from "../../assets/dropdown-ico.png";
 
 import { Link as ScrollLink } from "react-scroll";
 import { Element } from "react-scroll";
+import { English } from "../common/Font";
 
 const PC = styled.div`
   @media (min-width: 1025px) {
@@ -289,7 +290,9 @@ function TravelTendancyTest() {
             <TestIndex index={indexOne} />
 
             <TemplateBox>
-              <StepButton>{`STEP 01`}</StepButton>
+              <English>
+                <StepButton>{`STEP 01`}</StepButton>
+              </English>
               <QuestionH3>{titleOne}</QuestionH3>
               <Description>{descOne}</Description>
               <VerticalMargin margin="52px" />
@@ -303,7 +306,9 @@ function TravelTendancyTest() {
                 <Info>* 최대 3개까지 선택 가능합니다.</Info>
               </HashTagAndInfoWrapper>
               <ButtonWrapper>
-                <StyledButton onClick={onResetOne}>Reset</StyledButton>
+                <English>
+                  <StyledButton onClick={onResetOne}>Reset</StyledButton>
+                </English>
                 <ScrollLink
                   activeClass="active"
                   to="second-test"
@@ -311,7 +316,9 @@ function TravelTendancyTest() {
                   smooth={true}
                   duration={700}
                 >
-                  <ColorStyledButton>Next</ColorStyledButton>
+                  <English>
+                    <ColorStyledButton>Next</ColorStyledButton>
+                  </English>
                 </ScrollLink>
               </ButtonWrapper>
             </TemplateBox>
@@ -322,7 +329,9 @@ function TravelTendancyTest() {
               <TestIndex index={indexTwo} />
             </Element>
             <TemplateBox>
-              <StepButton>{`STEP 02`}</StepButton>
+              <English>
+                <StepButton>{`STEP 02`}</StepButton>
+              </English>
               <QuestionH3>{titleTwo}</QuestionH3>
               <Description>{descTwo}</Description>
               <VerticalMargin margin="52px" />
@@ -334,14 +343,18 @@ function TravelTendancyTest() {
                 <Info>* 최대 5개까지 선택 가능합니다.</Info>
               </HashTagAndInfoWrapper>
               <ButtonWrapper>
-                <StyledButton onClick={onResetTwo}>Reset</StyledButton>
-                <ColorStyledButton
-                  onClick={() => {
-                    alert("아래로 이동");
-                  }}
-                >
-                  Next
-                </ColorStyledButton>
+                <English>
+                  <StyledButton onClick={onResetTwo}>Reset</StyledButton>
+                </English>
+                <English>
+                  <ColorStyledButton
+                    onClick={() => {
+                      alert("아래로 이동");
+                    }}
+                  >
+                    Next
+                  </ColorStyledButton>
+                </English>
               </ButtonWrapper>
             </TemplateBox>
           </WrapperTwo>
@@ -355,7 +368,9 @@ function TravelTendancyTest() {
         <Title>서로의 여행 성향을 테스트 해보세요!</Title>
         <TestIndex index={indexOne} />
         <TemplateBox>
-          <StepButton>{`STEP 01`}</StepButton>
+          <English>
+            <StepButton>{`STEP 01`}</StepButton>
+          </English>
           <QuestionH3>{titleOne}</QuestionH3>
           <Description>{descOne}</Description>
 
@@ -378,17 +393,23 @@ function TravelTendancyTest() {
             smooth={true}
             duration={700}
           >
-            <ColorStyledButton>Next</ColorStyledButton>
+            <English>
+              <ColorStyledButton>Next</ColorStyledButton>
+            </English>
           </ScrollLink>
           <VerticalMargin margin="20px" />
-          <StyledButton onClick={onResetOne}>Reset</StyledButton>
+          <English>
+            <StyledButton onClick={onResetOne}>Reset</StyledButton>
+          </English>
         </TemplateBox>
         <Element name="mobile-second-test">
           <VerticalMargin margin="90px" />
         </Element>
         <TestIndex index={indexTwo} />
         <TemplateBox>
-          <StepButton>{`STEP 02`}</StepButton>
+          <English>
+            <StepButton>{`STEP 02`}</StepButton>
+          </English>
           <QuestionH3>{titleTwo}</QuestionH3>
           <Description>{descTwo}</Description>
 
@@ -404,9 +425,13 @@ function TravelTendancyTest() {
             {showHashTagListIfExist(checkedTwo, indexTwo)}
           </div>
           <VerticalMargin margin="30px" />
-          <ColorStyledButton>Next</ColorStyledButton>
+          <English>
+            <ColorStyledButton>Next</ColorStyledButton>
+          </English>
           <VerticalMargin margin="20px" />
-          <StyledButton onClick={onResetTwo}>Reset</StyledButton>
+          <English>
+            <StyledButton onClick={onResetTwo}>Reset</StyledButton>
+          </English>
         </TemplateBox>
         <VerticalMargin margin="174px" />
       </Mobile>

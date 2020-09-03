@@ -75,9 +75,6 @@ function ARowTable({ A, data, filterStatus, onToggle }) {
     const iterator = Array(flatData.length);
     iterator.fill(null);
 
-    console.log(flatData, flatFilterStatus);
-    console.log(iterator);
-
     return (
       <TableWrapper>
         <StyledTable>

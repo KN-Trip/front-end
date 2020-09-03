@@ -5,6 +5,7 @@ import clearIco from "../../assets/clear.png";
 import RadioChecked from "../../assets/radiobutton-checked.png";
 import RadioDefault from "../../assets/radiobutton-default.png";
 import Button, { ButtonTemplate } from "./Button";
+import { English } from "./Font";
 
 const Background = styled.div`
   position: fixed;
@@ -338,7 +339,9 @@ export default function ShowRedundantID({ close }) {
                         <FlexBox>
                           <div>{setRadioChecked(index === i)}</div>
                           <HorizontalMargin margin="24px" />
-                          <div>{v.id}</div>
+                          <English>
+                            <div>{v.id}</div>
+                          </English>
                         </FlexBox>
                       </StyledTd>
                       <StyledTd>{v.nickname}</StyledTd>
@@ -386,7 +389,9 @@ export default function ShowRedundantID({ close }) {
                       <FlexBox>
                         <div>{setRadioChecked(index === i)}</div>
                         <HorizontalMargin margin="8px" />
-                        <div>{v.id}</div>
+                        <English>
+                          <div>{v.id}</div>
+                        </English>
                       </FlexBox>
                     </StyledTd>
                     <StyledTd>{v.nickname}</StyledTd>

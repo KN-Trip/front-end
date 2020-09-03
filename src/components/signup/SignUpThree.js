@@ -27,7 +27,8 @@ const Mobile = styled.div`
 `;
 const DecorateID = styled.strong`
   color: #000000;
-  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 1000;
 `;
 function SignUpThree() {
   let history = useHistory();

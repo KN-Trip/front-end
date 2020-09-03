@@ -108,8 +108,8 @@ const ResponsiveBlock = styled.div`
 `;
 
 function MyPage() {
-  const [modal, toggleModal] = useState(true);
-  const [connectionModal, toggleConnectionModal] = useState(false);
+  const [modal, toggleModal] = useState(false);
+  const [connectionModal, toggleConnectionModal] = useState(true);
   const [receivedConnectionModal, toggleReceivedConnectionModal] = useState(
     false
   );

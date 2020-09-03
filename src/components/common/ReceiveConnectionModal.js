@@ -111,7 +111,8 @@ const Text = styled.div`
 `;
 
 const Strong = styled.strong`
-  font-weight: 900;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 1000;
   color: #f85c5c;
 `;
 

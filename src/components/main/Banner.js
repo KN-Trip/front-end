@@ -107,7 +107,6 @@ const MainImg = styled.img`
     margin-top: 32px;
     margin-bottom: 44px;
     width: 80vw;
-    height: 200px;
   }
 `;
 
