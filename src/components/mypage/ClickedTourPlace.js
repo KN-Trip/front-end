@@ -36,6 +36,10 @@ const Wrapper = styled.div`
   margin: 188px auto;
 
   box-sizing: border-box;
+
+  @media (max-width: 104px) {
+    width: 100%;
+  }
 `;
 
 const FlexDiv = styled.div`
@@ -87,6 +91,13 @@ const CardWrapper = styled.div`
   justify-content: center;
 
   margin-bottom: 90px;
+
+  @media (max-width: 1024px) {
+    box-sizing: border-box;
+    padding-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
   & :focus {
     outline: none;
@@ -321,7 +332,7 @@ export default function ClickedTourPlace() {
       </PC>
 
       <Mobile>
-        <Title>내가 찜한 여행지</Title>
+        <Title>최근 조회한 여행지</Title>
         <div>
           <WidthSlider ref={slider} {...mobileSettings}>
             {fakeJson.map((item, idx) => (

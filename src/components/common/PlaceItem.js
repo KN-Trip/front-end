@@ -18,6 +18,11 @@ const Wrapper = styled.div`
   background-color: #ffffff;
 
   box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const PlaceImage = styled.div`
@@ -28,9 +33,13 @@ const PlaceImage = styled.div`
 
   border-radius: 30px 30px 0 0;
   background-image: url(${(props) => props.src});
-  background-size: 288px 257px;
 
   box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    background-repeat: no-repeat;
+  }
 `;
 
 const ImgWrapper = styled.div`

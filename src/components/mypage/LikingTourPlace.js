@@ -94,6 +94,13 @@ const CardWrapper = styled.div`
 
   margin-bottom: 90px;
 
+  @media (max-width: 1024px) {
+    box-sizing: border-box;
+    padding-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
   & :focus {
     outline: none;
   }

@@ -390,8 +390,13 @@ export default function Mypagecontent() {
           </Center>
         </Box>
 
-        <LikingTourPlace />
-        <ClickedTourPlace />
+        <div>
+          <LikingTourPlace />
+        </div>
+
+        <div>
+          <ClickedTourPlace />
+        </div>
         <VerticalMargin margin="200px" />
       </Mobile>
     </div>

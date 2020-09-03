@@ -8,13 +8,39 @@ import RightArrowIco from "../../../assets/right-arrow-ico.png";
 
 import PlaceItem from "../../common/PlaceItem";
 
+const Mobile = styled.div`
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    display: block;
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+`;
+
+const PC = styled.div`
+  @media (min-width: 1025px) {
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
 const HorizontalMargin = styled.div`
   margin-left: ${(props) => props.margin};
 `;
 
 const Wrapper = styled.div`
   width: 1024px;
-  margin: 188px auto;
+  margin: 0 auto;
+
+  @media (min-width: 1024px) {
+    margin-top: 180px;
+  }
 
   box-sizing: border-box;
 `;
@@ -40,6 +66,18 @@ const Title = styled.div`
   letter-spacing: -2.52px;
   text-align: left;
   color: #173147;
+
+  @media (max-width: 1024px) {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+
+    letter-spacing: -1.08px;
+
+    color: #173147;
+  }
 `;
 
 const Desc = styled.div`
@@ -51,6 +89,11 @@ const Desc = styled.div`
   letter-spacing: -0.64px;
   text-align: left;
   color: #424242;
+
+  @media (max-width: 1024px) {
+    line-height: 1;
+    margin-bottom: 30px;
+  }
 `;
 
 const WidthSlider = styled(Slider)`
@@ -58,7 +101,6 @@ const WidthSlider = styled(Slider)`
   outline: none;
 
   background-color: #fff;
-
   & :focus {
     outline: none;
   }
@@ -66,9 +108,16 @@ const WidthSlider = styled(Slider)`
 
 const CardWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 
   margin-bottom: 90px;
+
+  @media (max-width: 1024px) {
+    box-sizing: border-box;
+    padding-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
   & :focus {
     outline: none;
@@ -219,68 +268,109 @@ export default function HotPlace() {
     arrows: false,
   };
 
+  const mobileSetting = {
+    accessibility: false,
+    focusOnSelect: false,
+    centerPadding: "0px",
+
+    dots: false,
+
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    beforeChange: (prev, next) => {
+      setCurrentSlide(next);
+    },
+
+    arrows: false,
+  };
+
   return (
-    <Wrapper>
-      <SpaceBetweenFlexDiv>
-        <FlexDiv>
-          <Title>#노원구 핫한 여행지</Title>
-          <Desc>다른 커플들은 이곳을 많이 다녀갔어요!</Desc>
-        </FlexDiv>
+    <>
+      <PC>
+        <Wrapper>
+          <SpaceBetweenFlexDiv>
+            <FlexDiv>
+              <Title>#노원구 핫한 여행지</Title>
+              <Desc>다른 커플들은 이곳을 많이 다녀갔어요!</Desc>
+            </FlexDiv>
 
-        <FlexDiv>
-          <Arrow
-            onClick={() => {
-              if (currentSlide === 0) {
-                return;
-              }
+            <FlexDiv>
+              <Arrow
+                onClick={() => {
+                  if (currentSlide === 0) {
+                    return;
+                  }
 
-              slider.current.slickGoTo(currentSlide - 3);
-              setCurrentSlide(currentSlide - 3);
-            }}
-            num={currentSlide}
-            direction={"left"}
-          >
-            <ArrowImg src={LeftArrowIco} />
-          </Arrow>
+                  slider.current.slickGoTo(currentSlide - 3);
+                  setCurrentSlide(currentSlide - 3);
+                }}
+                num={currentSlide}
+                direction={"left"}
+              >
+                <ArrowImg src={LeftArrowIco} />
+              </Arrow>
 
-          <HorizontalMargin margin="20px" />
+              <HorizontalMargin margin="20px" />
 
-          <Arrow
-            onClick={() => {
-              if (currentSlide === 6) {
-                return;
-              }
+              <Arrow
+                onClick={() => {
+                  if (currentSlide === 6) {
+                    return;
+                  }
 
-              slider.current.slickGoTo(currentSlide + 3);
-              setCurrentSlide(currentSlide + 3);
-            }}
-            num={currentSlide}
-            direction={"right"}
-          >
-            <ArrowImg src={RightArrowIco} />
-          </Arrow>
-        </FlexDiv>
-      </SpaceBetweenFlexDiv>
-      <div>
-        <WidthSlider ref={slider} {...settings}>
-          {fakeJson.map((item, idx) => (
-            <div className="center">
-              <CardWrapper>
-                <PlaceItem
-                  id={idx}
-                  img={item.img}
-                  name={item.name}
-                  address={item.address}
-                />
-              </CardWrapper>
-            </div>
-          ))}
-        </WidthSlider>
-      </div>
+                  slider.current.slickGoTo(currentSlide + 3);
+                  setCurrentSlide(currentSlide + 3);
+                }}
+                num={currentSlide}
+                direction={"right"}
+              >
+                <ArrowImg src={RightArrowIco} />
+              </Arrow>
+            </FlexDiv>
+          </SpaceBetweenFlexDiv>
+          <div>
+            <WidthSlider ref={slider} {...settings}>
+              {fakeJson.map((item, idx) => (
+                <div className="center">
+                  <CardWrapper>
+                    <PlaceItem
+                      id={idx}
+                      img={item.img}
+                      name={item.name}
+                      address={item.address}
+                    />
+                  </CardWrapper>
+                </div>
+              ))}
+            </WidthSlider>
+          </div>
 
-      <div>
-        <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-      </div>
-    </Wrapper>
+          <div>
+            <Dots slide={currentSlide} setSlide={setCurrentSlide} />
+          </div>
+        </Wrapper>
+      </PC>
+
+      <Mobile>
+        <Title>#노원구 핫한 여행지</Title>
+        <Desc>다른 커플들은 이곳을 많이 다녀갔어요!</Desc>
+        <div>
+          <WidthSlider ref={slider} {...mobileSetting}>
+            {fakeJson.map((item, idx) => (
+              <div className="center">
+                <CardWrapper>
+                  <PlaceItem
+                    id={idx}
+                    img={item.img}
+                    name={item.name}
+                    address={item.address}
+                  />
+                </CardWrapper>
+              </div>
+            ))}
+          </WidthSlider>
+        </div>
+      </Mobile>
+    </>
   );
 }
