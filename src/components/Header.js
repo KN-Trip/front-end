@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import Responsive from "./common/Responsive";
+import Divider from "./common/Divider";
 import Logo from "./common/Logo";
 import drawerIco from "../assets/drawer.png";
 import clearIco from "../assets/clear.png";
+
+import profileIco from "../assets/profile.png";
+import downArrowIco from "../assets/down-arrow-ico.png";
 import * as IconLib from "../lib/icon";
 
 const MobileHeader = styled.div`
@@ -45,6 +49,7 @@ const HeaderWrapper = styled.header`
 
 const HeaderContent = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 
@@ -62,6 +67,10 @@ const MenuItem = styled.li`
 
   list-style: none;
   letter-spacing: -0.64px;
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
 
   &:hover {
     font-weight: 900;
@@ -90,6 +99,81 @@ const NavItemActiveStyle = {
   color: "#f85c5c",
   textDecoration: "none",
 };
+
+const ProfileWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 16px;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 100%;
+  background-color: #f5f5f5;
+
+  cursor: pointer;
+`;
+
+const CursorWrapper = styled.div`
+  cursor: pointer;
+`;
+
+const TotalProfile = styled.div`
+  position: relative;
+  top: 73px;
+  margin-left: 40px;
+`;
+
+const ProfileDropDown = styled.div`
+  position: relative;
+  display: block;
+
+  visibility: ${(props) => (props.open ? "block" : "hidden")};
+
+  right: 110px;
+
+  margin-top: 30px;
+
+  padding: 20px;
+  width: 184px;
+
+  border-radius: 10px;
+  box-shadow: 1px 2px 30px 0 rgba(22, 27, 96, 0.1);
+  background-color: #ffffff;
+
+  box-sizing: border-box;
+`;
+
+const VerticalMargin = styled.div`
+  margin-top: ${(props) => props.margin};
+`;
+
+const NickName = styled.span`
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+
+  letter-spacing: -0.64px;
+  text-align: left;
+  color: #757575;
+`;
+
+const LogoutText = styled.span`
+  display: block;
+
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+
+  letter-spacing: -0.48px;
+  text-align: left;
+  color: #757575;
+`;
 
 // Mobile View
 
@@ -124,6 +208,7 @@ const NavOnBackground = styled.div`
 
 const NavMenu = styled.div`
   position: absolute;
+
   top: 0;
   right: 0;
   z-index: 31;
@@ -137,6 +222,12 @@ const NavMenu = styled.div`
 
   animation-name: slidein;
   animation-duration: 0.5s;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   @keyframes slidein {
     from {
@@ -158,12 +249,38 @@ const ClearIconWrapper = styled.div`
 const CenterBox = styled.div`
   display: flex;
 
-  height: 100%;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    justify-content: center;
+    flex-direction: column;
+  }
+`;
+
+const MobileProfileWrapper = styled.div`
+  display: flex;
   align-items: center;
 `;
 
+const MobileLogoutText = styled.span`
+  font-size: 1.25rem;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.64px;
+  text-align: left;
+  color: #757575;
+`;
+
+const Width100Div = styled.div`
+  width: 100%;
+`;
+
 function Header() {
+  const [isLoggedIn, setLoggedIn] = useState(true);
   const [nav, toggleNav] = useState(false);
+
+  const [profile, toggleProfile] = useState(false);
   return (
     <>
       <MobileHeader>
@@ -191,7 +308,22 @@ function Header() {
                     {IconLib.getImgIcon(clearIco, 24, 24)}
                   </ClearIconWrapper>
                   <CenterBox>
-                    <div>
+                    <Width100Div>
+                      {isLoggedIn && (
+                        <>
+                          <MobileProfileWrapper>
+                            <ProfileWrapper>
+                              <div>
+                                {IconLib.getImgIcon(profileIco, 24, 24)}
+                              </div>
+                            </ProfileWrapper>
+                            <NickName>랄랄랄랄님</NickName>
+                          </MobileProfileWrapper>
+                          <VerticalMargin margin="30px" />
+                          <Divider />
+                          <VerticalMargin margin="40px" />
+                        </>
+                      )}
                       <StyleNavLink
                         exact
                         to="/"
@@ -222,15 +354,26 @@ function Header() {
                       >
                         <MenuItem>마이페이지 </MenuItem>
                       </StyleNavLink>
+                      {isLoggedIn && (
+                        <>
+                          <Divider />
+                          <VerticalMargin margin="40px" />
+                          <MobileLogoutText>로그아웃</MobileLogoutText>
+                        </>
+                      )}
 
-                      <StyleNavLink
-                        exact
-                        to="/login"
-                        activeStyle={NavItemActiveStyle}
-                      >
-                        <MenuItem>로그인 / 회원가입</MenuItem>
-                      </StyleNavLink>
-                    </div>
+                      {!isLoggedIn && (
+                        <>
+                          <StyleNavLink
+                            exact
+                            to="/login"
+                            activeStyle={NavItemActiveStyle}
+                          >
+                            <MenuItem>로그인 / 회원가입</MenuItem>
+                          </StyleNavLink>
+                        </>
+                      )}
+                    </Width100Div>
                   </CenterBox>
                 </NavMenu>
               </NavOnBackground>
@@ -269,13 +412,48 @@ function Header() {
                   <MenuItem>마이페이지 </MenuItem>
                 </StyleNavLink>
 
-                <StyleNavLink
-                  exact
-                  to="/login"
-                  activeStyle={NavItemActiveStyle}
-                >
-                  <MenuItem>로그인 / 회원가입</MenuItem>
-                </StyleNavLink>
+                {!isLoggedIn && (
+                  <StyleNavLink
+                    exact
+                    to="/login"
+                    activeStyle={NavItemActiveStyle}
+                  >
+                    <MenuItem>로그인 / 회원가입</MenuItem>
+                  </StyleNavLink>
+                )}
+
+                {isLoggedIn && (
+                  <TotalProfile>
+                    <CenterBox>
+                      <ProfileWrapper
+                        onClick={() => {
+                          toggleProfile(!profile);
+                        }}
+                      >
+                        {IconLib.getImgIcon(profileIco, 24, 24)}
+                      </ProfileWrapper>
+                      <CursorWrapper
+                        onClick={() => {
+                          toggleProfile(!profile);
+                        }}
+                      >
+                        {IconLib.getImgIcon(downArrowIco, 24, 24)}
+                      </CursorWrapper>
+                    </CenterBox>
+                    <ProfileDropDown open={profile}>
+                      <CenterBox>
+                        <ProfileWrapper>
+                          <div>{IconLib.getImgIcon(profileIco, 24, 24)}</div>
+                        </ProfileWrapper>
+                        <NickName>랄랄랄랄님</NickName>
+                      </CenterBox>
+                      <VerticalMargin margin="12px" />
+                      <Divider />
+                      <VerticalMargin margin="12px" />
+                      <LogoutText>로그아웃</LogoutText>
+                    </ProfileDropDown>
+                  </TotalProfile>
+                )}
               </MenuList>
             </HeaderContent>
           </Responsive>

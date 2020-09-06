@@ -96,6 +96,7 @@ const MainImg = styled.img`
     position: absolute;
     left: 300px;
 
+    overflow-x: hidden;
     z-index: -1;
 
     width: 918px;

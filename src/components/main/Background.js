@@ -10,6 +10,7 @@ const BackgroundWrapper = styled.div`
     width: 100vw;
     background-image: url(${(props) => props.src});
     background-repeat: repeat-y;
+    overflow-x: hidden;
   }
 
   @media (max-width: 1024px) {

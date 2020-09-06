@@ -4,6 +4,7 @@ import XIcon from "../../assets/XIcon.png";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const HashTag = styled.div`
@@ -13,6 +14,7 @@ const HashTag = styled.div`
 
   height: 27px;
 
+  margin-bottom: 10px;
   margin-right: 12px;
   padding: 4px 13px 5px 12px;
 

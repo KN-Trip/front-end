@@ -340,6 +340,7 @@ export default function LikingTourPlace() {
             {fakeJson.map((item, idx) => (
               <div className="center">
                 <CardWrapper>
+                  
                   <PlaceItem
                     id={idx}
                     img={item.img}
