@@ -209,6 +209,7 @@ const useQuery = () => {
 export default function Recommendplace({ locationX, locationY, nowContentId }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slider = useRef();
+  const mobileSlider = useRef();
 
   const tripinfo = useTrip();
 
@@ -320,7 +321,7 @@ export default function Recommendplace({ locationX, locationY, nowContentId }) {
           <Title>추천하는 장소</Title>
           <Desc>검색하신 지역을 기반으로 하여 추천되는 장소입니다.</Desc>
           <div>
-            <WidthSlider ref={slider} {...mobileSetting}>
+            <WidthSlider ref={mobileSlider} {...mobileSetting}>
               {tripinfo.recommendPlace_data.map((item, idx) => (
                 <div className="center">
                   <CardWrapper>

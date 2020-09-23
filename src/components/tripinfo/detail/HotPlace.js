@@ -160,53 +160,6 @@ const Arrow = styled.div`
   cursor: pointer;
   user-select: none;
 `;
-const fakeJson = [
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-];
 
 const SelectedDot = styled.div`
   width: 341px;
@@ -253,6 +206,7 @@ function Dots({ slide, setSlide }) {
 
 export default function HotPlace({ contentId, areaCode }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const mobileSlider = useRef();
   const slider = useRef();
 
   const tripinfo = useTrip();
@@ -366,7 +320,7 @@ export default function HotPlace({ contentId, areaCode }) {
           <Title>{`#${tripinfo.tripinfo_detail_data.common.area} 핫한 여행지`}</Title>
           <Desc>다른 커플들은 이곳을 많이 다녀갔어요!</Desc>
           <div>
-            <WidthSlider ref={slider} {...mobileSetting}>
+            <WidthSlider ref={mobileSlider} {...mobileSetting}>
               {tripinfo.hotplace_data.map((item, idx) => (
                 <div className="center">
                   <CardWrapper>
