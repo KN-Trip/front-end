@@ -359,29 +359,6 @@ function LoginForm() {
             </SaveIDAndSignUpWrapper>
 
             <LoginButton onClick={loginRequest}>로그인</LoginButton>
-
-            <MarginDivider />
-
-            <SNSLoginWrapper>
-              <SocialLabel>간편 SNS 로그인</SocialLabel>
-              <SocialLoginList>
-                <SocialItem onClick={getKakaoLoginRequest}>
-                  <CursorDiv>{IconLib.getImgIcon(kakaoIco, 40, 40)}</CursorDiv>
-                  <HorizontalMargin margin="16px" />
-                  <div>카카오</div>
-                </SocialItem>
-
-                <SocialItem
-                  onClick={() => {
-                    window.open('http://localhost:8000/login/naver');
-                  }}
-                >
-                  <CursorDiv>{IconLib.getImgIcon(naverIco, 40, 40)}</CursorDiv>
-                  <HorizontalMargin margin="16px" />
-                  <div>네이버</div>
-                </SocialItem>
-              </SocialLoginList>
-            </SNSLoginWrapper>
           </LoginResponsive>
         </Wrapper>
       </PC>
@@ -435,31 +412,6 @@ function LoginForm() {
         </SaveIDAndSignUpWrapper>
 
         <LoginButton onClick={loginRequest}>로그인</LoginButton>
-
-        <MarginDivider />
-        <SocialWrapper>
-          <FlexDiv>
-            <SocialLabel>간편 SNS 로그인</SocialLabel>
-          </FlexDiv>
-          <FlexDiv>
-            <SNSLoginWrapper>
-              <SocialLoginList>
-                <SocialItem onClick={getKakaoLoginRequest}>
-                  <CursorDiv>{IconLib.getImgIcon(kakaoIco, 40, 40)}</CursorDiv>
-                  <HorizontalMargin margin="10px" />
-                  <div>카카오</div>
-                </SocialItem>
-
-                <SocialItem onClick={getNaverLoginRequest}>
-                  <CursorDiv>{IconLib.getImgIcon(naverIco, 40, 40)}</CursorDiv>
-                  <HorizontalMargin margin="10px" />
-                  <div>네이버</div>
-                </SocialItem>
-              </SocialLoginList>
-            </SNSLoginWrapper>
-          </FlexDiv>
-        </SocialWrapper>
-        <VerticalMargin margin="30px" />
       </Mobile>
     </>
   );
