@@ -238,14 +238,28 @@ export default function Hotelitem({ place }) {
           </div>
 
           <HorizontalMargin margin="auto" />
-          <Arrow>
+          <Arrow
+            onClick={() => {
+              window.open(
+                `https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=${place.title}`,
+                '_blank'
+              );
+            }}
+          >
             <ArrowImg src={RightArrowIco} />
           </Arrow>
           <HorizontalMargin margin="55px" />
         </Wrapper>
       </PC>
       <Mobile>
-        <Wrapper>
+        <Wrapper
+          onClick={() => {
+            window.open(
+              `https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=${place.title}`,
+              '_blank'
+            );
+          }}
+        >
           <PlaceImage src={place.image} />
           <Name>{place.title}</Name>
           <VerticalMargin margin="14px" />

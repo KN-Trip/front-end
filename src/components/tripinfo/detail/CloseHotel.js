@@ -124,54 +124,6 @@ const CardWrapper = styled.div`
   }
 `;
 
-const fakeJson = [
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-  {
-    img: dummy_img,
-    name: '서울 시립 북서울 미술관',
-    address: '서울시 노원구',
-  },
-];
-
 export default function Closehotel({ contentId, areaCode }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slider = useRef();
