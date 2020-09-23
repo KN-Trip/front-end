@@ -165,7 +165,6 @@ const VerticalMargin = styled.div`
 `;
 
 export default function Hotelitem({ place }) {
-  console.log(place);
   return (
     <>
       <PC>

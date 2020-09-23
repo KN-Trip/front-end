@@ -14,7 +14,6 @@ export const postTESTRequest = (test) => async (dispatch) => {
   dispatch({ type: TEST }); // 요청이 시작됨
   try {
     const res = await api.postTest(test); // API 호출
-    console.log(res.data);
     if (res.status !== 200) {
       alert('에러가 발생했습니다.\n잠시 뒤에 다시 시도해 주세요.');
       dispatch({ type: TEST_FAILURE, res_error: 'fail' });

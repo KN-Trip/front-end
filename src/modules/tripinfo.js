@@ -31,7 +31,7 @@ export const getTripInfoRequest = (option) => async (dispatch) => {
   dispatch({ type: TRIP_INFO }); // 요청이 시작됨
   try {
     const res = await api.getTripInfo(option); // API 호출
-    console.log(res);
+
     if (res.data.totalCount >= 0) {
       dispatch({ type: TRIP_INFO_SUCCESS, data: res.data }); // 성공
     } else {
@@ -46,7 +46,6 @@ export const getTripInfoDetailRequest = (id, type) => async (dispatch) => {
   dispatch({ type: TRIP_INFO_DETAIL }); // 요청이 시작됨
   try {
     const res = await api.getTripInfoDetail(id, type); // API 호출
-    console.log(JSON.stringify(res.data, 2));
 
     if (res.data) {
       dispatch({ type: TRIP_INFO_DETAIL_SUCCESS, data: res.data }); // 성공
@@ -115,7 +114,6 @@ export const getHotPlace = (areaCode, nowContentId) => async (dispatch) => {
   dispatch({ type: HOT_PLACE }); // 요청이 시작됨
   try {
     const res = await api.getHotPlace(areaCode, nowContentId); // API 호출
-    console.log(JSON.stringify(res.data, 2));
 
     if (res.data) {
       dispatch({ type: HOT_PLACE_SUCCESS, data: res.data }); // 성공

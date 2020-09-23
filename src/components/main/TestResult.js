@@ -12,6 +12,9 @@ import { Skeleton } from 'antd';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
+import { useHistory } from 'react-router-dom';
+import useLogin from '../../hooks/useLogin';
+
 const antIcon = (
   <LoadingOutlined
     style={{ fontSize: '43px', color: '#f85c5c', marginBottom: '24px' }}
@@ -155,6 +158,8 @@ const getHashTags = ({ area, category }) => {
 
 function TestResult() {
   const tripinfo = useTrip();
+  const history = useHistory();
+  const [login] = useLogin();
 
   useEffect(() => {
     tripinfo.tripInfoRequest();
@@ -174,6 +179,18 @@ function TestResult() {
         <FillContent />
       </>
     );
+  }
+
+  if (!login) {
+    alert('로그인을 해주세요!');
+    history.push('/login');
+    return <div />;
+  }
+
+  if (tripinfo.GET_TEST && tripinfo.GET_TEST_data.message !== 'OK') {
+    alert('테스트 결과가 없습니다.\n테스트를 먼저 진행해 주세요.');
+    history.push('/');
+    return <div />;
   }
 
   return (
