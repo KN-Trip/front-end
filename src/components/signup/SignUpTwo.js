@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import useSignUp from "../../hooks/useSignUp";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import useSignUp from '../../hooks/useSignUp';
+import ShowRedundantID from '../common/ShowRedundantID';
 
 const PC = styled.div`
   @media (max-width: 1024px) {
@@ -159,6 +160,8 @@ export const ColorButton = styled(Button)`
 
 function SignUpTwo({ setStep }) {
   const singUpdata = useSignUp();
+  const [isOn, setIsOn] = useState(false);
+  const [postOK, setPostOK] = useState(false);
 
   return (
     <>
@@ -166,7 +169,12 @@ function SignUpTwo({ setStep }) {
         <Wrapper>
           <CoupleIDWrapper>
             <CoupleIDLabel>상대방 아이디</CoupleIDLabel>
-            <CoupleIDInput placeholder="상대방 아이디를 입력해주세요." />
+            <CoupleIDInput
+              placeholder="상대방 아이디를 입력해주세요."
+              name="targetID"
+              value={singUpdata.targetID}
+              onChange={singUpdata.onChangeInput}
+            />
           </CoupleIDWrapper>
           <Description>
             서로의 해시태그를 분석하여 최적화된 여행지를 알려드리기 위해
@@ -183,8 +191,13 @@ function SignUpTwo({ setStep }) {
               건너뛰기
             </Button>
             <ColorButton
-              onClick={() => {
-                setStep(3);
+              onClick={async () => {
+                if (!postOK) {
+                  await singUpdata.candidateRequest();
+                  setIsOn(true);
+                } else {
+                  setStep(3);
+                }
               }}
             >
               연결하기
@@ -192,10 +205,16 @@ function SignUpTwo({ setStep }) {
           </ButtonWrapper>
         </Wrapper>
       </PC>
+
       <Mobile>
         <CoupleIDWrapper>
           <CoupleIDLabel>상대방 아이디</CoupleIDLabel>
-          <CoupleIDInput placeholder="상대방 아이디를 입력해주세요." />
+          <CoupleIDInput
+            placeholder="상대방 아이디를 입력해주세요."
+            name="targetID"
+            value={singUpdata.targetID}
+            onChange={singUpdata.onChangeInput}
+          />
         </CoupleIDWrapper>
         <Description>
           서로의 해시태그를 분석하여 최적화된 여행지를
@@ -205,8 +224,14 @@ function SignUpTwo({ setStep }) {
 
         <ButtonWrapper>
           <ColorButton
-            onClick={() => {
-              setStep(3);
+            onClick={async () => {
+              if (!postOK) {
+                await singUpdata.candidateRequest();
+                setIsOn(true);
+                console.log('asdf');
+              } else {
+                setStep(3);
+              }
             }}
           >
             연결하기
@@ -221,6 +246,17 @@ function SignUpTwo({ setStep }) {
           </Button>
         </ButtonWrapper>
       </Mobile>
+
+      {isOn && (
+        <ShowRedundantID
+          close={() => {
+            setIsOn(!isOn);
+          }}
+          setPostOK={() => {
+            setPostOK(true);
+          }}
+        />
+      )}
     </>
   );
 }

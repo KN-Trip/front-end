@@ -1,10 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import HotelItem from "./HotelItem";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import HotelItem from './HotelItem';
 
-import { useState, useRef } from "react";
-import Slider from "react-slick";
-import dummy_img from "../../../assets/dummy_img.jpg";
+import { useState, useRef } from 'react';
+import Slider from 'react-slick';
+import dummy_img from '../../../assets/dummy_img.jpg';
+
+import useTrip from '../../../hooks/useTrip';
+import { useLocation } from 'react-router-dom';
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
@@ -69,7 +72,7 @@ const Desc = styled.div`
 
 const Title = styled.div`
   margin-right: 40px;
-  font-family: "Godo", sans-serif;
+  font-family: 'Godo', sans-serif;
   font-size: 42px;
   font-weight: normal;
   font-stretch: normal;
@@ -107,7 +110,7 @@ const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
 
-  margin-bottom: 90px;
+  margin-bottom: 30px;
 
   @media (max-width: 1024px) {
     box-sizing: border-box;
@@ -124,59 +127,65 @@ const CardWrapper = styled.div`
 const fakeJson = [
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
   {
     img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
+    name: '서울 시립 북서울 미술관',
+    address: '서울시 노원구',
   },
 ];
 
-export default function Closehotel() {
+export default function Closehotel({ contentId, areaCode }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slider = useRef();
+
+  const tripinfo = useTrip();
+
+  useEffect(() => {
+    tripinfo.getStayPlaceRequest(areaCode, contentId);
+  }, []); //
 
   const mobileSetting = {
     accessibility: false,
     focusOnSelect: false,
-    centerPadding: "0px",
+    centerPadding: '0px',
 
     dots: false,
 
@@ -190,42 +199,52 @@ export default function Closehotel() {
   };
 
   return (
-    <>
-      <PC>
-        <Wrapper>
-          <SpaceBetweenFlexDiv>
-            <FlexDiv>
-              <Title>#노원구 근처 숙소</Title>
-              <Desc>검색하신 지역을 기반으로 하여 추천되는 숙소입니다.</Desc>
-            </FlexDiv>
-          </SpaceBetweenFlexDiv>
+    tripinfo.stayplace_data && (
+      <>
+        <PC>
+          <Wrapper>
+            <SpaceBetweenFlexDiv>
+              <FlexDiv>
+                <Title>{`#${tripinfo.tripinfo_detail_data.common.area} 근처 숙소`}</Title>
+                <Desc>검색하신 지역을 기반으로 하여 추천되는 숙소입니다.</Desc>
+              </FlexDiv>
+            </SpaceBetweenFlexDiv>
 
-          <div>
-            <HotelItem />
-            <HotelItem />
-            <HotelItem />
-          </div>
-        </Wrapper>
-      </PC>
-
-      <Mobile>
-        <Wrapper>
-          <Title>#노원구 근처 숙소</Title>
-          <Desc>검색하신 지역을 기반으로 하여 추천되는 숙소입니다.</Desc>
-
-          <div>
-            <WidthSlider ref={slider} {...mobileSetting}>
-              {fakeJson.map((idx) => (
-                <div className="center">
-                  <CardWrapper>
-                    <HotelItem />
-                  </CardWrapper>
-                </div>
+            <div>
+              {tripinfo.stayplace_data.map((place, i) => (
+                <>
+                  <div className="center">
+                    <CardWrapper>
+                      <HotelItem place={place} />
+                    </CardWrapper>
+                  </div>
+                </>
               ))}
-            </WidthSlider>
-          </div>
-        </Wrapper>
-      </Mobile>
-    </>
+            </div>
+          </Wrapper>
+        </PC>
+
+        <Mobile>
+          <Wrapper>
+            <Title>{`#${tripinfo.tripinfo_detail_data.common.area} 근처 숙소`}</Title>
+            <Desc>검색하신 지역을 기반으로 하여 추천되는 숙소입니다.</Desc>
+
+            <div>
+              <WidthSlider ref={slider} {...mobileSetting}>
+                {tripinfo.stayplace_data.map((place, i) => (
+                  <>
+                    <div className="center">
+                      <CardWrapper>
+                        <HotelItem place={place} />
+                      </CardWrapper>
+                    </div>
+                  </>
+                ))}
+              </WidthSlider>
+            </div>
+          </Wrapper>
+        </Mobile>
+      </>
+    )
   );
 }

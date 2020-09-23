@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import * as IconLib from "../../lib/icon";
-import clearIco from "../../assets/clear.png";
-import RadioChecked from "../../assets/radiobutton-checked.png";
-import RadioDefault from "../../assets/radiobutton-default.png";
-import Button, { ButtonTemplate } from "./Button";
-import { English } from "./Font";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import * as IconLib from '../../lib/icon';
+import clearIco from '../../assets/clear.png';
+import RadioChecked from '../../assets/radiobutton-checked.png';
+import RadioDefault from '../../assets/radiobutton-default.png';
+import Button, { ButtonTemplate } from './Button';
+import { English } from './Font';
+
+import useSignUp from '../../hooks/useSignUp';
 
 const Background = styled.div`
   position: fixed;
@@ -165,7 +167,7 @@ const StyledTr = styled.tr`
   width: 100%;
   border-bottom: 1px solid #e0e0e0;
 
-  color: ${(props) => (props.checked ? "#f85c5c" : "#757575")};
+  color: ${(props) => (props.checked ? '#f85c5c' : '#757575')};
   cursor: pointer;
 `;
 
@@ -274,40 +276,13 @@ const setRadioChecked = (checked) => {
     ? IconLib.getImgIcon(RadioChecked, 20, 20)
     : IconLib.getImgIcon(RadioDefault, 20, 20);
 };
-export default function ShowRedundantID({ close }) {
+export default function ShowRedundantID({ close, setPostOK }) {
+  console.log(close);
+  const signUp = useSignUp();
+  const redundantList = signUp.candidatesData;
+  const postCouple = signUp.onPostCoupleRequest;
+
   const [index, setIndex] = useState(null);
-  const fakeJson = [
-    {
-      id: "asdf",
-      nickname: "랄럴랄",
-      created_at: "20.06.18",
-    },
-    {
-      id: "asdf",
-      nickname: "랄럴랄",
-      created_at: "20.06.18",
-    },
-    {
-      id: "asdf",
-      nickname: "랄럴랄",
-      created_at: "20.06.18",
-    },
-    {
-      id: "asdf",
-      nickname: "랄럴랄",
-      created_at: "20.06.18",
-    },
-    {
-      id: "asdf",
-      nickname: "랄럴랄",
-      created_at: "20.06.18",
-    },
-    {
-      id: "asdf",
-      nickname: "랄럴랄",
-      created_at: "20.06.18",
-    },
-  ];
   return (
     <>
       <PC>
@@ -318,8 +293,8 @@ export default function ShowRedundantID({ close }) {
             </ClearIconWrapper>
             <Content>
               <ShowCntOfIDBanner>
-                상대방 정보와 일치하는 아이디를 <Strong>5개</Strong>{" "}
-                발견했습니다.
+                상대방 정보와 일치하는 아이디를
+                <Strong>{redundantList.length}개 </Strong> 발견했습니다.
               </ShowCntOfIDBanner>
               <TableWrapper>
                 <StyledTable>
@@ -328,7 +303,7 @@ export default function ShowRedundantID({ close }) {
                     <StyledTh>닉네임</StyledTh>
                     <StyledTh>가입일</StyledTh>
                   </StyledHeadTr>
-                  {fakeJson.map((v, i) => (
+                  {redundantList.map((v, i) => (
                     <StyledTr
                       onClick={() => {
                         setIndex(i);
@@ -340,12 +315,12 @@ export default function ShowRedundantID({ close }) {
                           <div>{setRadioChecked(index === i)}</div>
                           <HorizontalMargin margin="24px" />
                           <English>
-                            <div>{v.id}</div>
+                            <div>{v.mem_id}</div>
                           </English>
                         </FlexBox>
                       </StyledTd>
                       <StyledTd>{v.nickname}</StyledTd>
-                      <StyledTd>{v.created_at}</StyledTd>
+                      <StyledTd>{v.created_at.split('T')[0]}</StyledTd>
                     </StyledTr>
                   ))}
                 </StyledTable>
@@ -355,7 +330,17 @@ export default function ShowRedundantID({ close }) {
               <HorizontalMargin margin="auto" />
               <PlainButton onClick={close}>취소</PlainButton>
               <HorizontalMargin margin="20px" />
-              <StyledButton>확인</StyledButton>
+              <StyledButton
+                onClick={async () => {
+                  if (window.confirm(`커플 요청을 보내시겠습니까?`)) {
+                    await postCouple(redundantList[index].id, true);
+                    setPostOK();
+                    close();
+                  }
+                }}
+              >
+                확인
+              </StyledButton>
             </FlexBox>
           </Modal>
         </Background>
@@ -369,7 +354,7 @@ export default function ShowRedundantID({ close }) {
             <ShowCntOfIDBanner>
               상대방 정보와 일치하는 아이디를
               <br />
-              <Strong>5개</Strong> 발견했습니다.
+              <Strong>{redundantList.length}개 </Strong> 발견했습니다.
             </ShowCntOfIDBanner>
             <TableWrapper>
               <StyledTable>
@@ -378,7 +363,7 @@ export default function ShowRedundantID({ close }) {
                   <StyledTh>닉네임</StyledTh>
                   <StyledTh>가입일</StyledTh>
                 </StyledHeadTr>
-                {fakeJson.map((v, i) => (
+                {redundantList.map((v, i) => (
                   <StyledTr
                     onClick={() => {
                       setIndex(i);
@@ -390,12 +375,12 @@ export default function ShowRedundantID({ close }) {
                         <div>{setRadioChecked(index === i)}</div>
                         <HorizontalMargin margin="8px" />
                         <English>
-                          <div>{v.id}</div>
+                          <div>{v.mem_id}</div>
                         </English>
                       </FlexBox>
                     </StyledTd>
                     <StyledTd>{v.nickname}</StyledTd>
-                    <StyledTd>{v.created_at}</StyledTd>
+                    <StyledTd>{v.created_at.split('T')[0]}</StyledTd>
                   </StyledTr>
                 ))}
               </StyledTable>
@@ -403,7 +388,18 @@ export default function ShowRedundantID({ close }) {
 
             <VerticalMargin margin="50px" />
             <Center>
-              <StyledButton>확인</StyledButton>
+              <StyledButton
+                onClick={async () => {
+                  if (window.confirm(`커플 요청을 보내시겠습니까?`)) {
+                    await postCouple(redundantList[index].id, true);
+                    alert('커플 요청이 완료되었습니다.');
+                    setPostOK();
+                    close();
+                  }
+                }}
+              >
+                확인
+              </StyledButton>
               <VerticalMargin margin="20px" />
               <PlainButton onClick={close}>취소</PlainButton>
             </Center>

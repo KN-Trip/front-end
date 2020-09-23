@@ -1,17 +1,22 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import nonCB from "../../assets/checkbox-default.png";
-import CB from "../../assets/checkbox-checked.png";
+import nonCB from '../../assets/checkbox-default.png';
+import CB from '../../assets/checkbox-checked.png';
 
 const TableWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
+
+  td,
+  tr {
+    margin-bottom: 40px;
+  }
 `;
 
 const StyledTable = styled.table`
   width: 100%;
-  height: 144px;
+  height: 180px;
 
   margin: 52px 0;
 
@@ -57,8 +62,8 @@ const LabelText = styled.span`
   font-size: 16px;
   font-stretch: normal;
   font-style: normal;
-  font-weight: ${(props) => (props.checked ? 1000 : "bold")};
-  color: ${(props) => (props.checked ? "#f85c5c" : "#757575")};
+  font-weight: ${(props) => (props.checked ? 1000 : 'bold')};
+  color: ${(props) => (props.checked ? '#f85c5c' : '#757575')};
 
   line-height: 1.88;
   letter-spacing: -0.64px;

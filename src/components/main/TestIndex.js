@@ -1,5 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { English } from '../common/Font';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ const Circle = styled.div`
 
   border-radius: 100%;
 
+  font-weight: 700;
   color: white;
 `;
 
@@ -59,12 +61,16 @@ const LineTwo = styled(Line)`
 function TestIndex({ index }) {
   return (
     <Wrapper>
-      <Circle index={index}>1</Circle>
+      <Circle index={index}>
+        <English>1</English>
+      </Circle>
       <LineWrapper>
         <Line />
         <LineTwo index={index} />
       </LineWrapper>
-      <CircleTwo index={index}>2</CircleTwo>
+      <CircleTwo index={index}>
+        <English>2</English>
+      </CircleTwo>
     </Wrapper>
   );
 }

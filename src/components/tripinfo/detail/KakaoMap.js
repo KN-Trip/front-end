@@ -1,24 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
 const { kakao, innerHeight } = window;
 
 const mapStyle = {
-  width: "100%",
-  height: "100%",
+  width: '100%',
+  height: '100%',
 
-  borderRadius: "30px",
+  borderRadius: '30px',
 };
 
-function KakaoMap() {
+function KakaoMap({ locationX, locationY }) {
   const mapContainer = useRef();
   useEffect(() => {
     kakao.maps.load(() => {
       let el = mapContainer.current;
       let map = new kakao.maps.Map(el, {
-        center: new kakao.maps.LatLng(37.551389, 127.074111),
+        center: new kakao.maps.LatLng(locationY, locationX),
       });
 
-      let markerPosition = new kakao.maps.LatLng(37.551389, 127.074111);
+      let markerPosition = new kakao.maps.LatLng(locationY, locationX);
 
       let markers = [];
 

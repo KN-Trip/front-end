@@ -1,12 +1,12 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import Slider from "react-slick";
-import dummy_img from "../../assets/dummy_img.jpg";
+import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import Slider from 'react-slick';
+import dummy_img from '../../assets/dummy_img.jpg';
 
-import LeftArrowIco from "../../assets/left-arrow-ico.png";
-import RightArrowIco from "../../assets/right-arrow-ico.png";
+import LeftArrowIco from '../../assets/left-arrow-ico.png';
+import RightArrowIco from '../../assets/right-arrow-ico.png';
 
-import PlaceItem from "../common/PlaceItem";
+import PlaceItem from '../common/PlaceItem';
 
 const PC = styled.div`
   @media (min-width: 1025px) {
@@ -52,7 +52,7 @@ const SpaceBetweenFlexDiv = styled(FlexDiv)`
 const Title = styled.div`
   margin-right: 40px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 900;
   font-stretch: normal;
   font-style: normal;
   line-height: 3.3;
@@ -119,18 +119,18 @@ const Arrow = styled.div`
   width: 48px;
   height: 48px;
   border: ${(props) => {
-    if (props.direction === "left") {
+    if (props.direction === 'left') {
       if (props.num === 0) {
-        return "1px solid #bdbdbd";
+        return '1px solid #bdbdbd';
       }
     }
-    if (props.direction === "right") {
+    if (props.direction === 'right') {
       if (props.num === 6) {
-        return "1px solid #bdbdbd";
+        return '1px solid #bdbdbd';
       }
     }
 
-    return "1px solid #757575";
+    return '1px solid #757575';
   }};
 
   border-radius: 100%;
@@ -139,53 +139,6 @@ const Arrow = styled.div`
   cursor: pointer;
   user-select: none;
 `;
-const fakeJson = [
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-];
 
 const SelectedDot = styled.div`
   width: 341px;
@@ -230,14 +183,14 @@ function Dots({ slide, setSlide }) {
   );
 }
 
-export default function LikingTourPlace() {
+export default function LikingTourPlace({ places }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slider = useRef();
 
   const settings = {
     accessibility: false,
     focusOnSelect: false,
-    centerPadding: "50px",
+    centerPadding: '50px',
 
     dots: false,
 
@@ -253,7 +206,7 @@ export default function LikingTourPlace() {
   const mobileSettings = {
     accessibility: false,
     focusOnSelect: false,
-    centerPadding: "50px",
+    centerPadding: '50px',
 
     dots: false,
 
@@ -275,82 +228,89 @@ export default function LikingTourPlace() {
               <HorizontalMargin margin="75px" />
               <Title>내가 찜한 여행지</Title>
             </FlexDiv>
+            {places && (
+              <FlexDiv>
+                <Arrow
+                  onClick={() => {
+                    if (currentSlide === 0) {
+                      return;
+                    }
 
-            <FlexDiv>
-              <Arrow
-                onClick={() => {
-                  if (currentSlide === 0) {
-                    return;
-                  }
+                    slider.current.slickGoTo(currentSlide - 3);
+                    setCurrentSlide(currentSlide - 3);
+                  }}
+                  num={currentSlide}
+                  direction={'left'}
+                >
+                  <ArrowImg src={LeftArrowIco} />
+                </Arrow>
 
-                  slider.current.slickGoTo(currentSlide - 3);
-                  setCurrentSlide(currentSlide - 3);
-                }}
-                num={currentSlide}
-                direction={"left"}
-              >
-                <ArrowImg src={LeftArrowIco} />
-              </Arrow>
+                <HorizontalMargin margin="20px" />
 
-              <HorizontalMargin margin="20px" />
+                <Arrow
+                  onClick={() => {
+                    if (currentSlide === 6) {
+                      return;
+                    }
 
-              <Arrow
-                onClick={() => {
-                  if (currentSlide === 6) {
-                    return;
-                  }
-
-                  slider.current.slickGoTo(currentSlide + 3);
-                  setCurrentSlide(currentSlide + 3);
-                }}
-                num={currentSlide}
-                direction={"right"}
-              >
-                <ArrowImg src={RightArrowIco} />
-              </Arrow>
-            </FlexDiv>
+                    slider.current.slickGoTo(currentSlide + 3);
+                    setCurrentSlide(currentSlide + 3);
+                  }}
+                  num={currentSlide}
+                  direction={'right'}
+                >
+                  <ArrowImg src={RightArrowIco} />
+                </Arrow>
+              </FlexDiv>
+            )}
           </SpaceBetweenFlexDiv>
-          <div>
-            <WidthSlider ref={slider} {...settings}>
-              {fakeJson.map((item, idx) => (
-                <div className="center">
-                  <CardWrapper>
-                    <PlaceItem
-                      id={idx}
-                      img={item.img}
-                      name={item.name}
-                      address={item.address}
-                    />
-                  </CardWrapper>
-                </div>
-              ))}
-            </WidthSlider>
-          </div>
 
-          <div>
-            <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-          </div>
+          {places && (
+            <div>
+              <WidthSlider ref={slider} {...settings}>
+                {places.map((item, idx) => (
+                  <div className="center">
+                    <CardWrapper>
+                      <PlaceItem
+                        id={item.contentID}
+                        img={item.image}
+                        name={item.title}
+                        address={item.address}
+                      />
+                    </CardWrapper>
+                  </div>
+                ))}
+              </WidthSlider>
+            </div>
+          )}
+
+          {places && (
+            <div>
+              <Dots slide={currentSlide} setSlide={setCurrentSlide} />
+            </div>
+          )}
         </Wrapper>
       </PC>
 
       <Mobile>
         <Title>내가 찜한 여행지</Title>
         <div>
-          <WidthSlider ref={slider} {...mobileSettings}>
-            {fakeJson.map((item, idx) => (
-              <div className="center">
-                <CardWrapper>
-                  
-                  <PlaceItem
-                    id={idx}
-                    img={item.img}
-                    name={item.name}
-                    address={item.address}
-                  />
-                </CardWrapper>
-              </div>
-            ))}
-          </WidthSlider>
+          {places && (
+            <WidthSlider ref={slider} {...mobileSettings}>
+              {places.map((item, idx) => (
+                <div className="center">
+                  <CardWrapper>
+                    <PlaceItem
+                      id={item.contentID}
+                      img={item.image}
+                      name={item.title}
+                      address={item.address}
+                    />
+                  </CardWrapper>
+                </div>
+              ))}
+            </WidthSlider>
+          )}
         </div>
       </Mobile>
     </>

@@ -1,12 +1,15 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import Slider from "react-slick";
-import dummy_img from "../../../assets/dummy_img.jpg";
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import Slider from 'react-slick';
+import dummy_img from '../../../assets/dummy_img.jpg';
 
-import LeftArrowIco from "../../../assets/left-arrow-ico.png";
-import RightArrowIco from "../../../assets/right-arrow-ico.png";
+import LeftArrowIco from '../../../assets/left-arrow-ico.png';
+import RightArrowIco from '../../../assets/right-arrow-ico.png';
 
-import PlaceItem from "../../common/PlaceItem";
+import PlaceItem from '../../common/PlaceItem';
+
+import useTrip from '../../../hooks/useTrip';
+import { useLocation } from 'react-router-dom';
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
@@ -53,7 +56,7 @@ const SpaceBetweenFlexDiv = styled(FlexDiv)`
 
 const Title = styled.div`
   margin-right: 40px;
-  font-family: "Godo", sans-serif;
+  font-family: 'Godo', sans-serif;
   font-size: 42px;
   font-weight: normal;
   font-stretch: normal;
@@ -89,6 +92,7 @@ const Desc = styled.div`
   @media (max-width: 1024px) {
     line-height: 1;
     margin-bottom: 30px;
+    white-space: nowrap;
   }
 `;
 
@@ -134,18 +138,18 @@ const Arrow = styled.div`
   width: 48px;
   height: 48px;
   border: ${(props) => {
-    if (props.direction === "left") {
+    if (props.direction === 'left') {
       if (props.num === 0) {
-        return "1px solid #bdbdbd";
+        return '1px solid #bdbdbd';
       }
     }
-    if (props.direction === "right") {
+    if (props.direction === 'right') {
       if (props.num === 6) {
-        return "1px solid #bdbdbd";
+        return '1px solid #bdbdbd';
       }
     }
 
-    return "1px solid #757575";
+    return '1px solid #757575';
   }};
 
   border-radius: 100%;
@@ -154,53 +158,6 @@ const Arrow = styled.div`
   cursor: pointer;
   user-select: none;
 `;
-const fakeJson = [
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-];
 
 const SelectedDot = styled.div`
   width: 341px;
@@ -245,14 +202,24 @@ function Dots({ slide, setSlide }) {
   );
 }
 
-export default function Recommendplace() {
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
+export default function Recommendplace({ locationX, locationY, nowContentId }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slider = useRef();
+
+  const tripinfo = useTrip();
+
+  useEffect(() => {
+    tripinfo.getRecommendPlacesRequest(locationX, locationY, nowContentId);
+  }, []); //
 
   const settings = {
     accessibility: false,
     focusOnSelect: false,
-    centerPadding: "50px",
+    centerPadding: '50px',
 
     dots: false,
 
@@ -268,7 +235,7 @@ export default function Recommendplace() {
   const mobileSetting = {
     accessibility: false,
     focusOnSelect: false,
-    centerPadding: "0px",
+    centerPadding: '0px',
 
     dots: false,
 
@@ -282,91 +249,95 @@ export default function Recommendplace() {
   };
 
   return (
-    <>
-      <PC>
-        <Wrapper>
-          <SpaceBetweenFlexDiv>
-            <FlexDiv>
-              <Title>추천하는 장소</Title>
-              <Desc>검색하신 지역을 기반으로 하여 추천되는 장소입니다.</Desc>
-            </FlexDiv>
+    tripinfo.recommendPlace_data && (
+      <>
+        <PC>
+          <Wrapper>
+            <SpaceBetweenFlexDiv>
+              <FlexDiv>
+                <Title>추천하는 장소</Title>
+                <Desc>검색하신 지역을 기반으로 하여 추천되는 장소입니다.</Desc>
+              </FlexDiv>
 
-            <FlexDiv>
-              <Arrow
-                onClick={() => {
-                  if (currentSlide === 0) {
-                    return;
-                  }
+              <FlexDiv>
+                <Arrow
+                  onClick={() => {
+                    if (currentSlide === 0) {
+                      return;
+                    }
 
-                  slider.current.slickGoTo(currentSlide - 3);
-                  setCurrentSlide(currentSlide - 3);
-                }}
-                num={currentSlide}
-                direction={"left"}
-              >
-                <ArrowImg src={LeftArrowIco} />
-              </Arrow>
+                    slider.current.slickGoTo(currentSlide - 3);
+                    setCurrentSlide(currentSlide - 3);
+                  }}
+                  num={currentSlide}
+                  direction={'left'}
+                >
+                  <ArrowImg src={LeftArrowIco} />
+                </Arrow>
 
-              <HorizontalMargin margin="20px" />
+                <HorizontalMargin margin="20px" />
 
-              <Arrow
-                onClick={() => {
-                  if (currentSlide === 6) {
-                    return;
-                  }
+                <Arrow
+                  onClick={() => {
+                    if (currentSlide === 6) {
+                      return;
+                    }
 
-                  slider.current.slickGoTo(currentSlide + 3);
-                  setCurrentSlide(currentSlide + 3);
-                }}
-                num={currentSlide}
-                direction={"right"}
-              >
-                <ArrowImg src={RightArrowIco} />
-              </Arrow>
-            </FlexDiv>
-          </SpaceBetweenFlexDiv>
+                    slider.current.slickGoTo(currentSlide + 3);
+                    setCurrentSlide(currentSlide + 3);
+                  }}
+                  num={currentSlide}
+                  direction={'right'}
+                >
+                  <ArrowImg src={RightArrowIco} />
+                </Arrow>
+              </FlexDiv>
+            </SpaceBetweenFlexDiv>
+            <div>
+              <WidthSlider ref={slider} {...settings}>
+                {tripinfo.recommendPlace_data.map((item, idx) => (
+                  <div className="center">
+                    <CardWrapper>
+                      <PlaceItem
+                        id={item.contentID}
+                        img={item.image}
+                        name={item.title}
+                        address={item.address}
+                        type={item.contentTypeID}
+                      />
+                    </CardWrapper>
+                  </div>
+                ))}
+              </WidthSlider>
+            </div>
+
+            <div>
+              <Dots slide={currentSlide} setSlide={setCurrentSlide} />
+            </div>
+          </Wrapper>
+        </PC>
+        <Mobile>
+          <Title>추천하는 장소</Title>
+          <Desc>검색하신 지역을 기반으로 하여 추천되는 장소입니다.</Desc>
           <div>
-            <WidthSlider ref={slider} {...settings}>
-              {fakeJson.map((item, idx) => (
+            <WidthSlider ref={slider} {...mobileSetting}>
+              {tripinfo.recommendPlace_data.map((item, idx) => (
                 <div className="center">
                   <CardWrapper>
                     <PlaceItem
-                      id={idx}
-                      img={item.img}
-                      name={item.name}
+                      id={item.contentID}
+                      img={item.image}
+                      name={item.title}
                       address={item.address}
+                      type={item.contentTypeID}
                     />
                   </CardWrapper>
                 </div>
               ))}
             </WidthSlider>
           </div>
-
-          <div>
-            <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-          </div>
-        </Wrapper>
-      </PC>
-      <Mobile>
-        <Title>추천하는 장소</Title>
-        <Desc>검색하신 지역을 기반으로 하여 추천되는 장소입니다.</Desc>
-        <div>
-          <WidthSlider ref={slider} {...mobileSetting}>
-            {fakeJson.map((item, idx) => (
-              <div className="center">
-                <CardWrapper>
-                  <PlaceItem
-                    id={idx}
-                    img={item.img}
-                    name={item.name}
-                    address={item.address}
-                  />
-                </CardWrapper>
-              </div>
-            ))}
-          </WidthSlider>
-        </div>
-      </Mobile>
-    </>
+        </Mobile>
+      </>
+    )
   );
 }

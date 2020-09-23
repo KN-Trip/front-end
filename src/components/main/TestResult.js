@@ -1,10 +1,41 @@
-import React from "react";
-import styled from "styled-components";
-import TestResultHashTagList from "./TestResultHashTagList";
-import Responsive from "../common/Responsive";
-import TestResultPlaceList from "./TestResultPlaceList";
-import Divider from "../common/Divider";
-import PlaceItem from "../common/PlaceItem";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import TestResultHashTagList from './TestResultHashTagList';
+import Responsive from '../common/Responsive';
+import TestResultPlaceList from './TestResultPlaceList';
+import Divider from '../common/Divider';
+import PlaceItem from '../common/PlaceItem';
+
+import useTrip from '../../hooks/useTrip';
+
+import { Skeleton } from 'antd';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+
+const antIcon = (
+  <LoadingOutlined
+    style={{ fontSize: '43px', color: '#f85c5c', marginBottom: '24px' }}
+    spin
+  />
+);
+
+const FakeDisplay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 600;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(255, 255, 255, 1);
+`;
+
+const FillContent = styled.div`
+  width: 100vw;
+  height: 70vh;
+`;
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
@@ -36,7 +67,7 @@ const Wrapper = styled.div`
 const ResultText = styled.div`
   margin-bottom: 70px;
 
-  font-family: "Godo", sans-serif;
+  font-family: 'Godo', sans-serif;
 
   @media (max-width: 1024px) {
     margin-top: 100px;
@@ -89,6 +120,13 @@ const FilterWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
+  cursor: pointer;
+
+  @media (min-width: 1025px) {
+    width: 200px;
+    margin-left: auto;
+  }
 `;
 
 const FilterItem = styled.div`
@@ -103,53 +141,161 @@ const FilterItem = styled.div`
   text-align: left;
   color: #757575;
 `;
+
+const FilterDiv = styled.div`
+  font-weight: ${(props) => (props.checked ? 700 : 500)};
+  color: ${(props) => props.checked && '#f85c5c'};
+`;
+
+const getHashTags = ({ area, category }) => {
+  const areaNames = area.map((v) => v.area_name);
+  const categoryNames = category.map((v) => v.category_name);
+  return [...areaNames, ...categoryNames];
+};
+
 function TestResult() {
+  const tripinfo = useTrip();
+
+  useEffect(() => {
+    tripinfo.tripInfoRequest();
+    tripinfo.getTest();
+  }, []);
+
+  if (tripinfo.GET_TEST_loading || tripinfo.tripinfo_loading) {
+    return (
+      <>
+        <FakeDisplay>
+          <Spin
+            size="large"
+            indicator={antIcon}
+            style={{ color: '#f85c5c', fontSize: '19px', fontWeight: '700' }}
+          />
+        </FakeDisplay>
+        <FillContent />
+      </>
+    );
+  }
+
   return (
     <>
-      <PC>
-        <Wrapper>
-          <Responsive>
+      {tripinfo.tripinfo_data && tripinfo.GET_TEST_data && (
+        <>
+          <PC>
+            <Wrapper>
+              <Responsive>
+                <ResultText>
+                  <TextOne>서로의 해시태그를 분석한 결과!</TextOne>
+                  <TextTwo>
+                    <StrongWord>{`총 ${tripinfo.tripinfo_data.totalCount}개`}</StrongWord>
+                    의 <StrongWord>장소</StrongWord>를
+                    <StrongWord> 발견했습니다!</StrongWord>
+                  </TextTwo>
+                </ResultText>
+                <TestResultHashTagList
+                  hashTags={getHashTags(tripinfo.GET_TEST_data)}
+                />
+                <FilterWrapper>
+                  <FilterDiv
+                    checked={tripinfo.filterNum === 0}
+                    onClick={() => {
+                      tripinfo.setFilter(0);
+                      tripinfo.tripInfoRequest(0);
+                    }}
+                  >
+                    조회순
+                  </FilterDiv>
+                  <FilterItem>|</FilterItem>
+                  <FilterDiv
+                    checked={tripinfo.filterNum === 1}
+                    onClick={() => {
+                      tripinfo.setFilter(1);
+                      tripinfo.tripInfoRequest(1);
+                    }}
+                  >
+                    인기순
+                  </FilterDiv>
+                  <FilterItem>|</FilterItem>
+                  <FilterDiv
+                    checked={tripinfo.filterNum === 2}
+                    onClick={() => {
+                      tripinfo.setFilter(2);
+                      tripinfo.tripInfoRequest(2);
+                    }}
+                  >
+                    제목순
+                  </FilterDiv>
+                </FilterWrapper>
+              </Responsive>
+              <BlankDiv />
+              {tripinfo.tripinfo_loading ? (
+                <Responsive>
+                  <Skeleton active />
+                </Responsive>
+              ) : (
+                <TestResultPlaceList places={tripinfo.tripinfo_data.items} />
+              )}
+            </Wrapper>
+          </PC>
+
+          <Mobile>
             <ResultText>
-              <TextOne>서로의 해시태그를 분석한 결과!</TextOne>
-              <TextTwo>
-                <StrongWord>총 105개</StrongWord>의{" "}
-                <StrongWord>장소</StrongWord>를
-                <StrongWord> 발견했습니다!</StrongWord>
-              </TextTwo>
+              해시태그를 분석한 결과!
+              <br />
+              {`총 ${tripinfo.tripinfo_data.totalCount}개의 장소를`}
+              <br />
+              발견했습니다!
             </ResultText>
-            <TestResultHashTagList />
-          </Responsive>
-          <BlankDiv />
-          <TestResultPlaceList />
-        </Wrapper>
-      </PC>
+            <TestResultHashTagList
+              hashTags={getHashTags(tripinfo.GET_TEST_data)}
+            />
+            <VerticalMargin margin="50px" />
+            <Divider />
+            <VerticalMargin margin="30px" />
+            <FilterWrapper>
+              <div>{`총 ${tripinfo.tripinfo_data.totalCount}개`}</div>
+              <FilterWrapper>
+                <FilterDiv
+                  checked={tripinfo.filterNum === 0}
+                  onClick={() => {
+                    tripinfo.setFilter(0);
+                    tripinfo.tripInfoRequest(0);
+                  }}
+                >
+                  조회순
+                </FilterDiv>
+                <FilterItem>|</FilterItem>
+                <FilterDiv
+                  checked={tripinfo.filterNum === 1}
+                  onClick={() => {
+                    tripinfo.setFilter(1);
+                    tripinfo.tripInfoRequest(1);
+                  }}
+                >
+                  인기순
+                </FilterDiv>
+                <FilterItem>|</FilterItem>
+                <FilterDiv
+                  checked={tripinfo.filterNum === 2}
+                  onClick={() => {
+                    tripinfo.setFilter(2);
+                    tripinfo.tripInfoRequest(2);
+                  }}
+                >
+                  제목순
+                </FilterDiv>
+              </FilterWrapper>
+            </FilterWrapper>
+            <VerticalMargin margin="30px" />
 
-      <Mobile>
-        <ResultText>
-          해시태그를 분석한 결과!
-          <br />총 100개 이상의 장소를
-          <br />
-          발견했습니다!
-        </ResultText>
-        <TestResultHashTagList />
-        <VerticalMargin margin="50px" />
-        <Divider />
-        <VerticalMargin margin="30px" />
-        <FilterWrapper>
-          <div>총 100+</div>
-          <FilterWrapper>
-            <div>조회순</div>
-            <FilterItem>|</FilterItem>
-            <div>인기순</div>
-            <FilterItem>|</FilterItem>
-            <div>제목순</div>
-          </FilterWrapper>
-        </FilterWrapper>
-        <VerticalMargin margin="30px" />
-
-        <TestResultPlaceList />
-        <VerticalMargin margin="53px" />
-      </Mobile>
+            {tripinfo.tripinfo_loading ? (
+              <Skeleton active />
+            ) : (
+              <TestResultPlaceList places={tripinfo.tripinfo_data.items} />
+            )}
+            <VerticalMargin margin="53px" />
+          </Mobile>
+        </>
+      )}
     </>
   );
 }

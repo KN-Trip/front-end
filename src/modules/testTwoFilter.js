@@ -1,8 +1,8 @@
-import produce from "immer";
+import produce from 'immer';
 
-const CHECK_ALL = "testTwoFilter/CHECK_ALL";
-const CHECK_OTHERS = "testTwoFilter/CHECK_OTHERS";
-const RESET_FILTER_TWO = "testTwoFilter/RESET_FILTER_TWO";
+const CHECK_ALL = 'testTwoFilter/CHECK_ALL';
+const CHECK_OTHERS = 'testTwoFilter/CHECK_OTHERS';
+const RESET_FILTER_TWO = 'testTwoFilter/RESET_FILTER_TWO';
 
 export const toggleCheck = (index) => {
   if (index !== 0) {
@@ -24,24 +24,24 @@ export const resetFilterTwo = () => ({
 
 const initialState = {
   name: [
-    "전체",
-    "바다",
-    "산",
-    "계곡",
-    "해안절경",
-    "체험",
-    "박물관",
-    "미술관",
-    "전시관",
-    "공연장",
-    "도서관",
-    "축제",
-    "역사",
-    "쇼핑",
-    "음식점",
-    "액티비티",
-    "수목원",
-    "관광지",
+    '전체',
+    '바다',
+    '산',
+    '계곡',
+    '해안절경',
+    '체험',
+    '박물관',
+    '미술관',
+    '전시관',
+    '공연장',
+    '도서관',
+    '축제',
+    '역사',
+    '쇼핑',
+    '음식점',
+    '액티비티',
+    '수목원',
+    '관광지',
   ],
   checked: [
     false,
@@ -82,8 +82,8 @@ export default function testOneFilter(state = initialState, action) {
         if (v) trueCnt += 1;
       });
 
-      if (trueCnt >= 5) {
-        alert("최대 5개까지 선택 가능합니다.");
+      if (trueCnt >= 5 && state.checked[action.index] === false) {
+        alert('최대 5개까지 선택 가능합니다.');
         return state;
       }
 

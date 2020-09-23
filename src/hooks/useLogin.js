@@ -1,15 +1,31 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { postLoginRequest } from '../modules/login';
+import { postLoginRequest, clearLogin } from '../modules/login';
 
-export default function useLoginInput() {
-    const { id, password, login, login_loading, login_error } = useSelector(
-        (state) => state.login
-    );
-    const dispatch = useDispatch();
+export default function useLogin() {
+  const {
+    id,
+    password,
+    login,
+    login_loading,
+    login_error,
+    nickname,
+  } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
 
-    const loginRequest = () => {
-        dispatch(postLoginRequest(id, password));
-    };
+  const loginRequest = () => {
+    dispatch(postLoginRequest(id, password));
+  };
 
-    return [login, login_loading, login_error, loginRequest];
+  const onClearLogin = () => {
+    dispatch(clearLogin());
+  };
+
+  return [
+    login,
+    login_loading,
+    login_error,
+    loginRequest,
+    nickname,
+    onClearLogin,
+  ];
 }

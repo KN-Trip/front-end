@@ -1,33 +1,42 @@
-import React from "react";
-import styled from "styled-components";
-import Header from "../components/Header";
-import Footer from "../components/common/Footer";
-import MyPageNav from "../components/mypage/MyPageNav";
-import MyPageContent from "../components/mypage/MyPageContent";
-import ShowRedundantID from "../components/common/ShowRedundantID";
-import ReceiveConnectionModal from "../components/common/ReceiveConnectionModal";
-import { useState } from "react";
-import MakeConnectionModal from "../components/common/MakeConnectionModal";
+import React from 'react';
+import styled from 'styled-components';
+import Header from '../components/Header';
+import Footer from '../components/common/Footer';
+
+import MyPageContent from '../components/mypage/MyPageContent';
+import ShowRedundantID from '../components/common/ShowRedundantID';
+import ReceiveConnectionModal from '../components/common/ReceiveConnectionModal';
+import { useState } from 'react';
+import MakeConnectionModal from '../components/common/MakeConnectionModal';
+import useSignUp from '../hooks/useSignUp';
 
 const PC = styled.div`
   @media (min-width: 1025px) {
     display: block;
+    font-family: 'NanumSquare', sans-serif !important;
+    font-weight: 700;
   }
 
   @media (max-width: 1024px) {
     display: none;
+    font-family: 'NanumSquare', sans-serif !important;
+    font-weight: 700;
   }
 `;
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
     display: none;
+    font-family: 'NanumSquare', sans-serif !important;
+    font-weight: 700;
   }
 
   @media (max-width: 1024px) {
     display: block;
     padding: 0 30px;
     box-sizing: border-box;
+    font-family: 'NanumSquare', sans-serif !important;
+    font-weight: 700;
   }
 `;
 
@@ -49,7 +58,7 @@ const MyPageH1 = styled.h1`
     margin-bottom: 77px;
 
     text-align: center;
-    font-family: "Godo", sans-serif;
+    font-family: 'Godo', sans-serif;
     font-size: 42px;
     font-weight: bold;
     font-stretch: normal;
@@ -62,7 +71,7 @@ const MyPageH1 = styled.h1`
   @media (max-width: 1024px) {
     margin-top: 100px;
     margin-bottom: 50px;
-    font-family: "Godo", sans-serif;
+    font-family: 'Godo', sans-serif;
     font-size: 26px;
     font-weight: bold;
     font-stretch: normal;
@@ -78,7 +87,7 @@ const SmallMenu = styled.div`
   margin-left: 75px;
   margin-bottom: 50px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 900;
   font-stretch: normal;
   font-style: normal;
   letter-spacing: -0.8px;
@@ -109,10 +118,16 @@ const ResponsiveBlock = styled.div`
 
 function MyPage() {
   const [modal, toggleModal] = useState(false);
-  const [connectionModal, toggleConnectionModal] = useState(true);
+  const [connectionModal, toggleConnectionModal] = useState(false);
   const [receivedConnectionModal, toggleReceivedConnectionModal] = useState(
     false
   );
+
+  const [postOK, setPostOK] = useState(false);
+
+  const signUpdata = useSignUp();
+  console.log(signUpdata);
+
   return (
     <>
       <PC>
@@ -124,7 +139,12 @@ function MyPage() {
           </ResponsiveBlock>
 
           <FlexBox>
-            <MyPageContent />
+            <MyPageContent
+              signUpdata={signUpdata}
+              toggleCoupleModal={() => {
+                toggleModal(!modal);
+              }}
+            />
           </FlexBox>
           <Footer />
         </div>
@@ -136,6 +156,7 @@ function MyPage() {
             close={() => {
               toggleModal(!modal);
             }}
+            setPostOK={() => setPostOK(true)}
           />
         )}
       </div>
@@ -165,7 +186,12 @@ function MyPage() {
         <Mobile>
           <MyPageH1>마이페이지</MyPageH1>
           <SmallMenu>회원 정보 수정</SmallMenu>
-          <MyPageContent />
+          <MyPageContent
+            signUpdata={signUpdata}
+            toggleCoupleModal={() => {
+              toggleModal(!modal);
+            }}
+          />
         </Mobile>
         <Footer />
       </MobileWrapper>

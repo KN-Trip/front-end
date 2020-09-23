@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Slider from "react-slick";
-import PlaceItem from "../common/PlaceItem";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Slider from 'react-slick';
+import PlaceItem from '../common/PlaceItem';
 
-import dummy_img from "../../assets/dummy_img.jpg";
+import dummy_img from '../../assets/dummy_img.jpg';
 
-import "../../css/carousel.css";
-import { Link } from "react-router-dom";
+import '../../css/carousel.css';
+import { Link } from 'react-router-dom';
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
@@ -54,122 +54,33 @@ const VerticalMargin = styled.div`
   margin-top: ${(props) => props.margin};
 `;
 
-const fakeJson = [
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-  {
-    img: dummy_img,
-    name: "서울 시립 북서울 미술관",
-    address: "서울시 노원구",
-  },
-];
-
 // Non-Selected Dot
 const nonSelectedDot = {
-  width: "12px",
-  height: "12px",
-  color: "red",
-  border: "0px",
-  borderRadius: "100%",
-  backgroundColor: "#bdbdbd",
+  width: '12px',
+  height: '12px',
+  color: 'red',
+  border: '0px',
+  borderRadius: '100%',
+  backgroundColor: '#bdbdbd',
 };
 
 // Selected Dot
 const selectedDot = {
-  width: "12px",
-  height: "12px",
-  color: "red",
-  border: "0px",
-  borderRadius: "100%",
-  backgroundColor: "#f85c5c",
+  width: '12px',
+  height: '12px',
+  color: 'red',
+  border: '0px',
+  borderRadius: '100%',
+  backgroundColor: '#f85c5c',
 };
 
-function MultipleItems() {
+function MultipleItems({ places }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const settings = {
     accessibility: false,
     focusOnSelect: false,
-    centerPadding: "50px",
+    centerPadding: '50px',
 
     dots: true,
 
@@ -214,14 +125,15 @@ function MultipleItems() {
     <>
       <PC>
         <WidthSlider {...settings}>
-          {fakeJson.map((item, idx) => (
+          {places.map((item, idx) => (
             <div className="center">
               <CardWrapper>
                 <PlaceItem
-                  id={idx}
-                  img={item.img}
-                  name={item.name}
+                  id={item.contentID}
+                  img={item.image}
+                  name={item.title}
                   address={item.address}
+                  type={item.contentTypeID}
                 />
               </CardWrapper>
             </div>
@@ -229,13 +141,14 @@ function MultipleItems() {
         </WidthSlider>
       </PC>
       <Mobile>
-        {fakeJson.map((item, idx) => (
+        {places.map((item, idx) => (
           <>
             <PlaceItem
-              id={idx}
-              img={item.img}
-              name={item.name}
+              id={item.contentID}
+              img={item.image}
+              name={item.title}
               address={item.address}
+              type={item.contentTypeID}
             />
             <VerticalMargin margin="30px" />
           </>
@@ -245,10 +158,10 @@ function MultipleItems() {
   );
 }
 
-function TestResultPlaceList() {
+function TestResultPlaceList({ places }) {
   return (
     <>
-      <MultipleItems />
+      <MultipleItems places={places} />
     </>
   );
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import XIcon from "../../assets/XIcon.png";
+import React from 'react';
+import styled from 'styled-components';
+import XIcon from '../../assets/XIcon.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,12 +35,10 @@ const HashTag = styled.div`
   user-select: none;
 `;
 
-const TempList = ["전체", "아무데나", "우리 집"];
-
-function TestResultHashTagList() {
+function TestResultHashTagList({ hashTags }) {
   return (
     <Wrapper>
-      {TempList.map((tag) => (
+      {hashTags.map((tag) => (
         <HashTag>
           <span>{`# ${tag}`}</span>
         </HashTag>

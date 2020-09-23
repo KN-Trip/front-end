@@ -1,18 +1,20 @@
-import React from "react";
-import styled from "styled-components";
-import Responsive from "../common/Responsive";
-import TestIndex from "./TestIndex";
-import Divider from "../common/Divider";
-import TestFilter from "./TestFilter";
-import HashTagList from "./HashTagList";
-import useTravelTest from "../../hooks/useTravelTest";
+import React from 'react';
+import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import Responsive from '../common/Responsive';
+import TestIndex from './TestIndex';
+import Divider from '../common/Divider';
+import TestFilter from './TestFilter';
+import HashTagList from './HashTagList';
+import useTravelTest from '../../hooks/useTravelTest';
 
-import * as IconLib from "../../lib/icon";
-import dropdownIco from "../../assets/dropdown-ico.png";
+import * as IconLib from '../../lib/icon';
+import dropdownIco from '../../assets/dropdown-ico.png';
 
-import { Link as ScrollLink } from "react-scroll";
-import { Element } from "react-scroll";
-import { English } from "../common/Font";
+import { Link as ScrollLink } from 'react-scroll';
+import { Element } from 'react-scroll';
+import { English } from '../common/Font';
+import usePostTest from '../../hooks/usePostTest';
 
 const PC = styled.div`
   @media (min-width: 1025px) {
@@ -54,7 +56,7 @@ const WrapperTwo = styled(Wrapper)`
 const Title = styled.h2`
   margin-bottom: 70px;
 
-  font-family: "Godo", sans-serif;
+  font-family: 'Godo', sans-serif;
   font-size: 42px;
   font-weight: bold;
   font-stretch: normal;
@@ -124,7 +126,7 @@ const StepButton = styled.div`
 const QuestionH3 = styled.h3`
   margin-bottom: 26px;
 
-  font-family: "Godo", sans-serif;
+  font-family: 'Godo', sans-serif;
   font-size: 25px;
   font-weight: bold;
   font-stretch: normal;
@@ -265,10 +267,19 @@ function TravelTendancyTest() {
     2
   );
 
+  const {
+    TEST,
+    TEST_loading,
+    TEST_error,
+    onPostTestRequest,
+    login,
+  } = usePostTest();
+  const history = useHistory();
+
   const showHashTagListIfExist = (checked, testNum) => {
     if (checked > 0) {
       return (
-        <div style={{ width: "100%" }}>
+        <div style={{ width: '100%' }}>
           <Divider />
           <VerticalMargin margin="30px" />
           <HashTagList index={testNum} />
@@ -291,7 +302,7 @@ function TravelTendancyTest() {
 
             <TemplateBox>
               <English>
-                <StepButton>{`STEP 01`}</StepButton>
+                <StepButton>{`Step 01`}</StepButton>
               </English>
               <QuestionH3>{titleOne}</QuestionH3>
               <Description>{descOne}</Description>
@@ -330,7 +341,7 @@ function TravelTendancyTest() {
             </Element>
             <TemplateBox>
               <English>
-                <StepButton>{`STEP 02`}</StepButton>
+                <StepButton>{`Step 02`}</StepButton>
               </English>
               <QuestionH3>{titleTwo}</QuestionH3>
               <Description>{descTwo}</Description>
@@ -348,8 +359,17 @@ function TravelTendancyTest() {
                 </English>
                 <English>
                   <ColorStyledButton
-                    onClick={() => {
-                      alert("아래로 이동");
+                    onClick={async () => {
+                      await onPostTestRequest();
+                      if (login) {
+                        if (
+                          window.confirm(
+                            '검사를 완료했습니다.\n결과를 확인하시겠습니까?'
+                          )
+                        ) {
+                          history.push('/tripinfo');
+                        }
+                      }
                     }}
                   >
                     Next
@@ -369,7 +389,7 @@ function TravelTendancyTest() {
         <TestIndex index={indexOne} />
         <TemplateBox>
           <English>
-            <StepButton>{`STEP 01`}</StepButton>
+            <StepButton>{`Step 01`}</StepButton>
           </English>
           <QuestionH3>{titleOne}</QuestionH3>
           <Description>{descOne}</Description>
@@ -382,7 +402,7 @@ function TravelTendancyTest() {
           </SelectStatus>
           <TestFilter index={indexOne} />
           <Info>* 최대 3개까지 선택 가능합니다.</Info>
-          <div style={{ width: "100%" }}>
+          <div style={{ width: '100%' }}>
             {showHashTagListIfExist(checkedOne, indexOne)}
           </div>
           <VerticalMargin margin="30px" />
@@ -408,7 +428,7 @@ function TravelTendancyTest() {
         <TestIndex index={indexTwo} />
         <TemplateBox>
           <English>
-            <StepButton>{`STEP 02`}</StepButton>
+            <StepButton>{`Step 02`}</StepButton>
           </English>
           <QuestionH3>{titleTwo}</QuestionH3>
           <Description>{descTwo}</Description>
@@ -421,12 +441,27 @@ function TravelTendancyTest() {
           </SelectStatus>
           <TestFilter index={indexTwo} />
           <Info>* 최대 5개까지 선택 가능합니다.</Info>
-          <div style={{ width: "100%" }}>
+          <div style={{ width: '100%' }}>
             {showHashTagListIfExist(checkedTwo, indexTwo)}
           </div>
           <VerticalMargin margin="30px" />
           <English>
-            <ColorStyledButton>Next</ColorStyledButton>
+            <ColorStyledButton
+              onClick={async () => {
+                await onPostTestRequest();
+                if (login) {
+                  if (
+                    window.confirm(
+                      '검사를 완료했습니다.\n결과를 확인하시겠습니까?'
+                    )
+                  ) {
+                    history.push('/tripinfo');
+                  }
+                }
+              }}
+            >
+              Next
+            </ColorStyledButton>
           </English>
           <VerticalMargin margin="20px" />
           <English>
