@@ -186,7 +186,11 @@ function TestResult() {
                 <ResultText>
                   <TextOne>서로의 해시태그를 분석한 결과!</TextOne>
                   <TextTwo>
-                    <StrongWord>{`총 ${tripinfo.tripinfo_data.totalCount}개`}</StrongWord>
+                    <StrongWord>{`총 ${
+                      tripinfo.tripinfo_data.totalCount >= 100
+                        ? '100개 이상'
+                        : String(tripinfo.tripinfo_data.totalCount) + '개'
+                    }`}</StrongWord>
                     의 <StrongWord>장소</StrongWord>를
                     <StrongWord> 발견했습니다!</StrongWord>
                   </TextTwo>
@@ -241,7 +245,11 @@ function TestResult() {
             <ResultText>
               해시태그를 분석한 결과!
               <br />
-              {`총 ${tripinfo.tripinfo_data.totalCount}개의 장소를`}
+              {`총 ${
+                tripinfo.tripinfo_data.totalCount >= 100
+                  ? '100개 이상'
+                  : String(tripinfo.tripinfo_data.totalCount) + '개'
+              }의 장소를`}
               <br />
               발견했습니다!
             </ResultText>
@@ -252,7 +260,11 @@ function TestResult() {
             <Divider />
             <VerticalMargin margin="30px" />
             <FilterWrapper>
-              <div>{`총 ${tripinfo.tripinfo_data.totalCount}개`}</div>
+              <div>{`총 ${
+                tripinfo.tripinfo_data.totalCount >= 100
+                  ? '100+'
+                  : tripinfo.tripinfo_data.totalCount
+              }개`}</div>
               <FilterWrapper>
                 <FilterDiv
                   checked={tripinfo.filterNum === 0}
