@@ -14,6 +14,8 @@ import * as IconLib from '../lib/icon';
 import useLogin from '../hooks/useLogin';
 import useLogout from '../hooks/useLogout';
 
+import { useHistory } from 'react-router-dom';
+
 const MobileHeader = styled.div`
   @media (min-width: 1025px) {
     display: none;
@@ -284,7 +286,7 @@ const NavContentWrapper = styled.div`
 
 function Header() {
   const [nav, toggleNav] = useState(false);
-
+  const history = useHistory();
   const [
     login,
     login_loading,
@@ -388,7 +390,8 @@ function Header() {
                                 ) {
                                   clearLogin();
                                   await logoutRequest();
-                                  window.location.reload(true);
+                                  toggleProfile(!profile);
+                                  window.open('http://kntrip.me', '_self');
                                 }
                               }}
                             >
@@ -422,7 +425,13 @@ function Header() {
         <HeaderWrapper>
           <Responsive>
             <HeaderContent>
-              <Logo width={174} height={60} />
+              <Logo
+                width={174}
+                height={60}
+                onClick={() => {
+                  window.open('http://kntrip.me', '_self');
+                }}
+              />
               <MenuList>
                 <StyleNavLink exact to="/" activeStyle={NavItemActiveStyle}>
                   <MenuItem>소개</MenuItem>
@@ -491,8 +500,9 @@ function Header() {
                           if (window.confirm('정말 로그아웃 하시겠습니까?')) {
                             clearLogin();
                             await logoutRequest();
+                            toggleProfile(!profile);
 
-                            window.location.reload(true);
+                            window.open('http://kntrip.me', '_self');
                           }
                         }}
                       >
