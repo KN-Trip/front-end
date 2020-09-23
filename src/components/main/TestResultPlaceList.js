@@ -113,7 +113,18 @@ function MultipleItems({ places }) {
     arrows: false,
 
     customPaging: (i) => {
-      return 5 * i === currentSlide ? (
+      return (function () {
+        if (window.innerWidth > 1700) {
+          return 5;
+        }
+
+        if (window.innerWidth > 1333) {
+          return 4;
+        }
+        return 3;
+      })() *
+        i ===
+        currentSlide ? (
         <div style={selectedDot} />
       ) : (
         <div style={nonSelectedDot} />
