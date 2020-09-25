@@ -128,12 +128,7 @@ function PlaceItem({ img, name, address, id, type }) {
   return (
     <Wrapper>
       <OneMoreWrapper>
-        <PlaceImage src={img}>
-          <ImgWrapper>
-            <ClickImageIcon src={love_blank} alt="loveIcon" />
-            <ClickImageIcon src={share} alt="shareIcon" />
-          </ImgWrapper>
-        </PlaceImage>
+        <PlaceImage src={img}></PlaceImage>
 
         <PlaceName>
           <StyledLink

@@ -9,6 +9,8 @@ import ReceiveConnectionModal from '../components/common/ReceiveConnectionModal'
 import { useState } from 'react';
 import MakeConnectionModal from '../components/common/MakeConnectionModal';
 import useSignUp from '../hooks/useSignUp';
+import useLogin from '../hooks/useLogin';
+import { useHistory } from 'react-router-dom';
 
 const PC = styled.div`
   @media (min-width: 1025px) {
@@ -123,10 +125,25 @@ function MyPage() {
     false
   );
 
+  const [
+    login,
+    login_loading,
+    login_error,
+    loginRequest,
+    nickname,
+    onClearLogin,
+  ] = useLogin();
+
   const [postOK, setPostOK] = useState(false);
 
+  const history = useHistory();
+
   const signUpdata = useSignUp();
-  console.log(signUpdata);
+
+  if (!login) {
+    alert('로그인 하신 뒤에 이용해 주세요.');
+    history.push('/login');
+  }
 
   return (
     <>
@@ -144,6 +161,7 @@ function MyPage() {
               toggleCoupleModal={() => {
                 toggleModal(!modal);
               }}
+              nickname={nickname}
             />
           </FlexBox>
           <Footer />
@@ -191,6 +209,7 @@ function MyPage() {
             toggleCoupleModal={() => {
               toggleModal(!modal);
             }}
+            nickname={nickname}
           />
         </Mobile>
         <Footer />

@@ -145,7 +145,7 @@ const ProfileName = styled.span`
   display: block;
 
   font-size: 25px;
-  font-weight: bold;
+  font-weight: 900;
   font-stretch: normal;
   font-style: normal;
   line-height: 2.64;
@@ -240,28 +240,43 @@ const Center = styled.div`
   justify-content: center;
 `;
 
-export default function Mypagecontent({ signUpdata, toggleCoupleModal }) {
+const ProfileCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export default function Mypagecontent({
+  signUpdata,
+  toggleCoupleModal,
+  nickname,
+}) {
   const mypage = useMyPage();
 
-  console.log(toggleCoupleModal);
+  console.log('nickname', nickname);
 
   useEffect(() => {
     mypage.basketRequest();
     mypage.searchRequest();
   }, []);
 
+  if (mypage.newinfo) {
+    alert('정보 변경을 완료했습니다.\n다시 로그인 해주세요.');
+    window.location.href = 'http://kntrip.me/login';
+  }
+
   return (
     <div style={{ width: '100%' }}>
       <PC>
         <ResponsiveBlock>
           <Box>
-            <div>
+            <ProfileCenter>
               <ProfileWrapper>
                 {IconLib.getImgIcon(profile, 55, 55)}
               </ProfileWrapper>
               <VerticalMargin margin="30px" />
-              <ProfileName>랄라랄라님</ProfileName>
-            </div>
+              <ProfileName>{`${nickname}님`}</ProfileName>
+            </ProfileCenter>
 
             <HorizontalMargin margin="57px" />
             <VerticalDivider />
@@ -382,7 +397,7 @@ export default function Mypagecontent({ signUpdata, toggleCoupleModal }) {
               {IconLib.getImgIcon(profile, 55, 55)}
             </ProfileWrapper>
             <VerticalMargin margin="30px" />
-            <ProfileName>랄라랄라님</ProfileName>
+            <ProfileName>{`${nickname}님`}</ProfileName>
           </ProfileWrapperArranger>
 
           <VerticalMargin margin="50px" />

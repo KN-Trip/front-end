@@ -78,12 +78,13 @@ export const getSearchPlace = () => {
 };
 
 export const putChangeInfo = (updateObject) => {
-  return axios.put(`${baseURL}/my-info/change-info`, {
-    data: {
+  return axios.put(
+    `${baseURL}/my-info/change-info`,
+    {
       updateObject,
     },
-    withCredentials: true,
-  });
+    { withCredentials: true }
+  );
 };
 
 //GET EVENT
@@ -126,7 +127,6 @@ export const postBasket = (contentID) => {
   );
 };
 
-// Area Code 없어서 불가능(노원구 근처 숙소)
 export const getStayPlace = (areaCode, nowContentId) => {
   return axios.get(`${baseURL}/trip-info/stay`, {
     params: {
@@ -137,7 +137,6 @@ export const getStayPlace = (areaCode, nowContentId) => {
   });
 };
 
-//Area Code 없어서 불가능 (노원구 핫한 여행지)
 export const getHotPlace = (areaCode, nowContentId) => {
   return axios.get(`${baseURL}/trip-info/area`, {
     params: {
@@ -146,13 +145,4 @@ export const getHotPlace = (areaCode, nowContentId) => {
     },
     withCredentials: true,
   });
-};
-
-//Not Done
-export const naverLogin = () => {
-  return axios.get(`${baseURL}/login/naver`);
-};
-
-export const kakaoLogin = () => {
-  return axios.get(`${baseURL}/login/kakao`);
 };

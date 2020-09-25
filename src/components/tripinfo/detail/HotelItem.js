@@ -23,6 +23,7 @@ const Mobile = styled.div`
   @media (max-width: 1024px) {
     display: block;
     width: 100%;
+
     box-sizing: border-box;
   }
 `;
@@ -52,14 +53,14 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 1024px) {
-    display: block;
-
-    padding: 20px;
     width: 100%;
     height: auto;
-
-    box-sizing: border-box;
   }
+`;
+
+const OneMoreWrapper = styled.div`
+  width: 100%;
+  height: 100%;
 `;
 
 const PlaceImage = styled.div`
@@ -169,12 +170,7 @@ export default function Hotelitem({ place }) {
     <>
       <PC>
         <Wrapper>
-          <PlaceImage src={place.image}>
-            <ImgWrapper>
-              <ClickImageIcon src={love_blank} alt="loveIcon" />
-              <ClickImageIcon src={share} alt="shareIcon" />
-            </ImgWrapper>
-          </PlaceImage>
+          <PlaceImage src={place.image}></PlaceImage>
 
           <HorizontalMargin margin="70px" />
 
@@ -216,7 +212,7 @@ export default function Hotelitem({ place }) {
                 <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
                 <HorizontalMargin margin="12px" />
                 <StyledSpan>
-                  체크인
+                  {'체크인 '}
                   <NotBoldStyledSpan>{place.checkInTime}</NotBoldStyledSpan>
                 </StyledSpan>
               </VerticalCenterDiv>
@@ -229,7 +225,7 @@ export default function Hotelitem({ place }) {
                 <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
                 <HorizontalMargin margin="12px" />
                 <StyledSpan>
-                  체크아웃
+                  {'체크아웃 '}
                   <NotBoldStyledSpan>{place.checkOutTime}</NotBoldStyledSpan>
                 </StyledSpan>
               </VerticalCenterDiv>
@@ -259,58 +255,60 @@ export default function Hotelitem({ place }) {
             );
           }}
         >
-          <PlaceImage src={place.image} />
-          <Name>{place.title}</Name>
-          <VerticalMargin margin="14px" />
-          <VerticalCenterDiv>
-            <div>{IconLib.getImgIcon(marker, 24, 24)}</div>
-            <HorizontalMargin margin="12px" />
-            <StyledSpan>{place.address}</StyledSpan>
-          </VerticalCenterDiv>
-          <VerticalMargin margin="20px" />
-          <Divider />
-          <VerticalMargin margin="20px" />
-          <div>
+          <OneMoreWrapper>
+            <PlaceImage src={place.image} />
+            <Name>{place.title}</Name>
+            <VerticalMargin margin="14px" />
             <VerticalCenterDiv>
-              <div>{IconLib.getImgIcon(parkingIco, 24, 24)}</div>
+              <div>{IconLib.getImgIcon(marker, 24, 24)}</div>
               <HorizontalMargin margin="12px" />
-              <StyledSpan>{`주차 ${
-                place.parkAvailable ? '' : '불'
-              }가능`}</StyledSpan>
+              <StyledSpan>{place.address}</StyledSpan>
             </VerticalCenterDiv>
+            <VerticalMargin margin="20px" />
+            <Divider />
+            <VerticalMargin margin="20px" />
+            <div>
+              <VerticalCenterDiv>
+                <div>{IconLib.getImgIcon(parkingIco, 24, 24)}</div>
+                <HorizontalMargin margin="12px" />
+                <StyledSpan>{`주차 ${
+                  place.parkAvailable ? '' : '불'
+                }가능`}</StyledSpan>
+              </VerticalCenterDiv>
+
+              <VerticalMargin margin="20px" />
+
+              <VerticalCenterDiv>
+                <div>{IconLib.getImgIcon(wifiIco, 24, 24)}</div>
+                <HorizontalMargin margin="12px" />
+                <StyledSpan>와이파이</StyledSpan>
+              </VerticalCenterDiv>
+
+              <VerticalMargin margin="20px" />
+
+              <VerticalCenterDiv>
+                <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
+                <HorizontalMargin margin="12px" />
+                <StyledSpan>
+                  {'체크인 '}
+                  <NotBoldStyledSpan>{place.checkInTime}</NotBoldStyledSpan>
+                </StyledSpan>
+              </VerticalCenterDiv>
+
+              <VerticalMargin margin="20px" />
+
+              <VerticalCenterDiv>
+                <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
+                <HorizontalMargin margin="12px" />
+                <StyledSpan>
+                  {'체크아웃 '}
+                  <NotBoldStyledSpan>{place.checkOutTime}</NotBoldStyledSpan>
+                </StyledSpan>
+              </VerticalCenterDiv>
+            </div>
 
             <VerticalMargin margin="20px" />
-
-            <VerticalCenterDiv>
-              <div>{IconLib.getImgIcon(wifiIco, 24, 24)}</div>
-              <HorizontalMargin margin="12px" />
-              <StyledSpan>와이파이</StyledSpan>
-            </VerticalCenterDiv>
-
-            <VerticalMargin margin="20px" />
-
-            <VerticalCenterDiv>
-              <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
-              <HorizontalMargin margin="12px" />
-              <StyledSpan>
-                체크인{' '}
-                <NotBoldStyledSpan>{place.checkInTime}</NotBoldStyledSpan>
-              </StyledSpan>
-            </VerticalCenterDiv>
-
-            <VerticalMargin margin="20px" />
-
-            <VerticalCenterDiv>
-              <div>{IconLib.getImgIcon(timeIco, 24, 24)}</div>
-              <HorizontalMargin margin="12px" />
-              <StyledSpan>
-                체크아웃{' '}
-                <NotBoldStyledSpan>{place.checkOutTime}</NotBoldStyledSpan>
-              </StyledSpan>
-            </VerticalCenterDiv>
-          </div>
-
-          <VerticalMargin margin="20px" />
+          </OneMoreWrapper>
         </Wrapper>
       </Mobile>
     </>

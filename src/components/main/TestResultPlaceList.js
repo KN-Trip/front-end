@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import PlaceItem from '../common/PlaceItem';
 
+import arrowDownIco from '../../assets/arrow-down-ico.png';
 import dummy_img from '../../assets/dummy_img.jpg';
 
 import '../../css/carousel.css';
 import { Link } from 'react-router-dom';
+
+import { getImgIcon } from '../../lib/icon';
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
@@ -54,6 +57,25 @@ const VerticalMargin = styled.div`
   margin-top: ${(props) => props.margin};
 `;
 
+const MoreWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 16px;
+
+  letter-spacing: -0.64px;
+  color: #757575;
+
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
+const MoreText = styled.div`
+  margin-right: 12px;
+`;
+const MoreIcon = styled.div``;
+
 // Non-Selected Dot
 const nonSelectedDot = {
   width: '12px',
@@ -76,7 +98,11 @@ const selectedDot = {
 
 function MultipleItems({ places }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [moreInfo, setMoreInfo] = useState(5);
 
+  useEffect(() => {
+    setMoreInfo(places.length < 5 ? places.length : 5);
+  }, []);
   const settings = {
     accessibility: false,
     focusOnSelect: false,
@@ -152,7 +178,7 @@ function MultipleItems({ places }) {
         </WidthSlider>
       </PC>
       <Mobile>
-        {places.map((item, idx) => (
+        {places.slice(0, moreInfo).map((item, idx) => (
           <>
             <PlaceItem
               id={item.contentID}
@@ -164,6 +190,21 @@ function MultipleItems({ places }) {
             <VerticalMargin margin="30px" />
           </>
         ))}
+
+        {places.length > 5 && moreInfo < places.length && (
+          <div
+            onClick={() => {
+              const nextIndex =
+                moreInfo + 5 < places.length ? moreInfo + 5 : places.length;
+              setMoreInfo(nextIndex);
+            }}
+          >
+            <MoreWrapper>
+              <MoreText>더 보기</MoreText>
+              <MoreIcon>{getImgIcon(arrowDownIco, 24, 24)}</MoreIcon>
+            </MoreWrapper>
+          </div>
+        )}
       </Mobile>
     </>
   );

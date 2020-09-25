@@ -184,6 +184,7 @@ function Dots({ slide, setSlide }) {
 export default function ClickedTourPlace({ places }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slider = useRef();
+  const mobileSlider = useRef();
 
   const settings = {
     accessibility: false,
@@ -282,11 +283,9 @@ export default function ClickedTourPlace({ places }) {
             </div>
           )}
 
-          {places && (
-            <div>
-              <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-            </div>
-          )}
+          <div>
+            <Dots slide={currentSlide} setSlide={setCurrentSlide} />
+          </div>
         </Wrapper>
       </PC>
 
@@ -294,7 +293,7 @@ export default function ClickedTourPlace({ places }) {
         <Title>최근 조회한 여행지</Title>
         {places && (
           <div>
-            <WidthSlider ref={slider} {...mobileSettings}>
+            <WidthSlider ref={mobileSlider} {...mobileSettings}>
               {places &&
                 places.map((item, idx) => (
                   <div className="center">

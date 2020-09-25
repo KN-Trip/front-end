@@ -326,8 +326,8 @@ export default function HotPlace({ contentId, areaCode }) {
                   <CardWrapper>
                     <PlaceItem
                       id={idx}
-                      img={item.img}
-                      name={item.name}
+                      img={item.image}
+                      name={item.title}
                       address={item.address}
                     />
                   </CardWrapper>

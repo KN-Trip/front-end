@@ -24,14 +24,6 @@ const POST_COUPLE = 'signup/POST_COUPLE';
 const POST_COUPLE_SUCCESS = 'signup/POST_COUPLE_SUCCESS';
 const POST_COUPLE_FAILURE = 'signup/POST_COUPLE_FAILURE';
 
-const NAVER_LOGIN = 'signup/NAVER_LOGIN';
-const NAVER_LOGIN_SUCCESS = 'signup/NAVER_LOGIN_SUCCESS';
-const NAVER_LOGIN_FAILURE = 'signup/NAVER_LOGIN_FAILURE';
-
-const KAKAO_LOGIN = 'signup/KAKAO_LOGIN';
-const KAKAO_LOGIN_SUCCESS = 'signup/KAKAO_LOGIN_SUCCESS';
-const KAKAO_LOGIN_FAILURE = 'signup/KAKAO_LOGIN_FAILURE';
-
 export const setStep = (step) => ({
   type: SET_STEP,
   step,
@@ -113,34 +105,6 @@ export const postCoupleRequest = (index, option) => async (dispatch) => {
   }
 };
 
-export const getNaverLogin = () => async (dispatch) => {
-  dispatch({ type: NAVER_LOGIN });
-  try {
-    const res = await api.naverLogin(); // API 호출
-    if (res.data) {
-      dispatch({ type: NAVER_LOGIN_SUCCESS, data: res.data }); // 성공
-    } else {
-      dispatch({ type: NAVER_LOGIN_FAILURE });
-    }
-  } catch (e) {
-    dispatch({ type: NAVER_LOGIN_FAILURE, res_error: e });
-  }
-};
-
-export const getKakaoLogin = () => async (dispatch) => {
-  dispatch({ type: KAKAO_LOGIN });
-  try {
-    const res = await api.kakaoLogin(); // API 호출
-    if (res.data) {
-      dispatch({ type: KAKAO_LOGIN_SUCCESS, data: res.data }); // 성공
-    } else {
-      dispatch({ type: KAKAO_LOGIN_FAILURE });
-    }
-  } catch (e) {
-    dispatch({ type: KAKAO_LOGIN_FAILURE, res_error: e });
-  }
-};
-
 const initialState = {
   step: 1,
 
@@ -170,16 +134,6 @@ const initialState = {
   postCouple: false,
   postCouple_loading: false,
   postCouple_error: null,
-
-  naverlogin: false,
-  naverlogin_loading: false,
-  naverlogin_error: null,
-  naverlogin_data: null,
-
-  kakaologin: false,
-  kakaologin_loading: false,
-  kakaologin_error: null,
-  kakaologin_data: null,
 };
 
 export default function signup(state = initialState, action) {
@@ -303,46 +257,6 @@ export default function signup(state = initialState, action) {
       return {
         ...state,
         radio: !state.radio,
-      };
-
-    case NAVER_LOGIN:
-      return {
-        ...state,
-        naverlogin_loading: true,
-      };
-
-    case NAVER_LOGIN_SUCCESS:
-      return {
-        ...state,
-        naverlogin_loading: false,
-        naverlogin_data: action.data,
-      };
-
-    case NAVER_LOGIN_FAILURE:
-      return {
-        ...state,
-        naverlogin_loading: false,
-        naverlogin_error: action.res_error,
-      };
-
-    case KAKAO_LOGIN:
-      return {
-        ...state,
-        kakaologin_loading: true,
-      };
-
-    case KAKAO_LOGIN_SUCCESS:
-      return {
-        ...state,
-        kakaologin_loading: false,
-        kakaologin_data: action.data,
-      };
-
-    case KAKAO_LOGIN_FAILURE:
-      return {
-        ...state,
-        kakaologin_loading: false,
-        kakaologin_error: action.res_error,
       };
 
     default:
