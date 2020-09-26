@@ -67,8 +67,8 @@ const MoreWrapper = styled.div`
   letter-spacing: -0.64px;
   color: #757575;
 
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 43px;
+  margin-bottom: 171px;
 `;
 
 const MoreText = styled.div`

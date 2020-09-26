@@ -213,8 +213,8 @@ const IDStyledTh = styled(StyledTh)`
 `;
 const StyledTd = styled.td`
   padding-left: 32px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+
+  height: 60px;
   box-sizing: border-box;
   font-size: 16px;
   font-weight: bold;
@@ -226,15 +226,31 @@ const StyledTd = styled.td`
 
   @media (max-width: 1024px) {
     padding-left: 0px;
-    padding-top: 18px;
-    padding-bottom: 18px;
+
     font-size: 14px;
+
+    height: 50px;
+
+    padding-top: 0;
+    padding-bottom: 0;
   }
 `;
 
 const FlexBox = styled.div`
   display: flex;
   align-items: center;
+
+  height: 100%;
+`;
+
+const NewFlexBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const TableFlexBox = styled(FlexBox)`
+  position: relative;
+  top: -5px;
 `;
 
 const VerticalMargin = styled.div`
@@ -294,7 +310,7 @@ export default function ShowRedundantID({ close, setPostOK }) {
             <Content>
               <ShowCntOfIDBanner>
                 상대방 정보와 일치하는 아이디를
-                <Strong>{redundantList.length}개 </Strong> 발견했습니다.
+                <Strong>{` ${redundantList.length}개 `}</Strong> 발견했습니다.
               </ShowCntOfIDBanner>
               <TableWrapper>
                 <StyledTable>
@@ -319,14 +335,26 @@ export default function ShowRedundantID({ close, setPostOK }) {
                           </English>
                         </FlexBox>
                       </StyledTd>
-                      <StyledTd>{v.nickname}</StyledTd>
-                      <StyledTd>{v.created_at.split('T')[0]}</StyledTd>
+                      <StyledTd>
+                        <TableFlexBox>
+                          <div>{v.nickname}</div>
+                          <HorizontalMargin margin="0px" />
+                        </TableFlexBox>
+                      </StyledTd>
+
+                      <StyledTd>
+                        <TableFlexBox>
+                          <div>{v.created_at.split('T')[0]}</div>
+                          <HorizontalMargin margin="0px" />
+                        </TableFlexBox>
+                      </StyledTd>
                     </StyledTr>
                   ))}
                 </StyledTable>
               </TableWrapper>
             </Content>
-            <FlexBox>
+
+            <NewFlexBox>
               <HorizontalMargin margin="auto" />
               <PlainButton onClick={close}>취소</PlainButton>
               <HorizontalMargin margin="20px" />
@@ -334,6 +362,7 @@ export default function ShowRedundantID({ close, setPostOK }) {
                 onClick={async () => {
                   if (window.confirm(`커플 요청을 보내시겠습니까?`)) {
                     await postCouple(redundantList[index].id, true);
+                    alert('커플 요청이 완료되었습니다.');
                     setPostOK();
                     close();
                   }
@@ -341,7 +370,7 @@ export default function ShowRedundantID({ close, setPostOK }) {
               >
                 확인
               </StyledButton>
-            </FlexBox>
+            </NewFlexBox>
           </Modal>
         </Background>
       </PC>
@@ -379,8 +408,20 @@ export default function ShowRedundantID({ close, setPostOK }) {
                         </English>
                       </FlexBox>
                     </StyledTd>
-                    <StyledTd>{v.nickname}</StyledTd>
-                    <StyledTd>{v.created_at.split('T')[0]}</StyledTd>
+
+                    <StyledTd>
+                      <TableFlexBox>
+                        <div>{v.nickname}</div>
+                        <HorizontalMargin margin="0px" />
+                      </TableFlexBox>
+                    </StyledTd>
+
+                    <StyledTd>
+                      <TableFlexBox>
+                        <div>{v.created_at.split('T')[0]}</div>
+                        <HorizontalMargin margin="0px" />
+                      </TableFlexBox>
+                    </StyledTd>
                   </StyledTr>
                 ))}
               </StyledTable>

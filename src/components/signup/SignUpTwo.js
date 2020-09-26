@@ -167,83 +167,42 @@ function SignUpTwo({ setStep }) {
     <>
       <PC>
         <Wrapper>
-          <CoupleIDWrapper>
-            <CoupleIDLabel>상대방 아이디</CoupleIDLabel>
-            <CoupleIDInput
-              placeholder="상대방 아이디를 입력해주세요."
-              name="targetID"
-              value={singUpdata.targetID}
-              onChange={singUpdata.onChangeInput}
-            />
-          </CoupleIDWrapper>
           <Description>
             서로의 해시태그를 분석하여 최적화된 여행지를 알려드리기 위해
-            <br /> 상대방의 아이디가 필요합니다. 필요로 하지 않으실 경우 건너뛸
-            수 있습니다.
+            <br /> 상대방의 아이디가 필요합니다.
+            <br />
+            회원가입을 한 뒤, 마이페이지에서 커플을 등록하세요.
           </Description>
 
           <ButtonWrapper>
-            <Button
+            <ColorButton
               onClick={async () => {
                 await singUpdata.postSignUp();
               }}
             >
-              건너뛰기
-            </Button>
-            <ColorButton
-              onClick={async () => {
-                if (!postOK) {
-                  await singUpdata.candidateRequest();
-                  setIsOn(true);
-                } else {
-                  setStep(3);
-                }
-              }}
-            >
-              연결하기
+              확인
             </ColorButton>
           </ButtonWrapper>
         </Wrapper>
       </PC>
 
       <Mobile>
-        <CoupleIDWrapper>
-          <CoupleIDLabel>상대방 아이디</CoupleIDLabel>
-          <CoupleIDInput
-            placeholder="상대방 아이디를 입력해주세요."
-            name="targetID"
-            value={singUpdata.targetID}
-            onChange={singUpdata.onChangeInput}
-          />
-        </CoupleIDWrapper>
         <Description>
-          서로의 해시태그를 분석하여 최적화된 여행지를
-          <br /> 알려드리기 위해 상대방의 아이디가 필요합니다. <br /> 필요로
-          하지 않으실 경우 건너뛸 수 있습니다.
+          서로의 해시태그를 분석하여
+          <br /> 최적화된 여행지를 알려드리기 위해
+          <br /> 상대방의 아이디가 필요합니다.
+          <br />
+          회원가입을 한 뒤, 마이페이지에서 커플을 등록하세요.
         </Description>
 
         <ButtonWrapper>
           <ColorButton
             onClick={async () => {
-              if (!postOK) {
-                await singUpdata.candidateRequest();
-                setIsOn(true);
-                console.log('asdf');
-              } else {
-                setStep(3);
-              }
-            }}
-          >
-            연결하기
-          </ColorButton>
-
-          <Button
-            onClick={async () => {
               await singUpdata.postSignUp();
             }}
           >
-            건너뛰기
-          </Button>
+            확인
+          </ColorButton>
         </ButtonWrapper>
       </Mobile>
 

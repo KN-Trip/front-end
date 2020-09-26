@@ -282,10 +282,11 @@ export default function ClickedTourPlace({ places }) {
               </WidthSlider>
             </div>
           )}
-
-          <div>
-            <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-          </div>
+          {places && (
+            <div>
+              <Dots slide={currentSlide} setSlide={setCurrentSlide} />
+            </div>
+          )}
         </Wrapper>
       </PC>
 
