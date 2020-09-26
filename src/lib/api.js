@@ -42,12 +42,12 @@ export const getCandidateID = (id) => {
   });
 };
 
-export const postCouple = (targetId, connectionOption) => {
+export const postCouple = (targetId, connectOption) => {
   return axios.post(
     `${baseURL}/my-info/post-event`,
     {
       targetId,
-      connectionOption,
+      connectOption,
     },
     { withCredentials: true }
   );

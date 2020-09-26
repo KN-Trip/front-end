@@ -172,6 +172,8 @@ function SignUpTwo({ setStep }) {
             <br /> 상대방의 아이디가 필요합니다.
             <br />
             회원가입을 한 뒤, 마이페이지에서 커플을 등록하세요.
+            <br />
+            (커플 등록을 하지 않더라도 서비스 이용 가능합니다.)
           </Description>
 
           <ButtonWrapper>
@@ -193,6 +195,8 @@ function SignUpTwo({ setStep }) {
           <br /> 상대방의 아이디가 필요합니다.
           <br />
           회원가입을 한 뒤, 마이페이지에서 커플을 등록하세요.
+          <br />
+          (커플 등록을 하지 않더라도 서비스 이용 가능합니다.)
         </Description>
 
         <ButtonWrapper>
