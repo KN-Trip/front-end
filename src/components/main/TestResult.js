@@ -107,7 +107,7 @@ const TextTwo = styled.span`
 
 const StrongWord = styled.strong`
   font-weight: bold;
-  color: black;
+  color: #173147;
 `;
 
 const BlankDiv = styled.div`

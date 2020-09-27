@@ -114,7 +114,7 @@ const KoreanName = styled.h2`
 
   font-family: 'Godo', sans-serif;
   font-size: 42px;
-  font-weight: normal;
+  font-weight: 700;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.57;
@@ -202,7 +202,7 @@ const SubTitle = styled.h2`
   margin-bottom: 30px;
 
   font-size: 21px;
-  font-weight: bold;
+  font-weight: 900;
   font-stretch: normal;
   font-style: normal;
 

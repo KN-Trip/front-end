@@ -75,6 +75,8 @@ const MenuItem = styled.li`
 
   @media (max-width: 1024px) {
     margin-left: 0;
+    font-family: 'NanumSquare', sans-serif !important;
+    font-size: 16px;
   }
 
   &:hover {
@@ -264,7 +266,7 @@ const MobileProfileWrapper = styled.div`
 `;
 
 const MobileLogoutText = styled.span`
-  font-size: 1.25rem;
+  font-size: 16px;
   font-stretch: normal;
   font-style: normal;
   font-weight: 700;

@@ -74,7 +74,7 @@ const Title = styled.div`
   margin-right: 40px;
   font-family: 'Godo', sans-serif;
   font-size: 42px;
-  font-weight: normal;
+  font-weight: 700;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.57;

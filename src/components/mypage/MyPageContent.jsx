@@ -361,8 +361,9 @@ export default function Mypagecontent({
 
               <ExplainCouple>
                 서로의 해시태그를 분석하여 최적화된 여행지를 알려드리기 위해
-                상대방의 아이디가 필요합니다. 필요로 하지 않으실 경우 건너뛸 수
-                있습니다.
+                상대방의 아이디가 필요합니다.
+                <br />
+                필요로 하지 않으실 경우 건너뛸 수 있습니다.
               </ExplainCouple>
             </div>
           </Box>
@@ -387,7 +388,7 @@ export default function Mypagecontent({
                 toggleCoupleModal();
               }}
             >
-              수정하기
+              연결하기
             </StyledButton>
           </FlexBox>
 
