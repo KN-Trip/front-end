@@ -169,6 +169,22 @@ function MyPage() {
         </div>
       </PC>
 
+      <MobileWrapper>
+        <Header />
+        <Mobile>
+          <MyPageH1>마이페이지</MyPageH1>
+          <SmallMenu>회원 정보 수정</SmallMenu>
+          <MyPageContent
+            signUpdata={signUpdata}
+            toggleCoupleModal={() => {
+              toggleConnectionModal(!connectionModal);
+            }}
+            nickname={nickname}
+          />
+        </Mobile>
+        <Footer />
+      </MobileWrapper>
+
       <div>
         {connectionModal && (
           <ShowRedundantID
@@ -181,22 +197,6 @@ function MyPage() {
           />
         )}
       </div>
-
-      <MobileWrapper>
-        <Header />
-        <Mobile>
-          <MyPageH1>마이페이지</MyPageH1>
-          <SmallMenu>회원 정보 수정</SmallMenu>
-          <MyPageContent
-            signUpdata={signUpdata}
-            toggleCoupleModal={() => {
-              toggleModal(!modal);
-            }}
-            nickname={nickname}
-          />
-        </Mobile>
-        <Footer />
-      </MobileWrapper>
     </>
   );
 }

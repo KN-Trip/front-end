@@ -309,7 +309,10 @@ export default function ShowRedundantID({ close, setPostOK }) {
             <Content>
               <ShowCntOfIDBanner>
                 상대방 정보와 일치하는 아이디를
-                <Strong>{` ${redundantList.length}개 `}</Strong> 발견했습니다.
+                <Strong>
+                  {redundantList && ` ${redundantList.length}개 `}
+                </Strong>
+                발견했습니다.
               </ShowCntOfIDBanner>
               <TableWrapper>
                 <StyledTable>
