@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import * as IconLib from "../../lib/icon";
-import clearIco from "../../assets/clear.png";
+import * as IconLib from '../../lib/icon';
+import clearIco from '../../assets/clear.png';
 
-import { ButtonTemplate } from "./Button";
+import { ButtonTemplate } from './Button';
 const Background = styled.div`
   position: fixed;
   z-index: 30;
@@ -111,7 +111,7 @@ const Text = styled.div`
 `;
 
 const Strong = styled.strong`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 1000;
   color: #f85c5c;
 `;
@@ -158,7 +158,12 @@ const FlexBox = styled.div`
   }
 `;
 
-export default function ReceiveConnectionModal({ close }) {
+export default function ReceiveConnectionModal({
+  close,
+  connectionData,
+  processCouple,
+}) {
+  console.log(connectionData, processCouple);
   return (
     <>
       <PC>
@@ -169,13 +174,27 @@ export default function ReceiveConnectionModal({ close }) {
             </ClearIconWrapper>
 
             <Text>
-              <Strong>dmsgp0829</Strong> 님이 연결을 요청했습니다.
+              <Strong>{connectionData.mem_id}</Strong> 님이 연결을 요청했습니다.
               <br /> 수락 하시겠습니까?
             </Text>
 
             <FlexBox>
-              <PlainButton onClick={close}>거절하기</PlainButton>
-              <StyledButton onClick={close}>수락하기</StyledButton>
+              <PlainButton
+                onClick={async () => {
+                  await processCouple(false);
+                  close();
+                }}
+              >
+                거절하기
+              </PlainButton>
+              <StyledButton
+                onClick={async () => {
+                  await processCouple(true);
+                  close();
+                }}
+              >
+                수락하기
+              </StyledButton>
             </FlexBox>
           </Modal>
         </Background>
@@ -187,13 +206,27 @@ export default function ReceiveConnectionModal({ close }) {
               <div>{IconLib.getImgIcon(clearIco, 24, 24)}</div>
             </ClearIconWrapper>
             <Text>
-              <Strong>dmsgp0829</Strong> 님이 연결을 요청했습니다.
+              <Strong>{connectionData.mem_id}</Strong> 님이 연결을 요청했습니다.
               <br /> 수락 하시겠습니까?
             </Text>
 
             <FlexBox>
-              <StyledButton onClick={close}>수락하기</StyledButton>
-              <PlainButton onClick={close}>거절하기</PlainButton>
+              <StyledButton
+                onClick={async () => {
+                  await processCouple(true);
+                  close();
+                }}
+              >
+                수락하기
+              </StyledButton>
+              <PlainButton
+                onClick={async () => {
+                  await processCouple(false);
+                  close();
+                }}
+              >
+                거절하기
+              </PlainButton>
             </FlexBox>
           </Modal>
         </Background>

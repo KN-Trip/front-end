@@ -14,6 +14,8 @@ export default function usePostTest() {
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   const onPostTestRequest = () => {
     const place = testOne.checked.reduce((acc, cur, idx) => {
       return cur ? [...acc, testOne.name[idx]] : acc;
@@ -25,21 +27,26 @@ export default function usePostTest() {
 
     if (place.length === 0 || concept.length === 0) {
       alert('선택하지 않은 항목이 있습니다.');
-      return;
+      return false;
     }
 
     if (!login) {
       alert('로그인 하신 뒤 이용해 주세요!');
       window.location.href = './login';
-      return;
+      return false;
     }
 
-    dispatch(
-      postTESTRequest({
-        place: place,
-        concept: concept,
-      })
-    );
+    if (login) {
+      if (window.confirm('검사를 완료했습니다.\n결과를 확인하시겠습니까?')) {
+        dispatch(
+          postTESTRequest({
+            place: place,
+            concept: concept,
+          })
+        );
+        history.push('/tripinfo');
+      }
+    }
   };
 
   return {

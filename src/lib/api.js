@@ -53,6 +53,23 @@ export const postCouple = (targetId, connectOption) => {
   );
 };
 
+export const getCoupleEvent = () => {
+  return axios.get(`${baseURL}/my-info/event`, {
+    withCredentials: true,
+  });
+};
+
+// 커플 이벤트 진행하는 것 acceptOption 이 true면 수락하기, false면 거절
+export const processCoupleEvent = (acceptOption) => {
+  return axios.post(
+    `${baseURL}/my-info/process-couple`,
+    { acceptOption },
+    {
+      withCredentials: true,
+    }
+  );
+};
+
 export const getTest = () => {
   return axios.get(`${baseURL}/test/get-test`, {
     withCredentials: true,
@@ -87,11 +104,6 @@ export const putChangeInfo = (updateObject) => {
   );
 };
 
-//GET EVENT
-//PROCESS COUPLE
-
-//ALL ABOUT TRIP
-
 export const getTripInfo = (order = 0) => {
   return axios.get(`${baseURL}/trip-info`, {
     params: {
@@ -119,10 +131,10 @@ export const getRecommendedPlaces = (locationX, locationY, nowContentId) => {
   });
 };
 
-export const postBasket = (contentID) => {
+export const postBasket = (contentId) => {
   return axios.post(
     `${baseURL}/trip-info/post-basket`,
-    { contentID },
+    { contentId },
     { withCredentials: true }
   );
 };

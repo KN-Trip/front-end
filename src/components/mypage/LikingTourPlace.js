@@ -106,6 +106,10 @@ const CardWrapper = styled.div`
   }
 `;
 
+const LessThanThreeCardWrapper = styled(CardWrapper)`
+  margin: 0 10px;
+`;
+
 const ArrowImg = styled.img`
   width: 24px;
   height: 24px;
@@ -140,68 +144,37 @@ const Arrow = styled.div`
   user-select: none;
 `;
 
-const SelectedDot = styled.div`
-  width: 341px;
-  height: 5px;
+const LessThanThreeContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
 
-  background-color: #f85c5c;
+  padding-bottom: 90px;
+  box-sizing: border-box;
+
+  ::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #f85c5c;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+
+    background-clip: content-box;
+
+    background-color: #bdbdbd;
+  }
 `;
-
-const Dot = styled.div`
-  width: 341px;
-  height: 1px;
-
-  background-color: #bdbdbd;
-`;
-
-const DotContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-function Dots({ slide, setSlide }) {
-  const lengthOfJson = [0, 1, 2];
-
-  return (
-    <DotContainer>
-      {lengthOfJson.map((v, idx) => {
-        return v * 3 === slide ? (
-          <SelectedDot
-            onClick={() => {
-              setSlide(idx);
-            }}
-          />
-        ) : (
-          <Dot
-            onClick={() => {
-              setSlide(idx);
-            }}
-          />
-        );
-      })}
-    </DotContainer>
-  );
-}
 
 export default function LikingTourPlace({ places }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slider = useRef();
 
-  const settings = {
-    accessibility: false,
-    focusOnSelect: false,
-    centerPadding: '50px',
-
-    dots: false,
-
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    beforeChange: (prev, next) => {
-      setCurrentSlide(next);
-    },
-
-    arrows: false,
-  };
+  const mobileSlider = useRef();
 
   const mobileSettings = {
     accessibility: false,
@@ -228,66 +201,25 @@ export default function LikingTourPlace({ places }) {
               <HorizontalMargin margin="75px" />
               <Title>내가 찜한 여행지</Title>
             </FlexDiv>
-            {places && (
-              <FlexDiv>
-                <Arrow
-                  onClick={() => {
-                    if (currentSlide === 0) {
-                      return;
-                    }
-
-                    slider.current.slickGoTo(currentSlide - 3);
-                    setCurrentSlide(currentSlide - 3);
-                  }}
-                  num={currentSlide}
-                  direction={'left'}
-                >
-                  <ArrowImg src={LeftArrowIco} />
-                </Arrow>
-
-                <HorizontalMargin margin="20px" />
-
-                <Arrow
-                  onClick={() => {
-                    if (currentSlide === 6) {
-                      return;
-                    }
-
-                    slider.current.slickGoTo(currentSlide + 3);
-                    setCurrentSlide(currentSlide + 3);
-                  }}
-                  num={currentSlide}
-                  direction={'right'}
-                >
-                  <ArrowImg src={RightArrowIco} />
-                </Arrow>
-              </FlexDiv>
-            )}
           </SpaceBetweenFlexDiv>
 
           {places && (
-            <div>
-              <WidthSlider ref={slider} {...settings}>
+            <LessThanThreeContainer>
+              <FlexDiv>
                 {places.map((item, idx) => (
                   <div className="center">
-                    <CardWrapper>
+                    <LessThanThreeCardWrapper>
                       <PlaceItem
                         id={item.contentID}
                         img={item.image}
                         name={item.title}
                         address={item.address}
                       />
-                    </CardWrapper>
+                    </LessThanThreeCardWrapper>
                   </div>
                 ))}
-              </WidthSlider>
-            </div>
-          )}
-
-          {places && (
-            <div>
-              <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-            </div>
+              </FlexDiv>
+            </LessThanThreeContainer>
           )}
         </Wrapper>
       </PC>
@@ -296,7 +228,7 @@ export default function LikingTourPlace({ places }) {
         <Title>내가 찜한 여행지</Title>
         <div>
           {places && (
-            <WidthSlider ref={slider} {...mobileSettings}>
+            <WidthSlider ref={mobileSlider} {...mobileSettings}>
               {places.map((item, idx) => (
                 <div className="center">
                   <CardWrapper>

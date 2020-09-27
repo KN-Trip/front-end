@@ -293,7 +293,6 @@ const setRadioChecked = (checked) => {
     : IconLib.getImgIcon(RadioDefault, 20, 20);
 };
 export default function ShowRedundantID({ close, setPostOK }) {
-  console.log(close);
   const signUp = useSignUp();
   const redundantList = signUp.candidatesData;
   const postCouple = signUp.onPostCoupleRequest;

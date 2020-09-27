@@ -121,9 +121,9 @@ const ResponsiveBlock = styled.div`
 function MyPage() {
   const [modal, toggleModal] = useState(false);
   const [connectionModal, toggleConnectionModal] = useState(false);
-  const [receivedConnectionModal, toggleReceivedConnectionModal] = useState(
-    false
-  );
+
+  const signUp = useSignUp();
+  const postCouple = signUp.onPostCoupleRequest;
 
   const [
     login,
@@ -133,8 +133,6 @@ function MyPage() {
     nickname,
     onClearLogin,
   ] = useLogin();
-
-  const [postOK, setPostOK] = useState(false);
 
   const history = useHistory();
 
@@ -162,6 +160,9 @@ function MyPage() {
                 toggleModal(!modal);
               }}
               nickname={nickname}
+              refuseConnect={() => {
+                postCouple(false);
+              }}
             />
           </FlexBox>
           <Footer />
@@ -169,31 +170,10 @@ function MyPage() {
       </PC>
 
       <div>
-        {modal && (
-          <ShowRedundantID
-            close={() => {
-              toggleModal(!modal);
-            }}
-            setPostOK={() => setPostOK(true)}
-          />
-        )}
-      </div>
-
-      <div>
         {connectionModal && (
           <MakeConnectionModal
             close={() => {
               toggleConnectionModal(!connectionModal);
-            }}
-          />
-        )}
-      </div>
-
-      <div>
-        {receivedConnectionModal && (
-          <ReceiveConnectionModal
-            close={() => {
-              toggleReceivedConnectionModal(!receivedConnectionModal);
             }}
           />
         )}

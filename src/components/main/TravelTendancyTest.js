@@ -361,15 +361,6 @@ function TravelTendancyTest() {
                   <ColorStyledButton
                     onClick={async () => {
                       await onPostTestRequest();
-                      if (login) {
-                        if (
-                          window.confirm(
-                            '검사를 완료했습니다.\n결과를 확인하시겠습니까?'
-                          )
-                        ) {
-                          history.push('/tripinfo');
-                        }
-                      }
                     }}
                   >
                     Next

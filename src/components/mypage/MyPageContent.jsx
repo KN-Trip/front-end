@@ -250,6 +250,7 @@ export default function Mypagecontent({
   signUpdata,
   toggleCoupleModal,
   nickname,
+  refuseConnect,
 }) {
   const mypage = useMyPage();
 
@@ -369,7 +370,16 @@ export default function Mypagecontent({
 
           <FlexBox>
             <HorizontalMargin margin="auto" />
-            <WhiteButton>연결해제</WhiteButton>
+            <WhiteButton
+              onClick={() => {
+                if (window.confirm('연결을 정말로 해제하시겠습니까?')) {
+                  alert('연결을 해제하였습니다.');
+                  refuseConnect();
+                }
+              }}
+            >
+              연결해제
+            </WhiteButton>
             <HorizontalMargin margin="20px" />
             <StyledButton
               onClick={async () => {
@@ -476,7 +486,16 @@ export default function Mypagecontent({
                 연결하기
               </StyledButton>
               <VerticalMargin margin="20px" />
-              <WhiteButton>연결해제</WhiteButton>
+              <WhiteButton
+                onClick={() => {
+                  if (window.confirm('연결을 정말로 해제하시겠습니까?')) {
+                    alert('연결을 해제하였습니다.');
+                    refuseConnect();
+                  }
+                }}
+              >
+                연결해제
+              </WhiteButton>
             </div>
           </Center>
         </Box>

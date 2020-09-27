@@ -104,82 +104,36 @@ const CardWrapper = styled.div`
   }
 `;
 
-const ArrowImg = styled.img`
-  width: 24px;
-  height: 24px;
+const LessThanThreeContainer = styled.div`
+  width: 100%;
+  overflow-x: auto;
+
+  padding-bottom: 90px;
+  box-sizing: border-box;
+
+  ::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #f85c5c;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+
+    background-clip: content-box;
+
+    background-color: #bdbdbd;
+  }
 `;
 
-const Arrow = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 48px;
-  height: 48px;
-  border: ${(props) => {
-    if (props.direction === 'left') {
-      if (props.num === 0) {
-        return '1px solid #bdbdbd';
-      }
-    }
-    if (props.direction === 'right') {
-      if (props.num === 6) {
-        return '1px solid #bdbdbd';
-      }
-    }
-
-    return '1px solid #757575';
-  }};
-
-  border-radius: 100%;
-  background-color: #ffffff;
-
-  cursor: pointer;
-  user-select: none;
+const LessThanThreeCardWrapper = styled(CardWrapper)`
+  margin: 0 10px;
 `;
-
-const SelectedDot = styled.div`
-  width: 341px;
-  height: 5px;
-
-  background-color: #f85c5c;
-`;
-
-const Dot = styled.div`
-  width: 341px;
-  height: 1px;
-
-  background-color: #bdbdbd;
-`;
-
-const DotContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-function Dots({ slide, setSlide }) {
-  const lengthOfJson = [0, 1, 2];
-
-  return (
-    <DotContainer>
-      {lengthOfJson.map((v, idx) => {
-        return v * 3 === slide ? (
-          <SelectedDot
-            onClick={() => {
-              setSlide(idx);
-            }}
-          />
-        ) : (
-          <Dot
-            onClick={() => {
-              setSlide(idx);
-            }}
-          />
-        );
-      })}
-    </DotContainer>
-  );
-}
 
 export default function ClickedTourPlace({ places }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -227,65 +181,25 @@ export default function ClickedTourPlace({ places }) {
               <HorizontalMargin margin="75px" />
               <Title>최근 조회한 여행지</Title>
             </FlexDiv>
-            {places && (
-              <FlexDiv>
-                <Arrow
-                  onClick={() => {
-                    if (currentSlide === 0) {
-                      return;
-                    }
-
-                    slider.current.slickGoTo(currentSlide - 3);
-                    setCurrentSlide(currentSlide - 3);
-                  }}
-                  num={currentSlide}
-                  direction={'left'}
-                >
-                  <ArrowImg src={LeftArrowIco} />
-                </Arrow>
-
-                <HorizontalMargin margin="20px" />
-
-                <Arrow
-                  onClick={() => {
-                    if (currentSlide === 6) {
-                      return;
-                    }
-
-                    slider.current.slickGoTo(currentSlide + 3);
-                    setCurrentSlide(currentSlide + 3);
-                  }}
-                  num={currentSlide}
-                  direction={'right'}
-                >
-                  <ArrowImg src={RightArrowIco} />
-                </Arrow>
-              </FlexDiv>
-            )}
           </SpaceBetweenFlexDiv>
+
           {places && (
-            <div>
-              <WidthSlider ref={slider} {...settings}>
-                {places &&
-                  places.map((item, idx) => (
-                    <div className="center">
-                      <CardWrapper>
-                        <PlaceItem
-                          id={item.contentID}
-                          img={item.image}
-                          name={item.title}
-                          address={item.address}
-                        />
-                      </CardWrapper>
-                    </div>
-                  ))}
-              </WidthSlider>
-            </div>
-          )}
-          {places && (
-            <div>
-              <Dots slide={currentSlide} setSlide={setCurrentSlide} />
-            </div>
+            <LessThanThreeContainer>
+              <FlexDiv>
+                {places.map((item, idx) => (
+                  <div className="center">
+                    <LessThanThreeCardWrapper>
+                      <PlaceItem
+                        id={item.contentID}
+                        img={item.image}
+                        name={item.title}
+                        address={item.address}
+                      />
+                    </LessThanThreeCardWrapper>
+                  </div>
+                ))}
+              </FlexDiv>
+            </LessThanThreeContainer>
           )}
         </Wrapper>
       </PC>

@@ -8,6 +8,7 @@ import logout from './logout';
 import testpost from './testpost';
 import mypage from './mypage';
 import tripinfo from './tripinfo';
+import couple from './couple';
 
 const rootReducer = combineReducers({
   testIndex,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   testpost,
   mypage,
   tripinfo,
+  couple,
 });
 
 export default rootReducer;
