@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as IconLib from '../../lib/icon';
 import clearIco from '../../assets/clear.png';
 import RadioChecked from '../../assets/radiobutton-checked.png';
 import RadioDefault from '../../assets/radiobutton-default.png';
-import Button, { ButtonTemplate } from './Button';
+import { ButtonTemplate } from './Button';
 import { English } from './Font';
 
 import useSignUp from '../../hooks/useSignUp';

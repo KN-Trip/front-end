@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import love_blank from '../../assets/love_blank.png';
-import share from '../../assets/share.png';
 import marker from '../../assets/marker.png';
 import { Link } from 'react-router-dom';
 
@@ -49,26 +47,10 @@ const PlaceImage = styled.div`
   }
 `;
 
-const ImgWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  width: 68px;
-  margin-left: auto;
-
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
-`;
-
 const ImageIcon = styled.img`
   display: block;
   width: 24px;
   height: 24px;
-`;
-
-const ClickImageIcon = styled(ImageIcon)`
-  cursor: pointer;
 `;
 
 const PlaceName = styled.span`

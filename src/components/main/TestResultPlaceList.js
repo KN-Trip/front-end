@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import PlaceItem from '../common/PlaceItem';
 
 import arrowDownIco from '../../assets/arrow-down-ico.png';
-import dummy_img from '../../assets/dummy_img.jpg';
 
 import '../../css/carousel.css';
 import { Link } from 'react-router-dom';

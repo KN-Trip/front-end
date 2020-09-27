@@ -1,4 +1,3 @@
-import { produce } from 'immer';
 import * as api from '../lib/api';
 
 const GET_COUPLE_EVENT = 'getcouple/GET_COUPLE_EVENT';

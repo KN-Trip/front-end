@@ -288,7 +288,7 @@ const NavContentWrapper = styled.div`
 
 function Header() {
   const [nav, toggleNav] = useState(false);
-  const history = useHistory();
+
   const [
     login,
     login_loading,
@@ -298,13 +298,7 @@ function Header() {
   ] = useLogin(); // 로그인 여부 true false
   const isLoggedIn = login;
 
-  const {
-    logout,
-    logout_loading,
-    logout_error,
-    logoutRequest,
-    clearLogin,
-  } = useLogout();
+  const { logoutRequest, clearLogin } = useLogout();
 
   const [profile, toggleProfile] = useState(false);
   return (

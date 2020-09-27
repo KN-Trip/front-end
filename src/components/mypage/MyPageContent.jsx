@@ -183,12 +183,6 @@ const Input = styled.input`
   }
 `;
 
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
 const VerticalFlex = styled.div`
   display: flex;
   align-items: center;

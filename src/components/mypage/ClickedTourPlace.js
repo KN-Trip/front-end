@@ -1,10 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import dummy_img from '../../assets/dummy_img.jpg';
-
-import LeftArrowIco from '../../assets/left-arrow-ico.png';
-import RightArrowIco from '../../assets/right-arrow-ico.png';
 
 import PlaceItem from '../common/PlaceItem';
 
@@ -62,17 +58,6 @@ const Title = styled.div`
   letter-spacing: -0.8px;
   text-align: left;
   color: #000000;
-`;
-
-const Desc = styled.div`
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 4.13;
-  letter-spacing: -0.64px;
-  text-align: left;
-  color: #424242;
 `;
 
 const WidthSlider = styled(Slider)`
@@ -137,24 +122,8 @@ const LessThanThreeCardWrapper = styled(CardWrapper)`
 
 export default function ClickedTourPlace({ places }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slider = useRef();
+
   const mobileSlider = useRef();
-
-  const settings = {
-    accessibility: false,
-    focusOnSelect: false,
-    centerPadding: '50px',
-
-    dots: false,
-
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    beforeChange: (prev, next) => {
-      setCurrentSlide(next);
-    },
-
-    arrows: false,
-  };
 
   const mobileSettings = {
     accessibility: false,

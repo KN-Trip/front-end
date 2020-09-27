@@ -5,9 +5,9 @@ import Footer from '../components/common/Footer';
 
 import MyPageContent from '../components/mypage/MyPageContent';
 import ShowRedundantID from '../components/common/ShowRedundantID';
-import ReceiveConnectionModal from '../components/common/ReceiveConnectionModal';
+
 import { useState } from 'react';
-import MakeConnectionModal from '../components/common/MakeConnectionModal';
+
 import useSignUp from '../hooks/useSignUp';
 import useLogin from '../hooks/useLogin';
 import { useHistory } from 'react-router-dom';

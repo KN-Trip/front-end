@@ -4,10 +4,8 @@ import HotelItem from './HotelItem';
 
 import { useState, useRef } from 'react';
 import Slider from 'react-slick';
-import dummy_img from '../../../assets/dummy_img.jpg';
 
 import useTrip from '../../../hooks/useTrip';
-import { useLocation } from 'react-router-dom';
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {

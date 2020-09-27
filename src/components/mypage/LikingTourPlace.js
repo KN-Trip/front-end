@@ -1,10 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import dummy_img from '../../assets/dummy_img.jpg';
-
-import LeftArrowIco from '../../assets/left-arrow-ico.png';
-import RightArrowIco from '../../assets/right-arrow-ico.png';
 
 import PlaceItem from '../common/PlaceItem';
 
@@ -66,17 +62,6 @@ const Title = styled.div`
   }
 `;
 
-const Desc = styled.div`
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 4.13;
-  letter-spacing: -0.64px;
-  text-align: left;
-  color: #424242;
-`;
-
 const WidthSlider = styled(Slider)`
   width: 100%;
   outline: none;
@@ -108,40 +93,6 @@ const CardWrapper = styled.div`
 
 const LessThanThreeCardWrapper = styled(CardWrapper)`
   margin: 0 10px;
-`;
-
-const ArrowImg = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const Arrow = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 48px;
-  height: 48px;
-  border: ${(props) => {
-    if (props.direction === 'left') {
-      if (props.num === 0) {
-        return '1px solid #bdbdbd';
-      }
-    }
-    if (props.direction === 'right') {
-      if (props.num === 6) {
-        return '1px solid #bdbdbd';
-      }
-    }
-
-    return '1px solid #757575';
-  }};
-
-  border-radius: 100%;
-  background-color: #ffffff;
-
-  cursor: pointer;
-  user-select: none;
 `;
 
 const LessThanThreeContainer = styled.div`

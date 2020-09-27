@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import dummy_img from '../../../assets/dummy_img.jpg';
 
 import LeftArrowIco from '../../../assets/left-arrow-ico.png';
 import RightArrowIco from '../../../assets/right-arrow-ico.png';
@@ -201,10 +200,6 @@ function Dots({ slide, setSlide }) {
     </DotContainer>
   );
 }
-
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-};
 
 export default function Recommendplace({ locationX, locationY, nowContentId }) {
   const [currentSlide, setCurrentSlide] = useState(0);

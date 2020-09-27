@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import dummy_img from '../../../assets/dummy_img.jpg';
 
 import LeftArrowIco from '../../../assets/left-arrow-ico.png';
 import RightArrowIco from '../../../assets/right-arrow-ico.png';
@@ -9,7 +8,6 @@ import RightArrowIco from '../../../assets/right-arrow-ico.png';
 import PlaceItem from '../../common/PlaceItem';
 
 import useTrip from '../../../hooks/useTrip';
-import { useLocation } from 'react-router-dom';
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {

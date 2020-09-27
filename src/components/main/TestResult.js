@@ -4,7 +4,6 @@ import TestResultHashTagList from './TestResultHashTagList';
 import Responsive from '../common/Responsive';
 import TestResultPlaceList from './TestResultPlaceList';
 import Divider from '../common/Divider';
-import PlaceItem from '../common/PlaceItem';
 
 import useTrip from '../../hooks/useTrip';
 

@@ -267,13 +267,7 @@ function TravelTendancyTest() {
     2
   );
 
-  const {
-    TEST,
-    TEST_loading,
-    TEST_error,
-    onPostTestRequest,
-    login,
-  } = usePostTest();
+  const { onPostTestRequest, login } = usePostTest();
   const history = useHistory();
 
   const showHashTagListIfExist = (checked, testNum) => {

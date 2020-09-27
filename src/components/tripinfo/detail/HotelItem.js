@@ -3,10 +3,6 @@ import styled from 'styled-components';
 
 import Divider from '../../common/Divider';
 
-import dummy from '../../../assets/dummy_img.jpg';
-import love_blank from '../../../assets/love_blank.png';
-import share from '../../../assets/share.png';
-
 import marker from '../../../assets/marker.png';
 import parkingIco from '../../../assets/parking-ico.png';
 import timeIco from '../../../assets/time-ico.png';
@@ -81,24 +77,6 @@ const PlaceImage = styled.div`
     background-size: 100% 257px;
     margin-bottom: 30px;
   }
-`;
-
-const ImgWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  width: 68px;
-  margin-left: auto;
-`;
-
-const ImageIcon = styled.img`
-  display: block;
-  width: 24px;
-  height: 24px;
-`;
-
-const ClickImageIcon = styled(ImageIcon)`
-  cursor: pointer;
 `;
 
 const Name = styled.div`

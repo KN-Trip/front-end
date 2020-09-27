@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import * as IconLib from '../../../lib/icon';
@@ -15,13 +15,9 @@ import parkIco from '../../../assets/parking-ico.png';
 import petIco from '../../../assets/pet-ico.png';
 import childCarIco from '../../../assets/childCar-ico.png';
 
-import dummy from '../../../assets/dummy_img_2.jpg';
 import marker from '../../../assets/marker.png';
 import Divider from '../../common/Divider';
 import KakaoMap from './KakaoMap';
-import { English } from '../../common/Font';
-import useTrip from '../../../hooks/useTrip';
-import { useLocation } from 'react-router-dom';
 
 const Mobile = styled.div`
   @media (min-width: 1025px) {
@@ -78,34 +74,6 @@ const MainPicture = styled.img`
     margin-bottom: 30px;
     width: 100%;
     height: 160px;
-  }
-`;
-
-const EnglishName = styled.h3`
-  display: block;
-
-  margin-bottom: 25px;
-
-  font-size: 18px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 3.67;
-  letter-spacing: normal;
-  text-align: left;
-  color: #757575;
-
-  @media (max-width: 1024px) {
-    margin-bottom: 12px;
-
-    font-size: 14px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-
-    letter-spacing: normal;
-    text-align: left;
-    color: #757575;
   }
 `;
 
@@ -258,10 +226,6 @@ const BoldStyledH3 = styled(StyledH3)`
   font-weight: 900;
 `;
 
-const MarginLeft20Div = styled.div`
-  margin-left: 20px;
-`;
-
 const MarginLeftDiv = styled.div`
   margin-left: ${(props) => props.margin};
 `;
@@ -312,10 +276,6 @@ const MapWrapper = styled.div`
 
 const IconWrapper = styled.div`
   cursor: pointer;
-`;
-
-const InputForClipBoard = styled.textarea`
-  display: none;
 `;
 
 export default function Tripinfodetailcard({ tripinfo, id }) {
