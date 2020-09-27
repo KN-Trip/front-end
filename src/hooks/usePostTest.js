@@ -44,7 +44,7 @@ export default function usePostTest() {
             concept: concept,
           })
         );
-        history.push('/tripinfo');
+        return true;
       }
     }
   };

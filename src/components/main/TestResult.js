@@ -187,6 +187,7 @@ function TestResult() {
   }
 
   if (tripinfo.GET_TEST && tripinfo.GET_TEST_data.message !== 'OK') {
+    console.log(tripinfo);
     alert('테스트 결과가 없습니다.\n테스트를 먼저 진행해 주세요.');
     history.push('/');
     return <div />;
