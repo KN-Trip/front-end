@@ -16,7 +16,7 @@ export default function usePostTest() {
 
   const history = useHistory();
 
-  const onPostTestRequest = () => {
+  const onPostTestRequest = async () => {
     const place = testOne.checked.reduce((acc, cur, idx) => {
       return cur ? [...acc, testOne.name[idx]] : acc;
     }, []);
@@ -37,13 +37,13 @@ export default function usePostTest() {
     }
 
     if (login) {
+      await dispatch(
+        postTESTRequest({
+          place,
+          concept,
+        })
+      );
       if (window.confirm('검사를 완료했습니다.\n결과를 확인하시겠습니까?')) {
-        dispatch(
-          postTESTRequest({
-            place: place,
-            concept: concept,
-          })
-        );
         return true;
       }
     }
