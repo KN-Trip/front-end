@@ -163,7 +163,6 @@ export default function ReceiveConnectionModal({
   connectionData,
   processCouple,
 }) {
-  console.log(connectionData, processCouple);
   return (
     <>
       <PC>

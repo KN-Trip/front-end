@@ -248,8 +248,6 @@ export default function Mypagecontent({
 }) {
   const mypage = useMyPage();
 
-  console.log('nickname', nickname);
-
   useEffect(() => {
     mypage.basketRequest();
     mypage.searchRequest();

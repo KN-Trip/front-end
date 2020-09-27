@@ -332,7 +332,6 @@ export default function Tripinfodetailcard({ tripinfo, id }) {
                 {document.queryCommandSupported('copy') && (
                   <IconWrapper
                     onClick={() => {
-                      console.log('hi');
                       PCBoard.current.select();
                       document.execCommand('copy');
                       alert('클립보드에 복사되었습니다.');
@@ -514,7 +513,6 @@ export default function Tripinfodetailcard({ tripinfo, id }) {
                 {document.queryCommandSupported('copy') && (
                   <IconWrapper
                     onClick={() => {
-                      console.log('hi');
                       clipBoardInput.current.select();
                       document.execCommand('copy');
                       alert('클립보드에 복사되었습니다.');

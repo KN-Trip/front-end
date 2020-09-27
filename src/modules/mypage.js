@@ -55,7 +55,6 @@ export const putNewInfoRequest = (updateObject) => async (dispatch) => {
   dispatch({ type: NEWINFO });
   try {
     const res = await api.putChangeInfo(updateObject); // API 호출
-    console.log(res);
 
     if (res.data.message === 'success') {
       dispatch({ type: NEWINFO_SUCCESS }); // 성공

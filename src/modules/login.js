@@ -18,7 +18,6 @@ export const postLoginRequest = (id, password) => async (dispatch) => {
   dispatch({ type: LOGIN }); // 요청이 시작됨
   try {
     const res = await api.login(id, password); // API 호출
-    console.log(JSON.stringify(res, null, 4));
 
     if (res.data.message === 'fail') {
       alert('아이디와 비밀번호가 일치하지 않습니다.');

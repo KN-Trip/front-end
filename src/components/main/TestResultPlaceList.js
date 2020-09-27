@@ -131,7 +131,6 @@ function MultipleItems({ places }) {
     })(),
 
     beforeChange: (prev, next) => {
-      console.log(next);
       setCurrentSlide(next);
     },
 

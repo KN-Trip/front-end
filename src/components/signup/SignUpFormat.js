@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import SignUpOne from "./SignUpOne";
-import SignUpTwo from "./SignUpTwo";
-import SignUpThree from "./SignUpThree";
-import useSignUpIndex from "../../hooks/useSignUpIndex";
-import SignUpStep from "./SignUpStep";
+import React from 'react';
+import styled from 'styled-components';
+import SignUpOne from './SignUpOne';
+import SignUpTwo from './SignUpTwo';
+import SignUpThree from './SignUpThree';
+import useSignUpIndex from '../../hooks/useSignUpIndex';
+import SignUpStep from './SignUpStep';
 
 const PC = styled.div`
   @media (max-width: 1024px) {
@@ -42,7 +42,7 @@ const Title = styled.h2`
   margin-top: 86px;
   margin-bottom: 50px;
 
-  font-family: "Godo", sans-serif;
+  font-family: 'Godo', sans-serif;
   font-size: 42px;
   font-weight: bold;
   font-stretch: normal;
@@ -75,9 +75,9 @@ const VerticalMargin = styled.div`
 `;
 
 const setTitleByStep = (step) => {
-  if (step === 1) return "회원가입";
-  if (step === 2) return "상대방의 아이디를 입력해주세요";
-  if (step === 3) return "환영합니다! 가입이 완료되었습니다";
+  if (step === 1) return '회원가입';
+  if (step === 2) return '상대방의 아이디를 입력해주세요';
+  if (step === 3) return '환영합니다! 가입이 완료되었습니다';
 };
 
 const getSignUpStep = (step, setStep) => {
@@ -88,7 +88,7 @@ const getSignUpStep = (step, setStep) => {
 
 function SignUpFormat() {
   const [step, setStep] = useSignUpIndex();
-  console.log(step);
+
   return (
     <>
       <SignUpStep index={step} />
