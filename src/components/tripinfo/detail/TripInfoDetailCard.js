@@ -263,6 +263,7 @@ const RightFlexDiv = styled(FlexDiv)`
 
 const UnorderedFlexDiv = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const MapWrapper = styled.div`
@@ -276,6 +277,20 @@ const MapWrapper = styled.div`
 
 const IconWrapper = styled.div`
   cursor: pointer;
+`;
+
+const ListItemIdentifier = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: #757575;
+  border-radius: 100%;
+`;
+
+const ListItemIdentifierWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  height: 100%;
 `;
 
 export default function Tripinfodetailcard({ tripinfo, id }) {
@@ -380,9 +395,9 @@ export default function Tripinfodetailcard({ tripinfo, id }) {
                   ).map((v, idx) => (
                     <>
                       <UnorderedFlexDiv>
-                        <div>
-                          {IconLib.getImgIcon(facilitiesIcons[idx], 24, 24)}
-                        </div>
+                        <ListItemIdentifierWrapper>
+                          <ListItemIdentifier />
+                        </ListItemIdentifierWrapper>
                         <MarginLeftDiv margin="12px" />
                         <StyledH3>{v}</StyledH3>
                       </UnorderedFlexDiv>
@@ -552,9 +567,9 @@ export default function Tripinfodetailcard({ tripinfo, id }) {
               {obj.facilities.map((v, idx) => (
                 <>
                   <UnorderedFlexDiv>
-                    <div>
-                      {IconLib.getImgIcon(facilitiesIcons[idx], 24, 24)}
-                    </div>
+                    <ListItemIdentifierWrapper>
+                      <ListItemIdentifier />
+                    </ListItemIdentifierWrapper>
                     <MarginLeftDiv margin="12px" />
                     <StyledH3>{v}</StyledH3>
                   </UnorderedFlexDiv>
