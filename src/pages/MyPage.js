@@ -157,7 +157,7 @@ function MyPage() {
             <MyPageContent
               signUpdata={signUpdata}
               toggleCoupleModal={() => {
-                toggleModal(!modal);
+                toggleConnectionModal(!connectionModal);
               }}
               nickname={nickname}
               refuseConnect={() => {
@@ -171,9 +171,12 @@ function MyPage() {
 
       <div>
         {connectionModal && (
-          <MakeConnectionModal
+          <ShowRedundantID
             close={() => {
               toggleConnectionModal(!connectionModal);
+            }}
+            setPostOK={(option, id) => {
+              postCouple(option, id);
             }}
           />
         )}

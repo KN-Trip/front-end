@@ -360,9 +360,9 @@ export default function ShowRedundantID({ close, setPostOK }) {
               <StyledButton
                 onClick={async () => {
                   if (window.confirm(`커플 요청을 보내시겠습니까?`)) {
-                    await postCouple(redundantList[index].id, true);
+                    await postCouple(true, redundantList[index].id);
                     alert('커플 요청이 완료되었습니다.');
-                    setPostOK();
+
                     close();
                   }
                 }}
@@ -431,9 +431,9 @@ export default function ShowRedundantID({ close, setPostOK }) {
               <StyledButton
                 onClick={async () => {
                   if (window.confirm(`커플 요청을 보내시겠습니까?`)) {
-                    await postCouple(redundantList[index].id, true);
+                    await postCouple(true, redundantList[index].id);
                     alert('커플 요청이 완료되었습니다.');
-                    setPostOK();
+
                     close();
                   }
                 }}

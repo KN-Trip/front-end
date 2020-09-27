@@ -214,6 +214,7 @@ export default function LikingTourPlace({ places }) {
                         img={item.image}
                         name={item.title}
                         address={item.address}
+                        type={item.contentTypeID}
                       />
                     </LessThanThreeCardWrapper>
                   </div>
@@ -237,6 +238,7 @@ export default function LikingTourPlace({ places }) {
                       img={item.image}
                       name={item.title}
                       address={item.address}
+                      type={item.contentTypeID}
                     />
                   </CardWrapper>
                 </div>

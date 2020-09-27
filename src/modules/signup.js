@@ -90,10 +90,10 @@ export const getCandidateRequest = (id) => async (dispatch) => {
 
 export const setRadio = () => ({ type: SET_RADIO });
 
-export const postCoupleRequest = (index, option) => async (dispatch) => {
+export const postCoupleRequest = (option, index = null) => async (dispatch) => {
   dispatch({ type: POST_COUPLE }); // 요청이 시작됨
   try {
-    const res = await api.postCouple(index, option); // API 호출
+    const res = await api.postCouple(option, index); // API 호출
     if (res.data.message === 'post event success') {
       dispatch({ type: POST_COUPLE_SUCCESS }); // 성공
     } else {

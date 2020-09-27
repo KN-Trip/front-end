@@ -42,13 +42,22 @@ export const getCandidateID = (id) => {
   });
 };
 
-export const postCouple = (targetId, connectOption) => {
+export const postCouple = (connectOption, targetID = null) => {
+  const bodyMaker = (connectOption, targetID) => {
+    if (!targetID) {
+      return {
+        connectOption,
+      };
+    }
+    return {
+      targetID,
+      connectOption,
+    };
+  };
+
   return axios.post(
     `${baseURL}/my-info/post-event`,
-    {
-      targetId,
-      connectOption,
-    },
+    bodyMaker(connectOption, targetID),
     { withCredentials: true }
   );
 };

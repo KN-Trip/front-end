@@ -57,8 +57,8 @@ function useSignUp() {
     dispatch(setRadio());
   };
 
-  const onPostCoupleRequest = (index, option) => {
-    dispatch(postCoupleRequest(index, option));
+  const onPostCoupleRequest = (option, index = null) => {
+    dispatch(postCoupleRequest(option, index));
   };
 
   return {
