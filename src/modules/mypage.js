@@ -1,4 +1,3 @@
-import { produce } from 'immer';
 import * as api from '../lib/api';
 
 const CHANGE_INPUT = 'mypage/CHANGE_INPUT';

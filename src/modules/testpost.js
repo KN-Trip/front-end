@@ -1,5 +1,3 @@
-import { produce } from 'immer';
-import { useHistory } from 'react-router-dom';
 import * as api from '../lib/api';
 
 const TEST = 'TEST/TEST';
