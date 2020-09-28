@@ -323,10 +323,11 @@ export default function HotPlace({ contentId, areaCode }) {
                 <div className="center">
                   <CardWrapper>
                     <PlaceItem
-                      id={idx}
+                      id={item.contentID}
                       img={item.image}
                       name={item.title}
                       address={item.address}
+                      type={item.contentTypeID}
                     />
                   </CardWrapper>
                 </div>
